@@ -1,3 +1,3 @@
-# fivec_notes
+# 5C Notes
 
-A new Flutter project.
+The UI for the 5C Notes application developed for CS181AA at Harvey Mudd
