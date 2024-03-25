@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
-  <meta name="description" content="API docs for the User.fromJson constructor from Class User from the user library, for the Dart programming language.">
-  <title>User.fromJson constructor - User - user library - Dart API</title>
+  <meta name="description" content="API docs for the Directory.fromJson constructor from Class Directory from the directory library, for the Dart programming language.">
+  <title>Directory.fromJson constructor - Directory - directory library - Dart API</title>
 
 
   
@@ -29,11 +29,11 @@
   <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../../index.html">fivec_notes</a></li>
-    <li><a href="../../models_user/models_user-library.html">models&#47;user.dart</a></li>
-    <li><a href="../../models_user/User-class.html">User</a></li>
-    <li class="self-crumb">User.fromJson factory constructor</li>
+    <li><a href="../../models_directory/models_directory-library.html">models&#47;directory.dart</a></li>
+    <li><a href="../../models_directory/Directory-class.html">Directory</a></li>
+    <li class="self-crumb">Directory.fromJson factory constructor</li>
   </ol>
-  <div class="self-name">User.fromJson</div>
+  <div class="self-name">Directory.fromJson</div>
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
@@ -54,30 +54,31 @@
   <div
       id="dartdoc-main-content"
       class="main-content"
-      data-above-sidebar="models_user&#47;User-class-sidebar.html"
+      data-above-sidebar="models_directory&#47;Directory-class-sidebar.html"
       data-below-sidebar="">
       <div>
-<h1><span class="kind-constructor">User.fromJson</span> constructor 
+<h1><span class="kind-constructor">Directory.fromJson</span> constructor 
 </h1></div>
 
     <section class="multi-line-signature">
       
-      <span class="name ">User.fromJson</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="fromJson-param-json"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">json</span></span></li>
+      <span class="name ">Directory.fromJson</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="fromJson-param-json"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">json</span></span></li>
 </ol>)
     </section>
 
     
 <section class="desc markdown">
-  <p>Constructs a <a href="../../models_user/User-class.html">User</a> instance from a JSON object</p>
-<p>The <code>json</code> argument must contain the 'uuid', 'email', 'firstName' and 'lastName' properties</p>
+  <p>This is the JSON constructor for <a href="../../models_directory/Directory-class.html">Directory</a></p>
+<p>This constructor will be used to construct <a href="../../models_directory/Directory-class.html">Directory</a> objects from the backend's API endpoints
+It requires the <code>json</code> parameter to have valid structure that map to the class' properties</p>
 </section>
 
 
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">factory User.fromJson(Map&lt;String, dynamic&gt; json) {
-  return User(uuid: json[&#39;uuid&#39;], email: json[&#39;email&#39;], firstName: json[&#39;firstName&#39;], lastName: json[&#39;lastName&#39;]);
+  <pre class="language-dart"><code class="language-dart">factory Directory.fromJson(Map&lt;String, dynamic&gt; json) {
+  return Directory(course: json[&#39;course&#39;], name: json[&#39;name&#39;], uuid: json[&#39;uuid&#39;], parent: json[&#39;parent&#39;], user: json[&#39;user&#39;]);
 }</code></pre>
 </section>
 
@@ -94,13 +95,13 @@
 
 <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
     <li><a href="../../index.html">fivec_notes</a></li>
-    <li><a href="../../models_user/models_user-library.html">user</a></li>
-    <li><a href="../../models_user/User-class.html">User</a></li>
-    <li class="self-crumb">User.fromJson factory constructor</li>
+    <li><a href="../../models_directory/models_directory-library.html">directory</a></li>
+    <li><a href="../../models_directory/Directory-class.html">Directory</a></li>
+    <li class="self-crumb">Directory.fromJson factory constructor</li>
 </ol>
 
 
-    <h5>User class</h5>
+    <h5>Directory class</h5>
     <div id="dartdoc-sidebar-left-content"></div>
   </div><!--/.sidebar-offcanvas-left-->
 

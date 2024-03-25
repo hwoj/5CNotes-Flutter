@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
-  <meta name="description" content="API docs for the File class from the file library, for the Dart programming language.">
-  <title>File class - file library - Dart API</title>
+  <meta name="description" content="API docs for the Directory class from the directory library, for the Dart programming language.">
+  <title>Directory class - directory library - Dart API</title>
 
 
   
@@ -29,10 +29,10 @@
   <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../index.html">fivec_notes</a></li>
-    <li><a href="../models_file/models_file-library.html">models&#47;file.dart</a></li>
-    <li class="self-crumb">File class</li>
+    <li><a href="../models_directory/models_directory-library.html">models&#47;directory.dart</a></li>
+    <li class="self-crumb">Directory class</li>
   </ol>
-  <div class="self-name">File</div>
+  <div class="self-name">Directory</div>
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
@@ -53,17 +53,18 @@
   <div
       id="dartdoc-main-content"
       class="main-content"
-      data-above-sidebar="models_file&#47;models_file-library-sidebar.html"
-      data-below-sidebar="models_file&#47;File-class-sidebar.html">
+      data-above-sidebar="models_directory&#47;models_directory-library-sidebar.html"
+      data-below-sidebar="models_directory&#47;Directory-class-sidebar.html">
       <div>
-<h1><span class="kind-class">File</span> class 
+<h1><span class="kind-class">Directory</span> class 
  
 </h1></div>
 
     
 <section class="desc markdown">
-  <p>The class that encapsulates the metadata and file contents</p>
-<p>The</p>
+  <p>The <a href="../models_directory/Directory-class.html">Directory</a> class represents the different directories that exist within a course for a specific user</p>
+<p>Directories are user specific methods of organizing file structure
+<a href="../models_directory/Directory-class.html">Directory</a> objects will mostly be created by reading the local file tree or my consuming REST API endpoints</p>
 </section>
 
 
@@ -73,17 +74,17 @@
     <h2>Constructors</h2>
 
     <dl class="constructor-summary-list">
-        <dt id="File" class="callable">
-          <span class="name"><a href="../models_file/File/File.html">File</a></span><span class="signature">(<span class="parameter" id="-param-uuid">{<span>required</span> <span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">uuid</span>, </span><span class="parameter" id="-param-name"><span>required</span> <span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">name</span>, </span><span class="parameter" id="-param-author"><span>required</span> <span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">author</span>, </span><span class="parameter" id="-param-createdAt"><span>required</span> <span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/DateTime-class.html">DateTime</a></span> <span class="parameter-name">createdAt</span>, </span><span class="parameter" id="-param-lastEdited"><span>required</span> <span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/DateTime-class.html">DateTime</a>?</span> <span class="parameter-name">lastEdited</span>, </span><span class="parameter" id="-param-course"><span>required</span> <span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">course</span>, </span><span class="parameter" id="-param-collaborators"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../models_user/User-class.html">User</a></span>&gt;</span>?</span> <span class="parameter-name">collaborators</span>, </span><span class="parameter" id="-param-userCount"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/int-class.html">int</a>?</span> <span class="parameter-name">userCount</span>}</span>)</span>
+        <dt id="Directory" class="callable">
+          <span class="name"><a href="../models_directory/Directory/Directory.html">Directory</a></span><span class="signature">(<span class="parameter" id="-param-uuid">{<span>required</span> <span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">uuid</span>, </span><span class="parameter" id="-param-name"><span>required</span> <span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">name</span>, </span><span class="parameter" id="-param-parent"><span>required</span> <span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">parent</span>, </span><span class="parameter" id="-param-user"><span>required</span> <span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">user</span>, </span><span class="parameter" id="-param-course"><span>required</span> <span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">course</span>}</span>)</span>
         </dt>
         <dd>
-          Constructs a new <a href="../models_file/File-class.html">File</a> instance from the provided <a href="../models_file/File/uuid.html">uuid</a>, <a href="../models_file/File/name.html">name</a>, <a href="../models_file/File/author.html">author</a>, <a href="../models_file/File/createdAt.html">createdAt</a> datetime, <a href="../models_file/File/lastEdited.html">lastEdited</a> datetime, <a href="../models_file/File/course.html">course</a> and optionally the <a href="../models_file/File/collaborators.html">collaborators</a> and <a href="../models_file/File/userCount.html">userCount</a>
+          The primary constructor for the <a href="../models_directory/Directory-class.html">Directory</a> class
         </dd>
-        <dt id="File.fromJson" class="callable">
-          <span class="name"><a href="../models_file/File/File.fromJson.html">File.fromJson</a></span><span class="signature">(<span class="parameter" id="fromJson-param-json"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">json</span></span>)</span>
+        <dt id="Directory.fromJson" class="callable">
+          <span class="name"><a href="../models_directory/Directory/Directory.fromJson.html">Directory.fromJson</a></span><span class="signature">(<span class="parameter" id="fromJson-param-json"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">json</span></span>)</span>
         </dt>
         <dd>
-          This constructor will create a File given a properly formated JSON input
+          This is the JSON constructor for <a href="../models_directory/Directory-class.html">Directory</a>
             <div class="constructor-modifier features">factory</div>
         </dd>
     </dl>
@@ -93,46 +94,13 @@
       <h2>Properties</h2>
 
       <dl class="properties">
-        <dt id="author" class="property">
-  <span class="name"><a href="../models_file/File/author.html">author</a></span>
-  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> 
-
-</dt>
-<dd>
-  The uuid of the author of the file
-  <div class="features"><span class="feature">final</span></div>
-
-</dd>
-
-        <dt id="collaborators" class="property">
-  <span class="name"><a href="../models_file/File/collaborators.html">collaborators</a></span>
-  <span class="signature">&#8596; <a href="https://api.flutter.dev/flutter/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../models_user/User-class.html">User</a></span>&gt;</span>?</span> 
-
-</dt>
-<dd>
-  
-  <div class="features"><span class="feature">getter/setter pair</span></div>
-
-</dd>
-
         <dt id="course" class="property">
-  <span class="name"><a href="../models_file/File/course.html">course</a></span>
+  <span class="name"><a href="../models_directory/Directory/course.html">course</a></span>
   <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> 
 
 </dt>
 <dd>
-  The UUID for the course that the file belongs to
-  <div class="features"><span class="feature">final</span></div>
-
-</dd>
-
-        <dt id="createdAt" class="property">
-  <span class="name"><a href="../models_file/File/createdAt.html">createdAt</a></span>
-  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/DateTime-class.html">DateTime</a></span> 
-
-</dt>
-<dd>
-  The UTC server time timestamp for when the file was created
+  The course that the directory sits under
   <div class="features"><span class="feature">final</span></div>
 
 </dd>
@@ -148,25 +116,25 @@
 
 </dd>
 
-        <dt id="lastEdited" class="property">
-  <span class="name"><a href="../models_file/File/lastEdited.html">lastEdited</a></span>
-  <span class="signature">&#8596; <a href="https://api.flutter.dev/flutter/dart-core/DateTime-class.html">DateTime</a>?</span> 
-
-</dt>
-<dd>
-  The UTC server time timestamp for the last database persistent edit of the file
-  <div class="features"><span class="feature">getter/setter pair</span></div>
-
-</dd>
-
         <dt id="name" class="property">
-  <span class="name"><a href="../models_file/File/name.html">name</a></span>
+  <span class="name"><a href="../models_directory/Directory/name.html">name</a></span>
   <span class="signature">&#8596; <a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a>?</span> 
 
 </dt>
 <dd>
-  The string name of the file
+  The directory's name
   <div class="features"><span class="feature">getter/setter pair</span></div>
+
+</dd>
+
+        <dt id="parent" class="property">
+  <span class="name"><a href="../models_directory/Directory/parent.html">parent</a></span>
+  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> 
+
+</dt>
+<dd>
+  The directory's parent
+  <div class="features"><span class="feature">final</span></div>
 
 </dd>
 
@@ -181,24 +149,24 @@
 
 </dd>
 
-        <dt id="userCount" class="property">
-  <span class="name"><a href="../models_file/File/userCount.html">userCount</a></span>
-  <span class="signature">&#8596; <a href="https://api.flutter.dev/flutter/dart-core/int-class.html">int</a>?</span> 
-
-</dt>
-<dd>
-  The number of <a href="../models_user/User-class.html">User</a> that have access to a given file
-  <div class="features"><span class="feature">getter/setter pair</span></div>
-
-</dd>
-
-        <dt id="uuid" class="property">
-  <span class="name"><a href="../models_file/File/uuid.html">uuid</a></span>
+        <dt id="user" class="property">
+  <span class="name"><a href="../models_directory/Directory/user.html">user</a></span>
   <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> 
 
 </dt>
 <dd>
-  The UUID of the file
+  The user who owns the directory
+  <div class="features"><span class="feature">final</span></div>
+
+</dd>
+
+        <dt id="uuid" class="property">
+  <span class="name"><a href="../models_directory/Directory/uuid.html">uuid</a></span>
+  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> 
+
+</dt>
+<dd>
+  The uuid used to refer to the Directory
   <div class="features"><span class="feature">final</span></div>
 
 </dd>
@@ -278,12 +246,12 @@
 
 <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
     <li><a href="../index.html">fivec_notes</a></li>
-    <li><a href="../models_file/models_file-library.html">file</a></li>
-    <li class="self-crumb">File class</li>
+    <li><a href="../models_directory/models_directory-library.html">directory</a></li>
+    <li class="self-crumb">Directory class</li>
 </ol>
 
 
-    <h5>file library</h5>
+    <h5>directory library</h5>
     <div id="dartdoc-sidebar-left-content"></div>
   </div>
 

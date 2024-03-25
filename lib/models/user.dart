@@ -19,7 +19,7 @@ class User {
 
   /// Constructs a new [User] instance from the provided [uuid], [email], [firstName] and [lastName]
   /// 
-  /// This is the only constructor that will exist for the [User] class
+  /// This is the primary constructor that will exist for the [User] class and can be called by other constructors like [User.fromJson]
   User({
     required this.uuid,
     required this.email,
