@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
-  <meta name="description" content="API docs for the Semester class from the semester library, for the Dart programming language.">
-  <title>Semester class - semester library - Dart API</title>
+  <meta name="description" content="API docs for the FileService class from the file_service library, for the Dart programming language.">
+  <title>FileService class - file_service library - Dart API</title>
 
 
   
@@ -29,10 +29,10 @@
   <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../index.html">fivec_notes</a></li>
-    <li><a href="../models_semester/models_semester-library.html">semester</a></li>
-    <li class="self-crumb">Semester class</li>
+    <li><a href="../services_api_services_file_service/services_api_services_file_service-library.html">file_service</a></li>
+    <li class="self-crumb">FileService class</li>
   </ol>
-  <div class="self-name">Semester</div>
+  <div class="self-name">FileService</div>
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
@@ -53,20 +53,17 @@
   <div
       id="dartdoc-main-content"
       class="main-content"
-      data-above-sidebar="models_semester&#47;models_semester-library-sidebar.html"
-      data-below-sidebar="models_semester&#47;Semester-class-sidebar.html">
+      data-above-sidebar="services_api_services_file_service&#47;services_api_services_file_service-library-sidebar.html"
+      data-below-sidebar="services_api_services_file_service&#47;FileService-class-sidebar.html">
       <div>
-<h1><span class="kind-class">Semester</span> class 
+<h1><span class="kind-class">FileService</span> class 
  
 </h1></div>
 
     
 <section class="desc markdown">
-  <p>The <a href="../models_semester/Semester-class.html">Semester</a> class logically groups <a href="../models_course/Course-class.html">Course</a> objects together into</p>
-<p>This is the highest logical organization group in the 5CNotes filesystem
-Past courses will be collapsed with the courses and other data being lazy loaded into them if they are uncollapsed
-Files for past semesters also won't be saved on local disk or retrieved from the server when the app is booted in online mode
-This is the lazy loading behavior</p>
+  <p>This class encapsulates all the interfaces for <a href="../models_file/File-class.html">File</a> objects in the local file system as well as the OT and REST API</p>
+<p>The service class will handle background synchronization, offline file updates, online file updates and refreshing the local file system upon opening the app</p>
 </section>
 
 
@@ -76,30 +73,19 @@ This is the lazy loading behavior</p>
     <h2>Constructors</h2>
 
     <dl class="constructor-summary-list">
-        <dt id="Semester" class="callable">
-          <span class="name"><a href="../models_semester/Semester/Semester.html">Semester</a></span><span class="signature">(<span class="parameter" id="-param-name">{<span>required</span> <span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">name</span>}</span>)</span>
+        <dt id="FileService" class="callable">
+          <span class="name"><a href="../services_api_services_file_service/FileService/FileService.html">FileService</a></span><span class="signature">()</span>
         </dt>
         <dd>
-          This is the only constructor for the semester object
+          
         </dd>
     </dl>
   </section>
 
-    <section class="summary offset-anchor" id="instance-properties">
+    <section class="summary offset-anchor inherited" id="instance-properties">
       <h2>Properties</h2>
 
       <dl class="properties">
-        <dt id="courses" class="property">
-  <span class="name"><a href="../models_semester/Semester/courses.html">courses</a></span>
-  <span class="signature">&#8596; <a href="https://api.flutter.dev/flutter/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../models_course/Course-class.html">Course</a></span>&gt;</span></span> 
-
-</dt>
-<dd>
-  The list of <code>Course</code> objects that belong to this semester
-  <div class="features"><span class="feature">getter/setter pair</span></div>
-
-</dd>
-
         <dt id="hashCode" class="property inherited">
   <span class="name"><a href="https://api.flutter.dev/flutter/dart-core/Object/hashCode.html">hashCode</a></span>
   <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/int-class.html">int</a></span> 
@@ -108,17 +94,6 @@ This is the lazy loading behavior</p>
 <dd class="inherited">
   The hash code for this object.
   <div class="features"><span class="feature">no setter</span><span class="feature">inherited</span></div>
-
-</dd>
-
-        <dt id="name" class="property">
-  <span class="name"><a href="../models_semester/Semester/name.html">name</a></span>
-  <span class="signature">&#8594; <a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> 
-
-</dt>
-<dd>
-  The name of the semester (ie. 'Fall 2023')
-  <div class="features"><span class="feature">final</span></div>
 
 </dd>
 
@@ -138,10 +113,23 @@ This is the lazy loading behavior</p>
 
     
   <section
-      class="summary offset-anchor inherited"
+      class="summary offset-anchor"
       id="instance-methods">
     <h2>Methods</h2>
     <dl class="callables">
+        <dt id="backgroundSync" class="callable">
+  <span class="name"><a href="../services_api_services_file_service/FileService/backgroundSync.html">backgroundSync</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; dynamic</span>
+  </span>
+  
+
+</dt>
+<dd>
+  This function calls to update the local file tree in the background
+  
+
+</dd>
+
         <dt id="noSuchMethod" class="callable inherited">
   <span class="name"><a href="https://api.flutter.dev/flutter/dart-core/Object/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/Invocation-class.html">Invocation</a></span> <span class="parameter-name">invocation</span></span>)
     <span class="returntype parameter">&#8594; dynamic</span>
@@ -192,9 +180,50 @@ This is the lazy loading behavior</p>
     </dl>
   </section>
     
+  <section class="summary offset-anchor" id="static-properties">
+    <h2>Static Properties</h2>
+
+    <dl class="properties">
+        <dt id="lastSync" class="property">
+  <span class="name"><a href="../services_api_services_file_service/FileService/lastSync.html">lastSync</a></span>
+  <span class="signature">&#8596; <a href="https://api.flutter.dev/flutter/dart-core/DateTime-class.html">DateTime</a>?</span> 
+
+</dt>
+<dd>
+  This DateTime value holds the time for the last file sync according to the server time.
+This value will be updated each time the entire local filesystem is updated.
+It uses server time to ensure consistency across components
+  <div class="features"><span class="feature">getter/setter pair</span></div>
+
+</dd>
+
+    </dl>
+  </section>
     
     
 
+  <section class="summary offset-anchor" id="constants">
+    <h2>Constants</h2>
+
+    <dl class="properties">
+        <dt id="refreshPeriod" class="constant">
+    <span class="name "><a href="../services_api_services_file_service/FileService/refreshPeriod-constant.html">refreshPeriod</a></span>
+  <span class="signature">&#8594; const <a href="https://api.flutter.dev/flutter/dart-core/Duration-class.html">Duration</a></span>
+  
+
+</dt>
+<dd>
+  This is a constant holding the value for the period for background syncs.
+The <a href="https://api.flutter.dev/flutter/dart-core/Duration-class.html">Duration</a> data type is here to allow for calculations with date times
+  
+
+    <div>
+      <span class="signature"><code><a href="https://api.flutter.dev/flutter/dart-core/Duration/Duration.html">Duration</a>(hours: 1)</code></span>
+    </div>
+</dd>
+
+    </dl>
+  </section>
 
   </div> <!-- /.main-content -->
 
@@ -208,12 +237,12 @@ This is the lazy loading behavior</p>
 
 <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
     <li><a href="../index.html">fivec_notes</a></li>
-    <li><a href="../models_semester/models_semester-library.html">semester</a></li>
-    <li class="self-crumb">Semester class</li>
+    <li><a href="../services_api_services_file_service/services_api_services_file_service-library.html">file_service</a></li>
+    <li class="self-crumb">FileService class</li>
 </ol>
 
 
-    <h5>semester library</h5>
+    <h5>file_service library</h5>
     <div id="dartdoc-sidebar-left-content"></div>
   </div>
 

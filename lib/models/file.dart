@@ -2,7 +2,8 @@ import 'package:fivec_notes/models/user.dart';
 
 /// The class that encapsulates the metadata and file contents
 /// 
-/// The 
+/// The [File] class will handle the operations that are performed on files both pertaining to metadata and file contents. 
+/// The class will frequently make calls to the [FileService] to handle interfaces with other components of the project
 
 class File {
   /// The UUID of the file
@@ -11,7 +12,7 @@ class File {
   /// The string name of the file
   String? name;
 
-  ///
+  /// The list of the collaborators that have access to the file
   List<User>? collaborators = [];
 
   /// The uuid of the author of the file
