@@ -1,8 +1,10 @@
+import 'package:fivec_notes/widgets/top_bar.dart';
 import 'package:flutter/material.dart';
 
 /// [HomeScreen] is a [StatefulWidget] responsible for most of the application interfaces the user will use
 /// 
-/// This screen will include the main widgets for the file directory and the active note
+/// This screen will include the main widgets for the file directory and the active note.
+/// The main [State] of the [HomeScreen] is [_HomeScreenState]
 class HomeScreen extends StatefulWidget {
 
   @override
@@ -15,6 +17,8 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      appBar: TopBar(),
+    );
   }
 }
