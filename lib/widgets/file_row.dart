@@ -1,11 +1,11 @@
 import 'package:fivec_notes/models/file.dart';
 import 'package:flutter/material.dart';
 
-/// The file row represents the listing of an individual file in the file tree
+/// The [FileRow] represents the listing of an individual file in the file tree
 ///
 /// It will exist as a child to a parent [FolderRow] and display the file name as well as action buttons. 
 /// These buttons will exist for deleting the file, editing the file name and sharing the file. 
-/// As a stateful widget its primary state is the [_FileRowState] state.
+/// As a stateful widget its primary state is the [FileRowState] state.
 class FileRow extends StatefulWidget {
 
   /// The file that the row will be representing
@@ -22,10 +22,14 @@ class FileRow extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<FileRow> createState() => _FileRowState();
+  State<FileRow> createState() => FileRowState();
 }
 
-class _FileRowState extends State<FileRow> {
+/// The [FileRowState] comprises the main state of the [FileRow] [StatefulWidget].
+///
+/// The State will contain all the sub widgets of the widget and the functions for the actions.
+/// The contents of the widget are in [build] while the main actions are [shareFile], [deleteFile], [renameFile] and [openFile]
+class FileRowState extends State<FileRow> {
   /// This boolean variable keeps track of whether the [File] is open in the editor or not
   bool isOpen = false;
 
