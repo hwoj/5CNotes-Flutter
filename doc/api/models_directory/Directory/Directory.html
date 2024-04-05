@@ -29,7 +29,7 @@
   <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../../index.html">fivec_notes</a></li>
-    <li><a href="../../models_directory/models_directory-library.html">directory</a></li>
+    <li><a href="../../models_directory/models_directory-library.html">models\directory.dart</a></li>
     <li><a href="../../models_directory/Directory-class.html">Directory</a></li>
     <li class="self-crumb">Directory constructor</li>
   </ol>
@@ -81,7 +81,13 @@ The constructor requires the <a href="../../models_directory/Directory/uuid.html
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">Directory</code></pre>
+  <pre class="language-dart"><code class="language-dart">Directory({
+  required this.uuid,
+  required this.name,
+  required this.parent,
+  required this.user,
+  required this.course
+});</code></pre>
 </section>
 
 

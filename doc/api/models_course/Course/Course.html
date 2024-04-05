@@ -29,7 +29,7 @@
   <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../../index.html">fivec_notes</a></li>
-    <li><a href="../../models_course/models_course-library.html">course</a></li>
+    <li><a href="../../models_course/models_course-library.html">models\course.dart</a></li>
     <li><a href="../../models_course/Course-class.html">Course</a></li>
     <li class="self-crumb">Course constructor</li>
   </ol>
@@ -80,7 +80,13 @@
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">Course</code></pre>
+  <pre class="language-dart"><code class="language-dart">Course({
+  required this.uuid,
+  required this.name,
+  required this.code,
+  required this.semester,
+  required this.meetingTimes
+});</code></pre>
 </section>
 
 
