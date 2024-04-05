@@ -1,7 +1,7 @@
 import 'package:fivec_notes/models/file.dart';
 import 'package:flutter/material.dart';
 
-/// The [FileRow] represents the listing of an individual file in the file tree
+/// The [FileRow] represents the listing of an individual file in the [FileTree]
 ///
 /// It will exist as a child to a parent [FolderRow] and display the file name as well as action buttons. 
 /// These buttons will exist for deleting the file, editing the file name and sharing the file. 
