@@ -46,6 +46,20 @@ class DirectoryRowState extends State<DirectoryRow> {
 
   }
 
+  /// The function responsible for creating a subdirectory within the [Directory]
+  ///
+  /// This function will allow the user to create a new directory that exists underneath the current [DirectoryRow]'s directory
+  createSubDirectory() {
+
+  }
+
+  /// The function responsible for creating a new [File] within the current [Directory]
+  /// 
+  /// This function will create a new [File] to be represented as a [FileRow] within the current [Directory] and [DirectoryRow]
+  createSubFile() {
+
+  }
+
   /// The [build] function creates the widget and the subwidgets it contains
   ///
   /// The primary child is the [ExpansionTile] which will contain all of the [DirectoryRow] widget's children
