@@ -17,6 +17,11 @@ class TopBar extends StatelessWidget implements PreferredSizeWidget{
   /// returns: [AppBar] widget
   @override
   Widget build(BuildContext context) {
+    /// The [AppBar] widget should have 
+    /// [IconButton] widgets to define the hamburger menu,
+    /// back button, and manage access buttion.  Use the function
+    /// Navigation.of(context).push() Navigation.of(context).pop()
+    /// to move back and forth between screens.
     return AppBar(
 
     );

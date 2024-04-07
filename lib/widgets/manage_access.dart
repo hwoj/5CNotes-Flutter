@@ -11,24 +11,20 @@ class ManageAccess extends StatelessWidget {
   /// or write access.
   /// 
   /// params: [BuildContext] context
-  /// return: [MaterialApp] widget
+  /// return: [ShowDialogue] widget
   @override
   Widget build(BuildContext context) {
-    return MaterialApp();
+
+    /// The [ShowDialogue] widget will produce the modal
+    /// screen. This screen will take the context [BuildContext] context
+    /// and take a builder parameter, which will take an [AlertDialogue] widget.
+    /// In the [AlertDialogue widget], there will be text editing controller defined 
+    /// to allow a user to add another by typing their address.  It will also take a 
+    /// [Scrollable] widget that will allow the user choose if someone gets read or write 
+    /// access.  Finally, there must be a button defined such that updates permission.
+    /// Finally, include a button that will close the modal page using the Navigation.of(context).pop()
+    /// function.  
+    return ShowDialogue();
   }
 }
 
-/// Creates the the instance of the modal page
-class ManageAccessPage extends StatelessWidget {
-  /// Create structure/layout of the page.
-  /// This includes a textbox, a scroll-down menu,
-  /// and a button.  
-  /// 
-  /// params: [BuildContext] context
-  /// returns: [Scaffold] widget
-  @override
-  Widget build(Build context) {
-    returns Scaffold();
-  }
-
-}
