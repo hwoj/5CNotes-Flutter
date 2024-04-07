@@ -13,7 +13,7 @@ class HomeScreen extends StatefulWidget {
 
 /// This is the primary state for the [HomeScreen] screen
 /// 
-/// This state will encompass both the note and file directory widgets
+/// This state will encompass both the note and [FileTree] widgets
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
