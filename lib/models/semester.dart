@@ -15,12 +15,16 @@ class Semester {
   /// The list of [Course] objects that belong to this semester
   List<Course> courses = [];
 
+  /// Whether it is the current semester or not
+  bool ?isCurrent;
+
   /// This is the only constructor for the semester object
   /// 
   /// [Semester] objects are front end only objects and so they will never be constructed from JSON
   /// For this reason this is the only constructor for them
   Semester({
-    required this.name
+    required this.name,
+    isCurrent
   });
 
 
