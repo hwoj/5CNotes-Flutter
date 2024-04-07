@@ -1,4 +1,3 @@
-import 'package:fivec_notes/models/course.dart';
 import 'package:fivec_notes/models/semester.dart';
 import 'package:flutter/material.dart';
 
@@ -28,8 +27,17 @@ class SemesterRow extends StatefulWidget {
 /// This state encodes the contents of the [SemesterRow] and will update as necessary
 class SemesterRowState extends State<SemesterRow> {
   
+  /// This function will load the courses and files for a given semester
+  /// 
+  /// To enable lazy loading on old semesters. When an old semester is expanded, it will call this function to retrieve the 
+  /// courses and their contents using the [FileService]
+  void loadSemester(Semester semester) {
 
-  
+  }
+
+  /// The [build] method contains the widgets and content that makeup the [SemesterRow]
+  ///
+  /// This method will be called everytime the state is updated to rebuild the State and widget
   @override
   Widget build(BuildContext context) {
     return ExpansionTile(title: title);

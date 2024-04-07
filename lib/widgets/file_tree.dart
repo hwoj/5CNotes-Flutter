@@ -42,13 +42,6 @@ class FileTreeState extends State<FileTree> {
 
   }
 
-  /// This function will load the courses and files for a given semester
-  /// 
-  /// To enable lazy loading on old semesters. When an old semester is expanded, it will call this function to retrieve the 
-  /// courses and their contents using the [FileService]
-  void loadSemester(Semester semester) {
-
-  }
 
   /// The [build] function is used to create the widget and its sub widgets and update it when changes happen to it
   ///
