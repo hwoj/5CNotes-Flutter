@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+
+
 /// The [TopBar] widget is a [StatelessWidget] that represents the bar at the top of the screen of the application
 ///
 /// The widget is going to be present in the different application screens. 
@@ -7,12 +9,25 @@ import 'package:flutter/material.dart';
 /// [PreferredSizeWidget]
 
 class TopBar extends StatelessWidget implements PreferredSizeWidget{
+
+  /// Creates the app widget to build the structure of the topbar. 
+  /// 
+  /// The widget returned should create the buttons and define their actions.
+  /// params: [BuildContext] context
+  /// returns: [AppBar] widget
   @override
   Widget build(BuildContext context) {
+    /// The [AppBar] widget should have 
+    /// [IconButton] widgets to define the hamburger menu,
+    /// back button, and manage access buttion.  Use the function
+    /// Navigation.of(context).push() Navigation.of(context).pop()
+    /// to move back and forth between screens.
     return AppBar(
 
     );
   }
+
+  /// Gets parameter so the TopBar fits the screen dimensions
   @override
   Size get preferredSize => Size.fromHeight(kToolbarHeight);
 }
