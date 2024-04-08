@@ -1,7 +1,7 @@
 /// This class encapsulates all the interfaces for [File] objects in the local file system as well as the OT and REST API
 ///
 /// The service class will handle background synchronization, offline file updates, online file updates and refreshing the local file system upon opening the app
-class FileService {
+class FileTreeService {
 
   /// This is a constant holding the value for the period for background syncs. 
   /// The [Duration] data type is here to allow for calculations with date times 
@@ -28,6 +28,15 @@ class FileService {
 
     // Update the lastSync time with the server time from the synchronization
 
+  }
+
+  /// This function retrieves the directories and files that the [User] has access to
+  ///
+  /// This function is called to help initialize the [FileTree] widget
+  retrieveFileTree() {
+    // requests the file tree and metadata for the elements in the filetree that the user has acces to
+
+    // 
   }
 
 

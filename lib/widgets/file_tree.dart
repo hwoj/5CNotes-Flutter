@@ -39,7 +39,16 @@ class FileTreeState extends State<FileTree> {
   ///
   /// It will call the [FileService] to get all the objects to populate the files for the current semester
   void initializeFileTree() {
+    // call semester service to retrieve the semesters the user has been a part of
+    // place semesters in semester list
 
+    // call the course service to get a list of all the courses in the current semester
+    // pass in the courses to the current semester object
+
+    // retrieve directory and file tree
+    // pass these into the semester for them to be appropriately displayed
+
+    // retrieve contents of these files one by one starting with course most likely to be open
   }
 
 

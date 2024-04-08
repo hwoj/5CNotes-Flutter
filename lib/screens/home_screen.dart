@@ -1,3 +1,5 @@
+import 'package:fivec_notes/widgets/file_tree.dart';
+import 'package:fivec_notes/widgets/open_document.dart';
 import 'package:fivec_notes/widgets/top_bar.dart';
 import 'package:flutter/material.dart';
 
@@ -13,12 +15,18 @@ class HomeScreen extends StatefulWidget {
 
 /// This is the primary state for the [HomeScreen] screen
 /// 
-/// This state will encompass both the note and [FileTree] widgets
+/// This state will encompass both the [OpenDocument] and [FileTree] widgets
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: TopBar(),
+      body: Row(
+        children: [
+          FileTree(),
+          OpenDocument(file: file),
+        ]
+      ),
     );
   }
 }
