@@ -7,23 +7,19 @@ import 'package:flutter/material.dart';
 /// As it will be reused across the app, instead of redefining a custom [AppBar] in every screen we're creating a reusable widget
 /// In order to satisfy the appBar parameter of the [Scaffold] widget this will live under, we must implement it as a 
 /// [PreferredSizeWidget]
-
-class TopBar extends StatelessWidget implements PreferredSizeWidget{
+class TopBar extends StatelessWidget implements PreferredSizeWidget {
 
   /// Creates the app widget to build the structure of the topbar. 
   /// 
   /// The widget returned should create the buttons and define their actions.
-  /// params: [BuildContext] context
-  /// returns: [AppBar] widget
   @override
   Widget build(BuildContext context) {
     /// The [AppBar] widget should have 
-    /// [IconButton] widgets to define the hamburger menu,
-    /// back button, and manage access buttion.  Use the function
-    /// Navigation.of(context).push() Navigation.of(context).pop()
+    /// [IconButton] widgets to define the back button and hamburger menu on the top left,
+    /// [FlutterLogo] logo in the center, and a [ShowDialogue] manage access and [Scrollable] user dropdown menu on the 
+    /// top right.  Use the function Navigation.of(context).push() Navigation.of(context).pop()
     /// to move back and forth between screens.
     return AppBar(
-
     );
   }
 

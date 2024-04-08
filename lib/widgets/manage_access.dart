@@ -9,9 +9,6 @@ class ManageAccess extends StatelessWidget {
   /// Thus, it will have a text box to enter a user's email,
   /// along with a scroll-down menu to give them either read
   /// or write access.
-  /// 
-  /// params: [BuildContext] context
-  /// return: [ShowDialogue] widget
   @override
   Widget build(BuildContext context) {
 
