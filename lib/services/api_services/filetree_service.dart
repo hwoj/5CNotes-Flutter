@@ -1,3 +1,5 @@
+import 'package:fivec_notes/models/file.dart';
+
 /// This class encapsulates all the interfaces for [File] objects in the local file system as well as the OT and REST API
 ///
 /// The service class will handle background synchronization, offline file updates, online file updates and refreshing the local file system upon opening the app
@@ -36,8 +38,16 @@ class FileTreeService {
   retrieveFileTree() {
     // requests the file tree and metadata for the elements in the filetree that the user has acces to
 
-    // 
+    // returns a tuple with one list of files and one list of directories
   }
 
+  /// Gets the contents of a file using the file metadata
+  ///
+  /// Requests the contents of the file from the backend using the id from the [file] argument
+  getFile(File file) {
+    // send get request to server to get contents of the file using the id of the file passed into the function
+
+    // overwrite the contents of the local file or create new file on disk if doesn't exist on disk yet
+  }
 
 }
