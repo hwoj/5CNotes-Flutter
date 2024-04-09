@@ -81,7 +81,15 @@
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">void saveName(String newName) {
+  &#47;&#47; call validateName to make sure the name is correct
 
+  &#47;&#47; if validated then update name of file object locally
+  &#47;&#47; push change to server
+  &#47;&#47; close modal and widget
+
+  &#47;&#47; if not validated then show error message and keep modal open
+
+  &#47;&#47; return
 }</code></pre>
 </section>
 

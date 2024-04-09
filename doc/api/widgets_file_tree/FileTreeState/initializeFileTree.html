@@ -72,7 +72,7 @@
     
 <section class="desc markdown">
   <p>This function is reponsible for initializing the file tree by fetching it's contents</p>
-<p>It will call the <a href="../../services_api_services_file_service/FileService-class.html">FileService</a> to get all the objects to populate the files for the current semester</p>
+<p>It will call the <code>FileService</code> to get all the objects to populate the files for the current semester</p>
 </section>
 
 
@@ -80,7 +80,16 @@
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
   <pre class="language-dart"><code class="language-dart">void initializeFileTree() {
+  &#47;&#47; call semester service to retrieve the semesters the user has been a part of
+  &#47;&#47; place semesters in semester list
 
+  &#47;&#47; call the course service to get a list of all the courses in the current semester
+  &#47;&#47; pass in the courses to the current semester object
+
+  &#47;&#47; retrieve directory and file tree
+  &#47;&#47; pass these into the semester for them to be appropriately displayed
+
+  &#47;&#47; retrieve contents of these files one by one starting with course most likely to be open
 }</code></pre>
 </section>
 
