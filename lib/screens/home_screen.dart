@@ -1,3 +1,4 @@
+import 'package:fivec_notes/models/file.dart';
 import 'package:fivec_notes/widgets/file_tree.dart';
 import 'package:fivec_notes/widgets/open_document.dart';
 import 'package:fivec_notes/widgets/top_bar.dart';
@@ -24,7 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Row(
         children: [
           FileTree(),
-          OpenDocument(file: file),
+          OpenDocument(file: File(uuid: "123", name: "bob", author: "bob", createdAt: DateTime(2024), lastEdited: DateTime(2024), course: "somecourse")),
         ]
       ),
     );
