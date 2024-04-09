@@ -7,6 +7,19 @@ import 'package:fivec_notes/models/user.dart';
 /// This service class will be interacting with the REST API to retrieve information about the courses
 class CourseService {
 
+  /// This method retrieves the list of semesters the user is enrolled in
+  ///
+  /// Using the user, this method retrieves the semesters from the server
+  List<Semester> getSemesters(User user) {
+    // send get request for semesters a student is enrolled in using the id of the provided user
+
+    // create empty list of semesters
+
+    // parse json and create semesters from this using the json constructor of the semester
+    // push created semesters to list
+
+    // return list of semesters
+  }
   /// This function will retrieve the courses that the user is enrolled in for the current semester
   /// 
   /// Using the uuid of the [user], this method will send a request to the API for the courses and return a list of course objects using the [Course.fromJson] constructor
