@@ -16,7 +16,7 @@ class Semester {
   List<Course> courses = [];
 
   /// Whether it is the current semester or not
-  bool ?isCurrent;
+  bool isCurrent;
 
   /// This is the only constructor for the semester object
   /// 
@@ -24,7 +24,7 @@ class Semester {
   /// For this reason this is the only constructor for them
   Semester({
     required this.name,
-    isCurrent
+    this.isCurrent = false,
   });
 
 

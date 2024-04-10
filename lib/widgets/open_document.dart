@@ -46,22 +46,22 @@ class OpenDocumentState extends State<OpenDocument> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Column(
-        children: [
-          const QuillToolbar(
-            configurations: QuillToolbarConfigurations(buttonOptions: QuillSimpleToolbarButtonOptions()),
-            child: Text("")
-          ),
-          QuillEditor(
-            configurations: QuillEditorConfigurations(
-              controller: _controller
-            ),
-            focusNode: FocusNode(),
-            scrollController: ScrollController(),
+      // child: Column(
+      //   children: [
+      //     const QuillToolbar(
+      //       configurations: QuillToolbarConfigurations(buttonOptions: QuillSimpleToolbarButtonOptions()),
+      //       child: Text("")
+      //     ),
+      //     QuillEditor(
+      //       configurations: QuillEditorConfigurations(
+      //         controller: _controller
+      //       ),
+      //       focusNode: FocusNode(),
+      //       scrollController: ScrollController(),
              
-          ),
-        ],
-      ),
+      //     ),
+      //   ],
+      // ),
     );
   }
 }

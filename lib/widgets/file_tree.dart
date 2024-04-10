@@ -1,4 +1,5 @@
 import 'package:fivec_notes/models/semester.dart';
+import 'package:fivec_notes/widgets/semester_row.dart';
 import 'package:flutter/material.dart';
 
 /// The [FileTree] is a [StatefulWidget] representing the entirety of the files that the user has access to
@@ -20,7 +21,7 @@ class FileTreeState extends State<FileTree> {
 
 
   /// This instance variable contains the semesters that the user has been enrolled in
-  List<Semester> semesters = [];
+  List<Semester> semesters = [Semester(name: "Spring 2024", isCurrent: true), Semester(name: "Fall 2023")];
 
 
   /// The initState function handles the logic to be run upon the first build of the [FileTreeState]
@@ -58,6 +59,20 @@ class FileTreeState extends State<FileTree> {
   /// series of [DirectoryRow] and [FileRow] objects that are contained within a [ClassRow].
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Column(
+
+      children: [
+        SizedBox(
+          height: 800, 
+          width: 500,
+          child: ListView.builder(
+            itemCount: semesters.length,
+            itemBuilder: (BuildContext context, int index) {
+              return SemesterRow(semester: semesters[index]);
+            }
+          ),
+        )
+      ],
+    );
   }
 }
