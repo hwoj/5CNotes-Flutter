@@ -1,4 +1,6 @@
+import 'package:fivec_notes/screens/email_verification_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:fivec_notes/screens/home_screen.dart';
 
 /// The [SignupScreen] is a [StatefulWidget] that will handle all UI elements and interactions for signing up a [User]
 /// 
@@ -17,7 +19,9 @@ class _SignUpScreenState extends State<SignupScreen> {
 
   /// create text editing controllers for the email, password, 
   /// and confirm password fields.
-
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
+  TextEditingController _confirmPasswordController = TextEditingController();
   /// creates the structure/layout of the page.  This will include a
   /// email, password, and confirm password text box, and a button to 
   /// submit the entered fields.
@@ -36,7 +40,69 @@ class _SignUpScreenState extends State<SignupScreen> {
     /// Use the onPressed() function and use Navigation.of(context).push
     /// to navigate the user to the email verification page if the password confirmation
     /// matches the original password, if not, prompt the user to type the input again.
-    return Scaffold();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Signup'),
+      ),
+      body: Padding(
+        padding: EdgeInsets.all(16.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            TextField(
+              controller: _emailController,
+              decoration: InputDecoration(labelText: 'Email'),
+            ),
+            SizedBox(height: 16.0),
+            TextField(
+              controller: _passwordController,
+              decoration: InputDecoration(labelText: 'Password'),
+              obscureText: true,
+            ),
+            SizedBox(height: 16.0),
+            TextField(
+              controller: _confirmPasswordController,
+              decoration: InputDecoration(labelText: 'Confirm Password'),
+              obscureText: true,
+            ),
+            SizedBox(height: 16.0),
+            ElevatedButton(
+              onPressed: () {
+                // Add signup logic here
+                String email = _emailController.text;
+                String password = _passwordController.text;
+                String confirmPassword = _confirmPasswordController.text;
+
+                if (password == confirmPassword) {
+                  Navigator.push(
+                    context, 
+                    MaterialPageRoute(builder: (context) => EmailVerificationScreen()));
+                  // Implement signup logic here
+                } else {
+                  // Passwords don't match, show an error message
+                  showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                      title: Text('Error'),
+                      content: Text('Passwords do not match.'),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: Text('OK'),
+                        ),
+                      ],
+                    ),
+                  );
+                }
+              },
+              child: Text('Signup'),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   /// Removes the email, password, and confirm password 
@@ -45,6 +111,9 @@ class _SignUpScreenState extends State<SignupScreen> {
   void dispose() {
 
     /// call the dispose method on all three text editing controllers
-
+    _emailController.dispose();
+    _passwordController.dispose();
+    _confirmPasswordController.dispose();
+    super.dispose();
   }
 }

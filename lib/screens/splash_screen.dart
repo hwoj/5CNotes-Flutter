@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:fivec_notes/screens/home_screen.dart';
+import 'package:fivec_notes/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -16,7 +16,7 @@ class SplashScreenState extends State<SplashScreen> {
 
     Timer(const Duration(seconds: 3), () {
       Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => HomeScreen())
+        MaterialPageRoute(builder: (context) => LoginScreen())
       );
     });
   }

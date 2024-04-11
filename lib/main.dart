@@ -1,6 +1,5 @@
 import 'package:fivec_notes/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
-
 void main() {
   runApp(const MainApp());
 }

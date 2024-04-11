@@ -1,3 +1,5 @@
+import 'package:fivec_notes/screens/home_screen.dart';
+import 'package:fivec_notes/screens/signup_screen.dart';
 import 'package:flutter/material.dart';
 
 /// The [LoginScreen] widget is a [StatefulWidget] that is responsible for the application login processes
@@ -18,7 +20,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   // Initialize username and password text editing controller 
   // to take the user input.
-
+    TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
   /// Takes the information of the parent widget and 
   /// return a [Scaffold], which defines the structure, layout,
   /// color of the login page features
@@ -37,7 +40,60 @@ class _LoginScreenState extends State<LoginScreen> {
     /// Use the onPressed() function and use Navigation.of(context).push
     /// to navigate the user to the main page if their password is correct.
     /// Else, Tell them that their password is incorrect.
-    return Scaffold(); 
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Login'),
+      ),
+      body: Padding(
+        padding: EdgeInsets.all(16.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            TextField(
+              controller: _emailController,
+              decoration: InputDecoration(labelText: 'Email'),
+            ),
+            SizedBox(height: 16.0),
+            TextField(
+              controller: _passwordController,
+              decoration: InputDecoration(labelText: 'Password'),
+              obscureText: true,
+            ),
+            SizedBox(height: 16.0),
+            ElevatedButton(
+              onPressed: () {
+                // Add authentication logic here
+                String email = _emailController.text;
+                String password = _passwordController.text;
+                if (email == "email@gmail.com" && password == "password") {
+                  Navigator.push(
+                    context, 
+                    MaterialPageRoute(builder: (context) => HomeScreen()),
+                  );
+                } else {
+                  
+                }
+                
+              },
+              child: Text('Login'),
+            ),
+            const SizedBox(height: 30),
+          TextButton(
+              style: TextButton.styleFrom(
+                textStyle: const TextStyle(fontSize: 10),
+              ),
+              onPressed: () {
+                Navigator.push(
+                  context, 
+                  MaterialPageRoute(builder: (context) => SignupScreen()),
+                );
+              },
+              child: const Text('Do not have an account yet?  Sign up here!'),
+            ),
+          ],
+        ),
+      ),
+    );
   }
   /// Remove the password and email controller once one exits 
   /// the login page
@@ -45,6 +101,9 @@ class _LoginScreenState extends State<LoginScreen> {
   void dispose() {
     // Call the dispose method on the username and password
     // text editing controller.
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
   }
 
 }
