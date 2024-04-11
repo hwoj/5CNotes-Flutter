@@ -1,4 +1,5 @@
 import 'package:fivec_notes/models/semester.dart';
+import 'package:fivec_notes/widgets/course_row.dart';
 import 'package:flutter/material.dart';
 
 /// The [StatefulWidget] representing the [SemesterRow] top level object that composes the [FileTree]
@@ -70,7 +71,7 @@ class SemesterRowState extends State<SemesterRow> {
               children: [
                 
                 Text(widget.semester.name),
-                Spacer(),
+                const Spacer(),
                 Icon(
                   isExpanded ? Icons.expand_less : Icons.expand_more
                 ),
@@ -80,7 +81,20 @@ class SemesterRowState extends State<SemesterRow> {
         ),
         if (isExpanded) 
           Column(
-            children: [Text("HELLO WORLD")],
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              
+              ListView.builder(
+                scrollDirection: Axis.vertical,
+                
+                shrinkWrap: true,
+                itemCount: widget.semester.courses.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return CourseRow(course: widget.semester.courses[index]);
+                }
+                ),
+              
+            ]
           )
         
       ],

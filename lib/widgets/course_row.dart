@@ -27,6 +27,9 @@ class CourseRow extends StatefulWidget {
 /// This state encodes the contents of the [CourseRow] and will update as necessary
 class CourseRowState extends State<CourseRow> {
   
+  /// whether the dropdown is expanded or not
+  bool isExpanded = false;
+
   /// This function will load the courses and files for a given course
   /// 
   /// To enable lazy loading on old courses. When an old course is expanded, it will call this function to retrieve the 
@@ -40,6 +43,40 @@ class CourseRowState extends State<CourseRow> {
   /// This method will be called everytime the state is updated to rebuild the State and widget
   @override
   Widget build(BuildContext context) {
-    return ExpansionTile(title: title);
+    
+    return Column(
+      
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        InkWell(
+          onTap: () {
+            setState(() {
+              isExpanded = !isExpanded;
+            });
+          },
+          child: Padding(
+            padding: const EdgeInsets.only(left: 20, top: 5, bottom: 5, right: 10),
+            child: Row(
+
+              children: [
+                
+                Text(widget.course.name),
+                const Spacer(),
+                Icon(
+                  isExpanded ? Icons.expand_less : Icons.expand_more
+                ),
+              ],
+            ),
+          ),
+        ),
+        if (isExpanded) 
+          const Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [Text("HELLO WORLD")],
+          )
+        
+      ],
+      );
+   
   }
 }

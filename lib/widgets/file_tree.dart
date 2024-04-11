@@ -1,3 +1,4 @@
+import 'package:fivec_notes/models/course.dart';
 import 'package:fivec_notes/models/semester.dart';
 import 'package:fivec_notes/widgets/semester_row.dart';
 import 'package:flutter/material.dart';
@@ -32,6 +33,8 @@ class FileTreeState extends State<FileTree> {
     super.initState();
 
     initializeFileTree();
+    semesters[0].courses.add(Course(uuid: "123", name: "Software Engineering", code: "CSCI181AA", semester: "Spring 2024", meetingTimes: []));
+    semesters[0].courses.add(Course(uuid: "234", name: "Intermediate Chinese", code: "CHIN051B", semester: "Spring 2024", meetingTimes: []));
   }
 
 
@@ -66,6 +69,7 @@ class FileTreeState extends State<FileTree> {
           height: 800, 
           width: 500,
           child: ListView.builder(
+            shrinkWrap: true,
             itemCount: semesters.length,
             itemBuilder: (BuildContext context, int index) {
               return SemesterRow(semester: semesters[index]);
