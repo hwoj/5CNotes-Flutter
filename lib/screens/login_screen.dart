@@ -65,7 +65,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 // Add authentication logic here
                 String email = _emailController.text;
                 String password = _passwordController.text;
-                if (email == "email@gmail.com" && password == "password") {
+                // dummy values for correct email and password, will change later 
+                String correctEmail = "email@gmail.com";
+                String correctPassword = "password"; 
+                if (email == correctEmail && password == correctPassword) { 
                   Navigator.push(
                     context, 
                     MaterialPageRoute(builder: (context) => HomeScreen()),

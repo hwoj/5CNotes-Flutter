@@ -48,8 +48,8 @@ class _EmailVerificationState extends State<EmailVerificationScreen> {
               onPressed: () {
                 // Add signup logic here
                 String code = _verificationController.text;
-
-                if (code == "123456") {
+                String correctCode = "123456"; // dummy value, will change later
+                if (code == correctCode) { 
                   Navigator.push(
                     context, 
                     MaterialPageRoute(builder: (context) => HomeScreen()));
