@@ -41,6 +41,39 @@ class DatabaseService {
             userCount INTEGER,           
           )
         ''');
+        await db.execute(
+          '''
+            CREATE TABLE semesters(
+              id INTEGER PRIMARY KEY,
+              uuid TEXT,
+              name TEXT,
+              isCurrent INTEGER,
+            )
+          '''
+        );
+        await db.execute(
+          '''
+            CREATE TABLE courses(
+              id INTEGER PRIMARY KEY,
+              uuid TEXT,
+              name TEXT,
+              code TEXT,
+              semester TEXT,
+            )
+          '''
+        );
+        await db.execute(
+          '''
+            CREATE TABLE directory(
+              id INTEGER PRIMARY KEY,
+              uuid TEXT,
+              name TEXT,
+              parent TEXT,
+              user TEXT,
+              course TEXT
+            )
+          '''
+        );
       }
     );
   }

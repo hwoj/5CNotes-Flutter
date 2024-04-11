@@ -2,7 +2,6 @@
 /// 
 /// These objects act like the top level directories that contain all the relevant [Directory] and [File] objects
 /// They also contain information about the schedules of the courses so that relevant courses can be brought up to the front of the UI
-
 class Course {
 
   /// The id to refer to the [Course]
