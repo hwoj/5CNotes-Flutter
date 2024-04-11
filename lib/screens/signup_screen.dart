@@ -6,14 +6,14 @@ import 'package:flutter/material.dart';
 class SignupScreen extends StatefulWidget {
   /// Create new instance of a _SingUpPageState
   @override
-  State<SignupScreen> createState() => _SignupScreenState();
+  State<SignupScreen> createState() => _SignUpScreenState();
 }
 
 /// Monitors the state of the Signup page.
 ///  
 /// Keeps track of information passed into the 
 /// email, password, and confirm password textbox.
-class _SignUpPageState extends State<SignupScreen> {
+class _SignUpScreenState extends State<SignupScreen> {
 
   /// create text editing controllers for the email, password, 
   /// and confirm password fields.

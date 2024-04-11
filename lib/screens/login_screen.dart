@@ -14,7 +14,7 @@ class LoginScreen extends StatefulWidget {
 /// Stores the various states of a login page
 /// In this case, it refers to the information typed
 /// in the email and password fields. 
-class _LoginPageState extends State<LoginScreen> {
+class _LoginScreenState extends State<LoginScreen> {
 
   // Initialize username and password text editing controller 
   // to take the user input.

@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 class EmailVerificationScreen extends StatefulWidget {
   // override createState method by making it instantiate an 
   // _Email VerificationState instance.
-
+  @override
+  State<EmailVerificationScreen> createState() => _EmailVerificationState();
 }
 
 /// Creates the email verification page layout/features
