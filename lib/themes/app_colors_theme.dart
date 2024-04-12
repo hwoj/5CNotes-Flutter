@@ -17,7 +17,12 @@ class AppColorsTheme extends ThemeExtension<AppColorsTheme> {
   static const _darktext = Color(0xFF222326);
 
   ///
+  static const _lighterText = Color(0xFF64656c);
+
+  ///
   static const _darkerOffWhite = Color(0xFFE5E6EA);
+
+  static const _evenDarkerOffWhite = Color(0xFFD2D1D7);
 
 
 
@@ -38,6 +43,11 @@ class AppColorsTheme extends ThemeExtension<AppColorsTheme> {
   /// default application text color
   final Color textDefault;
 
+  /// hovered text/icon color
+  final Color textHover;
+
+  /// Container background color
+  final Color containerColor;
 
   /// Internal constructor used in factories
   ///
@@ -47,7 +57,9 @@ class AppColorsTheme extends ThemeExtension<AppColorsTheme> {
     required this.backgroundInput,
     required this.backgroundRow,
     required this.backgroundDarkerComponent,
-    required this.textDefault
+    required this.textDefault,
+    required this.textHover,
+    required this.containerColor
   });
 
   /// Lightmode factory
@@ -59,7 +71,9 @@ class AppColorsTheme extends ThemeExtension<AppColorsTheme> {
       backgroundInput: _blue,
       backgroundRow: _offwhite,
       backgroundDarkerComponent: _darkerOffWhite,
-      textDefault: _darktext
+      textDefault: _darktext,
+      textHover: _lighterText,
+      containerColor: _evenDarkerOffWhite
     );
   }
 
@@ -72,7 +86,9 @@ class AppColorsTheme extends ThemeExtension<AppColorsTheme> {
       backgroundInput: _blue,
       backgroundRow: _blue,
       backgroundDarkerComponent: _blue,
-      textDefault: _blue
+      textDefault: _blue,
+      textHover: _lighterText,
+      containerColor: _evenDarkerOffWhite
     );
   }
 

@@ -3,7 +3,6 @@ import 'package:fivec_notes/models/course.dart';
 import 'package:fivec_notes/models/directory.dart';
 import 'package:fivec_notes/widgets/directory_row.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 /// The [StatefulWidget] representing the [CourseRow] top level object that composes the [FileTree]
 ///
@@ -70,7 +69,7 @@ class CourseRowState extends State<CourseRow> {
             },
             hoverColor: Theme.of(context).appColors.backgroundDarkerComponent,
             child: Padding(
-              padding: const EdgeInsets.only(left: 20, top: 5, bottom: 5, right: 10),
+              padding: isHovered ? const EdgeInsets.only(left: 20, top: 3, bottom: 3, right: 10) : const EdgeInsets.only(left: 20, top: 5, bottom: 5, right: 10),
               child: Row(
           
                 children: [
@@ -81,13 +80,25 @@ class CourseRowState extends State<CourseRow> {
                     ),
                   const Spacer(),
                   if (isHovered) ...[
-                    Icon(
-                      Icons.create_new_folder_outlined,
-                      color: Theme.of(context).appColors.textDefault,
+                    IconButton(
+                      padding: const EdgeInsets.all(2),
+                      constraints: const BoxConstraints(),
+                      onPressed: () {},
+                      tooltip: "Create Subfolder",
+                      icon: Icon(
+                        Icons.create_new_folder_outlined,
+                        color: Theme.of(context).appColors.textDefault,
+                      ),
                     ),
-                    Icon(
-                      Icons.add,
-                      color: Theme.of(context).appColors.textDefault,
+                    IconButton(
+                      padding: const EdgeInsets.all(2),
+                      constraints: const BoxConstraints(),
+                      onPressed: (){},
+                      tooltip: "Create file",
+                      icon: Icon(
+                        Icons.add,
+                        color: Theme.of(context).appColors.textDefault,
+                      ),
                     ),
                   ],
                     
