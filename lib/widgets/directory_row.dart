@@ -2,6 +2,7 @@ import 'package:fivec_notes/main.dart';
 import 'package:fivec_notes/models/directory.dart';
 import 'package:fivec_notes/models/file.dart';
 import 'package:fivec_notes/widgets/directory_delete.dart';
+import 'package:fivec_notes/widgets/directory_rename.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -138,7 +139,14 @@ class DirectoryRowState extends State<DirectoryRow> {
                     IconButton(
                       padding: const EdgeInsets.all(2),
                       constraints: const BoxConstraints(),
-                      onPressed: (){},
+                      onPressed: (){
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return DirectoryRename(directory: widget.directory);
+                          }
+                        );
+                      },
                       tooltip: "Rename Folder",
                       icon: Icon(
                         Icons.create,

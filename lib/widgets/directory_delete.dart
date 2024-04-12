@@ -69,7 +69,7 @@ class DirectoryDeleteState extends State<DirectoryDelete> {
   @override
   Widget build(BuildContext context) {
     return SimpleDialog(
-      title: Text("Are you sure you would like to delete \"${widget.directory.name}\"and all of its contents?" ),
+      title: Text("Delete \"${widget.directory.name}\"" ),
       backgroundColor: Theme.of(context).appColors.backgroundRow,
       children: <Widget>[
         
@@ -80,10 +80,11 @@ class DirectoryDeleteState extends State<DirectoryDelete> {
           child: Container(
             alignment: Alignment.center,
             constraints: const BoxConstraints(
-              minHeight: 100
+              minHeight: 100,
+              maxWidth: 700
             ),
             color: Theme.of(context).appColors.containerColor,
-            child: const Text("Deleting this folder will permanently destroy the folder and all of its contents"),
+            child: Text("Are you sure you want to delete \"${widget.directory.name}\"? Deleting this folder will permanently destroy the folder and all of its contents"),
           ),
         ),
         const SizedBox(height: 10),
@@ -105,7 +106,7 @@ class DirectoryDeleteState extends State<DirectoryDelete> {
                       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10)
                     ),
                     onPressed: () {
-                      widget.
+                      
                     }, 
                     child: const Text("Delete Folder"),
                     
