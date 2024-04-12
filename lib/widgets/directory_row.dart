@@ -1,3 +1,4 @@
+import 'package:fivec_notes/main.dart';
 import 'package:fivec_notes/models/directory.dart';
 import 'package:fivec_notes/models/file.dart';
 import 'package:flutter/material.dart';
@@ -31,6 +32,12 @@ class DirectoryRow extends StatefulWidget {
 /// The [renameDirectory] and [deleteDirectory] functions handle those actions respectively while the flutter [ExpansionTile] wiget 
 /// has built in capabaility to perform the collapsing and expanding.
 class DirectoryRowState extends State<DirectoryRow> {
+
+  /// Whether the row is expanded or not
+  bool isExpanded = false;
+
+  /// Whether the row is hovered or not
+  bool isHovered = false;
 
   /// the files that exist in this directory
   List<File> files = [];
@@ -89,6 +96,64 @@ class DirectoryRowState extends State<DirectoryRow> {
   /// The primary child is the [ExpansionTile] which will contain all of the [DirectoryRow] widget's children
   @override
   Widget build(BuildContext context) {
-    return const ExpansionTile(title: Title)
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Material(
+          color: Theme.of(context).appColors.backgroundRow,
+          child: InkWell(
+            onTap: () {
+              setState(() {
+                isExpanded = !isExpanded;
+              });
+            },
+            onHover: (hovered) {
+              setState(() {
+                isHovered = hovered;
+              });
+            },
+            hoverColor: Theme.of(context).appColors.backgroundDarkerComponent,
+            child: Padding(
+              padding: const EdgeInsets.only(left: 30, top: 5, bottom: 5, right: 10),
+              child: Row(
+          
+                children: [
+                  Icon(
+                    Icons.folder_outlined,
+                    color: Theme.of(context).appColors.textDefault,
+                  ),
+                  const SizedBox(width: 10,),
+                  Text(
+                    widget.directory.name,
+                    style: TextStyle(color: Theme.of(context).appColors.textDefault),
+                    ),
+                  const Spacer(),
+                  if (isHovered) ...[
+                    Icon(
+                      Icons.create_new_folder_outlined,
+                      color: Theme.of(context).appColors.textDefault,
+                    ),
+                    Icon(
+                      Icons.add,
+                      color: Theme.of(context).appColors.textDefault,
+                    ),
+                  ],
+                    
+                  Icon(
+                    isExpanded ? Icons.expand_less : Icons.expand_more
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+        if (isExpanded)
+          const Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [Text("Hello World")],
+          )
+
+      ],
+    );
   }
 }

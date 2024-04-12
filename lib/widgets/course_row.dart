@@ -1,5 +1,9 @@
+import 'package:fivec_notes/main.dart';
 import 'package:fivec_notes/models/course.dart';
+import 'package:fivec_notes/models/directory.dart';
+import 'package:fivec_notes/widgets/directory_row.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 /// The [StatefulWidget] representing the [CourseRow] top level object that composes the [FileTree]
 ///
@@ -26,6 +30,8 @@ class CourseRow extends StatefulWidget {
 /// 
 /// This state encodes the contents of the [CourseRow] and will update as necessary
 class CourseRowState extends State<CourseRow> {
+
+  Directory dir = Directory(uuid: "1234", name: "Some Folder", parent: ".", user: "1234", course: "123");
   
   /// whether the dropdown is expanded or not
   bool isExpanded = false;
@@ -46,46 +52,66 @@ class CourseRowState extends State<CourseRow> {
   /// This method will be called everytime the state is updated to rebuild the State and widget
   @override
   Widget build(BuildContext context) {
-    
     return Column(
-      
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        InkWell(
-          onTap: () {
-            setState(() {
-              isExpanded = !isExpanded;
-            });
-          },
-          onHover: (hovered) {
-            setState(() {
-              isHovered = hovered;
-            });
-          },
-          child: Padding(
-            padding: const EdgeInsets.only(left: 20, top: 5, bottom: 5, right: 10),
-            child: Row(
-
-              children: [
-                
-                Text(widget.course.name),
-                const Spacer(),
-                if (isHovered) ...[
-                  const Icon(Icons.create_new_folder_outlined),
-                  const Icon(Icons.add),
-                ],
+        Material(
+          color: Theme.of(context).appColors.backgroundRow,
+          child: InkWell(
+            onTap: () {
+              setState(() {
+                isExpanded = !isExpanded;
+              });
+            },
+            onHover: (hovered) {
+              setState(() {
+                isHovered = hovered;
+              });
+            },
+            hoverColor: Theme.of(context).appColors.backgroundDarkerComponent,
+            child: Padding(
+              padding: const EdgeInsets.only(left: 20, top: 5, bottom: 5, right: 10),
+              child: Row(
+          
+                children: [
                   
-                Icon(
-                  isExpanded ? Icons.expand_less : Icons.expand_more
-                ),
-              ],
+                  Text(
+                    widget.course.name,
+                    style: TextStyle(color: Theme.of(context).appColors.textDefault),
+                    ),
+                  const Spacer(),
+                  if (isHovered) ...[
+                    Icon(
+                      Icons.create_new_folder_outlined,
+                      color: Theme.of(context).appColors.textDefault,
+                    ),
+                    Icon(
+                      Icons.add,
+                      color: Theme.of(context).appColors.textDefault,
+                    ),
+                  ],
+                    
+                  Icon(
+                    isExpanded ? Icons.expand_less : Icons.expand_more
+                  ),
+                ],
+              ),
             ),
           ),
         ),
         if (isExpanded) 
-          const Column(
+          Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [Text("HELLO WORLD")],
+            children: [
+              ListView.builder(
+                scrollDirection: Axis.vertical,
+                shrinkWrap: true,
+                itemCount: 1,
+                itemBuilder: (BuildContext context, int index) {
+                  return DirectoryRow(directory: dir);
+                }
+              )
+            ],
           )
         
       ],

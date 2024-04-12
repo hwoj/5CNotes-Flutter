@@ -1,3 +1,4 @@
+import 'package:fivec_notes/main.dart';
 import 'package:fivec_notes/models/semester.dart';
 import 'package:fivec_notes/widgets/course_row.dart';
 import 'package:flutter/material.dart';
@@ -58,24 +59,30 @@ class SemesterRowState extends State<SemesterRow> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        InkWell(
-          onTap: () {
-            setState(() {
-              isExpanded = !isExpanded;
-            });
-          },
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-            child: Row(
-
-              children: [
+        Material(
+          color: Theme.of(context).appColors.backgroundRow,
+          child: InkWell(
+            hoverColor: Theme.of(context).appColors.backgroundDarkerComponent,
+            
+            onTap: () {
+              setState(() {
+                isExpanded = !isExpanded;
+              });
+            },
+            child: Padding(
+              
+              padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+              child: Row(
                 
-                Text(widget.semester.name),
-                const Spacer(),
-                Icon(
-                  isExpanded ? Icons.expand_less : Icons.expand_more
-                ),
-              ],
+                children: [
+                  
+                  Text(widget.semester.name),
+                  const Spacer(),
+                  Icon(
+                    isExpanded ? Icons.expand_less : Icons.expand_more
+                  ),
+                ],
+              ),
             ),
           ),
         ),

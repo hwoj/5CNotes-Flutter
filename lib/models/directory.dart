@@ -2,14 +2,13 @@
 /// 
 /// Directories are user specific methods of organizing file structure
 /// [Directory] objects will mostly be created by reading the local file tree or my consuming REST API endpoints
-
 class Directory {
   
   /// The uuid used to refer to the Directory
   final String uuid;
 
   /// The directory's name
-  String? name;
+  final String name;
 
   /// The directory's parent
   final String parent;
