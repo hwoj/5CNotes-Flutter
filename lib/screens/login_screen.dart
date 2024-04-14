@@ -66,14 +66,14 @@ class _LoginScreenState extends State<LoginScreen> {
                 String email = _emailController.text;
                 String password = _passwordController.text;
                 // dummy values for correct email and password, will change later 
-                String correctEmail = "email@gmail.com";
-                String correctPassword = "password"; 
+                String correctEmail = "";
+                String correctPassword = ""; 
                 if (email == correctEmail && password == correctPassword) { 
                   Navigator.push(
                     context, 
                     MaterialPageRoute(builder: (context) => HomeScreen()),
                   );
-                } else {
+                } else { // TODO: add functionality if password is wrong
                   
                 }
                 
