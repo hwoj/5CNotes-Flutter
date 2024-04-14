@@ -14,87 +14,86 @@ class TopBar extends StatefulWidget implements PreferredSizeWidget {
   /// Creates the app widget to build the structure of the topbar. 
   /// 
   /// The widget returned should create the buttons and define their actions.
-  final TopBar topbar;
-  const TopBar({
-    Key? key,
-    required this.topbar,
-  }) : super(key: key);
-
-  State<TopBar> createState() => TopBarState();
-
-
+  @override
+  State<TopBar> createState() => _TopBarState();
   /// Gets parameter so the TopBar fits the screen dimensions
   @override
   Size get preferredSize => Size.fromHeight(kToolbarHeight);
 }
 
-class TopBarState extends State<TopBar> {
-  bool isExpanded = false;
-  bool isHovered = false;
-
-  List<TextButton> buttons = [];
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Material(
-          child: InkWell(
-            onTap: () {
-              setState(() {
-                isExpanded = !isExpanded;
-              });
-            },
-            onHover: (hovered) {
-              setState(() {
-                isHovered = hovered;
-              });
-            },
-            hoverColor: Theme.of(context).appColors.backgroundDarkerComponent,
-            child: Padding(
-              padding: const EdgeInsets.only(left: 30, top: 5, bottom: 5, right: 10),
-              child: Row(
-                children: [
-                  TextButton(
-                    onPressed: () => Navigator.push(
-                      context, 
-                      MaterialPageRoute(builder: (context) => SettingsScreen()
-                      )
-                    ), 
-                  child: Text("Settings")
+class _TopBarState extends State<TopBar> {
+  /// Creates the dropdown menu when the tree dots button
+  /// is pressed. 
+  /// 
+  /// There will be an [IconButton] on the top right that when
+  /// pressed, will display a modal screen.  This will have two
+  /// buttons: one to redirect to the settings page, and another one 
+  /// to logout. 
+   _dropdown(BuildContext context) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return Dialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10.0),
+            ),
+            child: Container(
+              height: 200.0, // Set desired height
+              width: 200.0,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  ElevatedButton(
+                    onPressed: () {
+                      // Handle take photo action
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => SettingsScreen()));
+                    },
+                    child: Text("Settings"),
                   ),
-                  TextButton(
-                    onPressed: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => LoginScreen()
-                      )
-                    ),
-                    child: Text("Logout")
+                  SizedBox(height: 16.0), // Space between buttons
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => LoginScreen()));
+                    },
+                  child: Text("Logout"),
                   ),
-                  const SizedBox(width: 10,),
-                  const Spacer(),
-                  if (isHovered) ...[
-                    Icon(
-                      Icons.create_new_folder_outlined,
-                      color: Theme.of(context).appColors.textDefault,
-                    ),
-                    Icon(
-                      Icons.add,
-                      color: Theme.of(context).appColors.textDefault,
-                    ),
-                  ],
-                    
-                  Icon(
-                    isExpanded ? Icons.expand_less : Icons.expand_more
-                  ),
+            
                 ],
               ),
             ),
-          ),
-        ),
-
-      ],
-    );
+          );
+        },
+      );
   }
+
+
+   @override
+  Widget build(BuildContext context) {
+    /// The [AppBar] widget should have 
+    /// [IconButton] widgets to define the back button and hamburger menu on the top left,
+    /// [FlutterLogo] logo in the center, and a [ShowDialogue] manage access and [Scrollable] user dropdown menu on the 
+    /// top right.  Use the function Navigation.of(context).push() Navigation.of(context).pop()
+    /// to move back and forth between screens.
+    return Scaffold(
+      appBar: AppBar(
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.more_vert),
+            tooltip: "Open menu options",
+            onPressed: () {
+              _dropdown(context);
+            },
+            )
+        ]
+      ),
+      
+      );
+    }
+
+
 }
