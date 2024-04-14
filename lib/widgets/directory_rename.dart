@@ -10,12 +10,16 @@ class DirectoryRename extends StatefulWidget {
   /// The directory that is being renamed
   final Directory directory;
 
+  /// The function passed in to handle the renaming
+  final Function(String) onRename;
+
   /// The main constructor for the [DirectoryRename] widget
   ///
   /// This constructor passes a [Directory] into the widget
   const DirectoryRename({
     Key? key,
-    required this.directory
+    required this.directory,
+    required this.onRename
   }) : super(key: key);
 
   @override
@@ -67,7 +71,7 @@ class DirectoryRenameState extends State<DirectoryRename> {
   void saveName(String newName) {
     // call validateName on the newName parameter
     if (validateName(newName)) {
-      widget.directory.name = newName;
+      widget.onRename(newName);
       Navigator.pop(context);
     } else {
       return;

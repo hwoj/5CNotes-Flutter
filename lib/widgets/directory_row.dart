@@ -54,10 +54,11 @@ class DirectoryRowState extends State<DirectoryRow> {
 
   /// The function responsible for handling the action to rename the [Directory] from the [DirectoryRow]
   ///
-  /// This function will call on the [DirectoryRename] widget to rename the [Directory]
-  renameDirectory() {
-    // calls on the directory rename widget and passes the directory into it
-    // DirectoryRename handles the rest!
+  /// This function will be passed to the [DirectoryRename] widget to rename the [Directory]
+  renameDirectory(String newName) {
+    setState(() {
+      widget.directory.name = newName;
+    }); 
   }
 
   /// The function responsible for handling the action to delete the [Directory] from the [DirectoryRow]
@@ -143,7 +144,7 @@ class DirectoryRowState extends State<DirectoryRow> {
                         showDialog(
                           context: context,
                           builder: (BuildContext context) {
-                            return DirectoryRename(directory: widget.directory);
+                            return DirectoryRename(directory: widget.directory, onRename: renameDirectory,);
                           }
                         );
                       },
