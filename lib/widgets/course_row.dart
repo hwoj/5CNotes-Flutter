@@ -41,6 +41,13 @@ class CourseRowState extends State<CourseRow> {
   /// whether the row is hovered or not
   bool isHovered = false;
 
+  /// The method to delete the directory
+  deleteDirectory(Directory directory) {
+    setState(() {
+      widget.directories.remove(directory);
+    });
+  }
+
   /// This function will load the courses and files for a given course
   /// 
   /// To enable lazy loading on old courses. When an old course is expanded, it will call this function to retrieve the 
@@ -122,7 +129,7 @@ class CourseRowState extends State<CourseRow> {
                 shrinkWrap: true,
                 itemCount: widget.directories.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return DirectoryRow(directory: widget.directories[index]);
+                  return DirectoryRow(directory: widget.directories[index], deleteFunction: deleteDirectory,);
                 }
               )
             ],

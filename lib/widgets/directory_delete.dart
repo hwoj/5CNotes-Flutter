@@ -10,12 +10,16 @@ class DirectoryDelete extends StatefulWidget {
   /// The directory that is being renamed
   final Directory directory;
 
+  /// The function from the parent widget to delete the directory
+  final Function(Directory) deleteFunction;
+
   /// The main constructor for the [DirectoryDelete] widget
   ///
   /// This constructor passes a [Directory] into the widget
   const DirectoryDelete({
     Key? key,
-    required this.directory
+    required this.directory,
+    required this.deleteFunction
   }) : super(key: key);
 
   @override
@@ -31,7 +35,8 @@ class DirectoryDeleteState extends State<DirectoryDelete> {
   ///
   /// This function will be called upon the user clicking the button to delete the Directory and delete the Directory
   void deleteDirectory() {
-
+    widget.deleteFunction(widget.directory);
+    Navigator.pop(context);
   }
 
   /// The function reponsible for closing the DirectoryDelete

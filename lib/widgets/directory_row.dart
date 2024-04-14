@@ -16,12 +16,16 @@ class DirectoryRow extends StatefulWidget {
   /// The [Directory] object that the [DirectoryRow] represents
   final Directory directory;
 
+  /// The function from the parent widget to delete the directory
+  final Function(Directory) deleteFunction;
+
   /// The constructor for the [DirectoryRow] object
   /// 
   /// This is the default and only constructor for the [DirectoryRow] object
   const DirectoryRow({
     Key? key,
-    required this.directory
+    required this.directory,
+    required this.deleteFunction
   }) : super (key: key);
 
   @override
@@ -161,7 +165,7 @@ class DirectoryRowState extends State<DirectoryRow> {
                         showDialog(
                           context: context, 
                           builder: (BuildContext context) {
-                            return DirectoryDelete(directory: widget.directory);
+                            return DirectoryDelete(directory: widget.directory, deleteFunction: widget.deleteFunction,);
                           }
                         );
                       },
