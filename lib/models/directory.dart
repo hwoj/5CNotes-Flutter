@@ -8,7 +8,7 @@ class Directory {
   final String uuid;
 
   /// The directory's name
-  final String name;
+  String name;
 
   /// The directory's parent
   final String parent;

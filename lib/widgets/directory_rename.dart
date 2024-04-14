@@ -27,6 +27,21 @@ class DirectoryRename extends StatefulWidget {
 /// This state contains all of the widgets within the the [DirectoryRename] widget and the logic performed on actions
 class DirectoryRenameState extends State<DirectoryRename> {
 
+  /// The Controller that controls the textfield
+  TextEditingController _renameController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    _renameController = TextEditingController(text: widget.directory.name);
+  }
+
+  @override
+  void dispose() {
+    _renameController.dispose();
+    super.dispose();
+  }
+
   /// The name that the user is renaming the directory to
   String ?name;
 
@@ -35,11 +50,14 @@ class DirectoryRenameState extends State<DirectoryRename> {
   /// This function checks to see if the [newName] follows the allowed directory naming conventions and 
   /// returns a boolean that provides indication of if this is the case or not 
   bool validateName(String newName) {
+
     // make sure that the filename is alphanumeric but allowed to include spaces, underscores, hyphens or periods
+    RegExp regex = RegExp(r'^[^\\/:*?"<>|]+$', caseSensitive: false);
 
-    // return whether the above check was true or not
+    // Check if the folder name matches the regular expression and does not start or end with a space
+    return regex.hasMatch(newName) && !newName.startsWith(' ') && !newName.endsWith(' ');
 
-    return false;
+  
   }
 
   /// This is the function reponsible for renaming the directory given the user input
@@ -48,7 +66,12 @@ class DirectoryRenameState extends State<DirectoryRename> {
   /// [newName] is the name being passed in
   void saveName(String newName) {
     // call validateName on the newName parameter
-
+    if (validateName(newName)) {
+      widget.directory.name = newName;
+      Navigator.pop(context);
+    } else {
+      return;
+    }
     // if validated then modify the directory object with the new name.
     // make call to directory service torename directory in backend.
     // close modal and widget
@@ -63,7 +86,7 @@ class DirectoryRenameState extends State<DirectoryRename> {
   /// This function will handle the logic for the DirectoryRename widget being closed if the user doesn't 
   /// want to proceed with renaming the directory
   void cancelRename() {
-    // close modal and widget
+    Navigator.pop(context);
   }
 
   @override
@@ -73,19 +96,22 @@ class DirectoryRenameState extends State<DirectoryRename> {
       backgroundColor: Theme.of(context).appColors.backgroundRow,
       children: <Widget>[
         
-        const Padding(padding: EdgeInsets.only(left: 30)),
-        ClipRect(
-          
-          
-          child: Container(
-            alignment: Alignment.center,
-            constraints: const BoxConstraints(
-              minHeight: 100
-            ),
-            color: Theme.of(context).appColors.containerColor,
-            child: const Text("Deleting this folder will permanently destroy the folder and all of its contents"),
+        Padding(
+          padding: const EdgeInsets.only(left: 30, right: 30, top: 20, bottom: 30),
+          child: Column(
+            children: <Widget>[
+              TextField(
+                controller: _renameController,
+                decoration: InputDecoration(
+                  labelText: "Folder Name:",
+                  border: const OutlineInputBorder(),
+                  hintText: widget.directory.name
+                ),
+              )
+            ],
           ),
         ),
+        
         const SizedBox(height: 10),
         Row(
           children: <Widget>[
@@ -96,7 +122,7 @@ class DirectoryRenameState extends State<DirectoryRename> {
                 children: <Widget>[
                   Positioned.fill(
                     child: Container(
-                      color: const Color(0xFF005500),
+                      color: Theme.of(context).appColors.backgroundDefault,
                     )
                   ),
                   TextButton(
@@ -105,7 +131,7 @@ class DirectoryRenameState extends State<DirectoryRename> {
                       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10)
                     ),
                     onPressed: () {
-                     
+                     saveName(_renameController.text);
                     }, 
                     child: const Text("Rename Folder"),
                     
@@ -123,7 +149,7 @@ class DirectoryRenameState extends State<DirectoryRename> {
                 children: <Widget>[
                   Positioned.fill(
                     child: Container(
-                      color: Theme.of(context).appColors.backgroundDefault,
+                      color: Theme.of(context).appColors.textHover,
                     )
                   ),
                   TextButton(
@@ -132,7 +158,7 @@ class DirectoryRenameState extends State<DirectoryRename> {
                       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10)
                     ),
                     onPressed: () {
-                      
+                      cancelRename();
                     }, 
                     child: const Text("Cancel"),
                     

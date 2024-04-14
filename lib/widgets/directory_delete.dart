@@ -124,7 +124,7 @@ class DirectoryDeleteState extends State<DirectoryDelete> {
                 children: <Widget>[
                   Positioned.fill(
                     child: Container(
-                      color: Theme.of(context).appColors.backgroundDefault,
+                      color: Theme.of(context).appColors.textHover,
                     )
                   ),
                   TextButton(
