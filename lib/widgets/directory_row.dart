@@ -1,7 +1,10 @@
 import 'package:fivec_notes/main.dart';
 import 'package:fivec_notes/models/directory.dart';
 import 'package:fivec_notes/models/file.dart';
+import 'package:fivec_notes/widgets/directory_delete.dart';
+import 'package:fivec_notes/widgets/directory_rename.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 /// The [DirectoryRow] [StatefulWidget] is the widget responsible for an individual [Directory] in the [FileTree]
 ///
@@ -29,7 +32,7 @@ class DirectoryRow extends StatefulWidget {
 ///
 /// This state will contain all of the contents of the [DirectoryRow] widget along with the logic to handle actions performed on it. 
 /// The primary subwidget being used is an [ExpansionTile] who's children are other rows of [FileRow] or [DirectoryRow]. 
-/// The [renameDirectory] and [deleteDirectory] functions handle those actions respectively while the flutter [ExpansionTile] wiget 
+/// The [renameDirectory] and [deleteDirectory] functions handle those actions respectively while the flutter [ExpansionTile] widget 
 /// has built in capabaility to perform the collapsing and expanding.
 class DirectoryRowState extends State<DirectoryRow> {
 
@@ -38,6 +41,10 @@ class DirectoryRowState extends State<DirectoryRow> {
 
   /// Whether the row is hovered or not
   bool isHovered = false;
+
+  /// Whether the rename icon is hovered or not
+  bool renameHovered = false;
+
 
   /// the files that exist in this directory
   List<File> files = [];
@@ -114,9 +121,8 @@ class DirectoryRowState extends State<DirectoryRow> {
             },
             hoverColor: Theme.of(context).appColors.backgroundDarkerComponent,
             child: Padding(
-              padding: const EdgeInsets.only(left: 30, top: 5, bottom: 5, right: 10),
+              padding: isHovered ? const EdgeInsets.only(left: 30, top: 3, bottom: 3, right: 10) : const EdgeInsets.only(left: 30, top: 5, bottom: 5, right: 10),
               child: Row(
-          
                 children: [
                   Icon(
                     Icons.folder_outlined,
@@ -129,13 +135,61 @@ class DirectoryRowState extends State<DirectoryRow> {
                     ),
                   const Spacer(),
                   if (isHovered) ...[
-                    Icon(
-                      Icons.create_new_folder_outlined,
-                      color: Theme.of(context).appColors.textDefault,
+                    IconButton(
+                      padding: const EdgeInsets.all(2),
+                      constraints: const BoxConstraints(),
+                      onPressed: (){
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return DirectoryRename(directory: widget.directory);
+                          }
+                        );
+                      },
+                      tooltip: "Rename Folder",
+                      icon: Icon(
+                        Icons.create,
+                        color: Theme.of(context).appColors.textDefault,
+                      ),
                     ),
-                    Icon(
-                      Icons.add,
-                      color: Theme.of(context).appColors.textDefault,
+                    IconButton(
+                      padding: const EdgeInsets.all(2),
+                      constraints: const BoxConstraints(),
+                      onPressed: (){
+                        showDialog(
+                          context: context, 
+                          builder: (BuildContext context) {
+                            return DirectoryDelete(directory: widget.directory);
+                          }
+                        );
+                      },
+                      tooltip: "Delete Folder",
+                      icon: Icon(
+                        Icons.delete_outline,
+                        color: Theme.of(context).appColors.textDefault
+                      ),
+                    ),
+                    IconButton(
+                      padding: const EdgeInsets.all(2),
+                      constraints: const BoxConstraints(),
+                      onPressed: () {},
+                      tooltip: "Create Subfolder",
+                      icon: Icon(
+                        Icons.create_new_folder_outlined,
+                        color: Theme.of(context).appColors.textDefault,
+                      ),
+                    ),
+                    IconButton(
+                      padding: const EdgeInsets.all(2),
+                      constraints: const BoxConstraints(),
+                      onPressed: (){
+
+                      },
+                      tooltip: "Create file",
+                      icon: Icon(
+                        Icons.add,
+                        color: Theme.of(context).appColors.textDefault,
+                      ),
                     ),
                   ],
                     

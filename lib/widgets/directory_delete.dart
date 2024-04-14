@@ -4,28 +4,28 @@ import 'package:flutter/material.dart';
 
 /// This is a [StatefulWidget] dedicated to renaming a [Directory]
 ///
-/// This [DirectoryRename] widget is called by the [DirectoryRow] or [OpenDocument] to rename the directory
-class DirectoryRename extends StatefulWidget {
+/// This [DirectoryDelete] widget is called by the [DirectoryRow] or [OpenDocument] to rename the directory
+class DirectoryDelete extends StatefulWidget {
 
   /// The directory that is being renamed
   final Directory directory;
 
-  /// The main constructor for the [DirectoryRename] widget
+  /// The main constructor for the [DirectoryDelete] widget
   ///
   /// This constructor passes a [Directory] into the widget
-  const DirectoryRename({
+  const DirectoryDelete({
     Key? key,
     required this.directory
   }) : super(key: key);
 
   @override
-  State<DirectoryRename> createState() => DirectoryRenameState();
+  State<DirectoryDelete> createState() => DirectoryDeleteState();
 }
 
-/// This is the main state of the [DirectoryRename] [StatefulWidget]
+/// This is the main state of the [DirectoryDelete] [StatefulWidget]
 ///
-/// This state contains all of the widgets within the the [DirectoryRename] widget and the logic performed on actions
-class DirectoryRenameState extends State<DirectoryRename> {
+/// This state contains all of the widgets within the the [DirectoryDelete] widget and the logic performed on actions
+class DirectoryDeleteState extends State<DirectoryDelete> {
 
   /// The name that the user is renaming the directory to
   String ?name;
@@ -58,9 +58,9 @@ class DirectoryRenameState extends State<DirectoryRename> {
     // return
   }
 
-  /// The function reponsible for closing the DirectoryRename
+  /// The function reponsible for closing the DirectoryDelete
   ///
-  /// This function will handle the logic for the DirectoryRename widget being closed if the user doesn't 
+  /// This function will handle the logic for the DirectoryDelete widget being closed if the user doesn't 
   /// want to proceed with renaming the directory
   void cancelRename() {
     // close modal and widget
@@ -69,7 +69,7 @@ class DirectoryRenameState extends State<DirectoryRename> {
   @override
   Widget build(BuildContext context) {
     return SimpleDialog(
-      title: Text("Rename \"${widget.directory.name}\"" ),
+      title: Text("Delete \"${widget.directory.name}\"" ),
       backgroundColor: Theme.of(context).appColors.backgroundRow,
       children: <Widget>[
         
@@ -80,10 +80,11 @@ class DirectoryRenameState extends State<DirectoryRename> {
           child: Container(
             alignment: Alignment.center,
             constraints: const BoxConstraints(
-              minHeight: 100
+              minHeight: 100,
+              maxWidth: 700
             ),
             color: Theme.of(context).appColors.containerColor,
-            child: const Text("Deleting this folder will permanently destroy the folder and all of its contents"),
+            child: Text("Are you sure you want to delete \"${widget.directory.name}\"? Deleting this folder will permanently destroy the folder and all of its contents"),
           ),
         ),
         const SizedBox(height: 10),
@@ -96,7 +97,7 @@ class DirectoryRenameState extends State<DirectoryRename> {
                 children: <Widget>[
                   Positioned.fill(
                     child: Container(
-                      color: const Color(0xFF005500),
+                      color: const Color(0xFFFF0000),
                     )
                   ),
                   TextButton(
@@ -105,9 +106,9 @@ class DirectoryRenameState extends State<DirectoryRename> {
                       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10)
                     ),
                     onPressed: () {
-                     
+                      
                     }, 
-                    child: const Text("Rename Folder"),
+                    child: const Text("Delete Folder"),
                     
                   ),
                 ],
