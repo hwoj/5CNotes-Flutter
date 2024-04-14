@@ -32,7 +32,7 @@ class DirectoryRow extends StatefulWidget {
 ///
 /// This state will contain all of the contents of the [DirectoryRow] widget along with the logic to handle actions performed on it. 
 /// The primary subwidget being used is an [ExpansionTile] who's children are other rows of [FileRow] or [DirectoryRow]. 
-/// The [renameDirectory] and [deleteDirectory] functions handle those actions respectively while the flutter [ExpansionTile] wiget 
+/// The [renameDirectory] and [deleteDirectory] functions handle those actions respectively while the flutter [ExpansionTile] widget 
 /// has built in capabaility to perform the collapsing and expanding.
 class DirectoryRowState extends State<DirectoryRow> {
 
@@ -123,7 +123,6 @@ class DirectoryRowState extends State<DirectoryRow> {
             child: Padding(
               padding: isHovered ? const EdgeInsets.only(left: 30, top: 3, bottom: 3, right: 10) : const EdgeInsets.only(left: 30, top: 5, bottom: 5, right: 10),
               child: Row(
-          
                 children: [
                   Icon(
                     Icons.folder_outlined,
