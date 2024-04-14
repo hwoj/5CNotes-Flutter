@@ -13,10 +13,14 @@ class CourseRow extends StatefulWidget {
   /// The [Course] object that the [CourseRow] is representing
   final Course course;
 
+
+  /// The list of [Directory] objects that exist under the course
+  List<Directory> directories = [Directory(uuid: "1234", name: "Some Folder", parent: ".", user: "1234", course: "123")];
+
   /// The default constructor for the [CourseRow]
   ///
   /// The constructor that will be used to pass in a [course] to the [CourseRow]
-  const CourseRow({
+  CourseRow({
     Key? key,
     required this.course
   }) : super(key: key);
@@ -30,7 +34,6 @@ class CourseRow extends StatefulWidget {
 /// This state encodes the contents of the [CourseRow] and will update as necessary
 class CourseRowState extends State<CourseRow> {
 
-  Directory dir = Directory(uuid: "1234", name: "Some Folder", parent: ".", user: "1234", course: "123");
   
   /// whether the dropdown is expanded or not
   bool isExpanded = false;
@@ -117,9 +120,9 @@ class CourseRowState extends State<CourseRow> {
               ListView.builder(
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,
-                itemCount: 1,
+                itemCount: widget.directories.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return DirectoryRow(directory: dir);
+                  return DirectoryRow(directory: widget.directories[index]);
                 }
               )
             ],
