@@ -8,7 +8,7 @@ class Directory {
   final String uuid;
 
   /// The directory's name
-  final String name;
+  String name;
 
   /// The directory's parent
   final String parent;
@@ -18,6 +18,9 @@ class Directory {
 
   /// The course that the directory sits under
   final String course;
+
+  /// The subdirectories of the directory
+  final List<Directory> subdirectories = [];
 
   /// The primary constructor for the [Directory] class
   ///

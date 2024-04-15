@@ -1,6 +1,7 @@
 import 'package:fivec_notes/main.dart';
 import 'package:fivec_notes/models/course.dart';
 import 'package:fivec_notes/models/directory.dart';
+import 'package:fivec_notes/widgets/add_directory.dart';
 import 'package:fivec_notes/widgets/directory_row.dart';
 import 'package:flutter/material.dart';
 
@@ -13,10 +14,14 @@ class CourseRow extends StatefulWidget {
   /// The [Course] object that the [CourseRow] is representing
   final Course course;
 
+
+  /// The list of [Directory] objects that exist under the course
+  List<Directory> directories = [Directory(uuid: "1234", name: "Some Folder", parent: ".", user: "1234", course: "123")];
+
   /// The default constructor for the [CourseRow]
   ///
   /// The constructor that will be used to pass in a [course] to the [CourseRow]
-  const CourseRow({
+  CourseRow({
     Key? key,
     required this.course
   }) : super(key: key);
@@ -30,7 +35,6 @@ class CourseRow extends StatefulWidget {
 /// This state encodes the contents of the [CourseRow] and will update as necessary
 class CourseRowState extends State<CourseRow> {
 
-  Directory dir = Directory(uuid: "1234", name: "Some Folder", parent: ".", user: "1234", course: "123");
   
   /// whether the dropdown is expanded or not
   bool isExpanded = false;
@@ -38,12 +42,31 @@ class CourseRowState extends State<CourseRow> {
   /// whether the row is hovered or not
   bool isHovered = false;
 
+  /// The method to delete the directory
+  deleteDirectory(Directory directory) {
+    setState(() {
+      widget.directories.remove(directory);
+    });
+  }
+
   /// This function will load the courses and files for a given course
   /// 
   /// To enable lazy loading on old courses. When an old course is expanded, it will call this function to retrieve the 
   /// courses and their contents using the [FileService]
   void loadCourse(Course course) {
 
+  }
+
+  /// The function to create a directory within the Course
+  ///
+  /// This function takes the name sent by the [AddDirectory] widget and creates a new [Directory]
+  /// from it that lives within the [Course]
+  void createDirectory(String directoryName) {
+    setState(() {
+      widget.directories.add(Directory(uuid: "xdd", name: directoryName, parent: ".", user: "-", course: widget.course.uuid));
+      isExpanded = true;  
+    });
+    
   }
 
   /// The [build] method contains the widgets and content that makeup the [CourseRow]
@@ -83,8 +106,15 @@ class CourseRowState extends State<CourseRow> {
                     IconButton(
                       padding: const EdgeInsets.all(2),
                       constraints: const BoxConstraints(),
-                      onPressed: () {},
-                      tooltip: "Create Subfolder",
+                      onPressed: () {
+                        showDialog(
+                          context: context, 
+                          builder: (BuildContext context) {
+                            return AddDirectory(parent: widget.course, createDirectory: createDirectory);
+                          }
+                        );
+                      },
+                      tooltip: "Create Folder",
                       icon: Icon(
                         Icons.create_new_folder_outlined,
                         color: Theme.of(context).appColors.textDefault,
@@ -117,11 +147,12 @@ class CourseRowState extends State<CourseRow> {
               ListView.builder(
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,
-                itemCount: 1,
+                itemCount: widget.directories.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return DirectoryRow(directory: dir);
+                  return DirectoryRow(directory: widget.directories[index], deleteFunction: deleteDirectory,);
                 }
-              )
+                            )
+              
             ],
           )
         

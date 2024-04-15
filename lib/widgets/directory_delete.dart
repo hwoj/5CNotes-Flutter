@@ -10,12 +10,16 @@ class DirectoryDelete extends StatefulWidget {
   /// The directory that is being renamed
   final Directory directory;
 
+  /// The function from the parent widget to delete the directory
+  final Function(Directory) deleteFunction;
+
   /// The main constructor for the [DirectoryDelete] widget
   ///
   /// This constructor passes a [Directory] into the widget
   const DirectoryDelete({
     Key? key,
-    required this.directory
+    required this.directory,
+    required this.deleteFunction
   }) : super(key: key);
 
   @override
@@ -27,43 +31,21 @@ class DirectoryDelete extends StatefulWidget {
 /// This state contains all of the widgets within the the [DirectoryDelete] widget and the logic performed on actions
 class DirectoryDeleteState extends State<DirectoryDelete> {
 
-  /// The name that the user is renaming the directory to
-  String ?name;
-
-  /// This function validates the name the user wants to rename the directory to
+  /// The function responsible for deleting the directory
   ///
-  /// This function checks to see if the [newName] follows the allowed directory naming conventions and 
-  /// returns a boolean that provides indication of if this is the case or not 
-  bool validateName(String newName) {
-    // make sure that the filename is alphanumeric but allowed to include spaces, underscores, hyphens or periods
-
-    // return whether the above check was true or not
-
-    return false;
-  }
-
-  /// This is the function reponsible for renaming the directory given the user input
-  ///
-  /// It will change the name of the directory after validating it with [validateName]. 
-  /// [newName] is the name being passed in
-  void saveName(String newName) {
-    // call validateName on the newName parameter
-
-    // if validated then modify the directory object with the new name.
-    // make call to directory service torename directory in backend.
-    // close modal and widget
-
-    // if not validated then display error and keep modal open
-
-    // return
+  /// This function will be called upon the user clicking the button to delete the Directory and delete the Directory
+  void deleteDirectory() {
+    widget.deleteFunction(widget.directory);
+    Navigator.pop(context);
   }
 
   /// The function reponsible for closing the DirectoryDelete
   ///
   /// This function will handle the logic for the DirectoryDelete widget being closed if the user doesn't 
   /// want to proceed with renaming the directory
-  void cancelRename() {
+  void cancelDelete() {
     // close modal and widget
+    Navigator.pop(context);
   }
 
   @override
@@ -73,20 +55,18 @@ class DirectoryDeleteState extends State<DirectoryDelete> {
       backgroundColor: Theme.of(context).appColors.backgroundRow,
       children: <Widget>[
         
-        const Padding(padding: EdgeInsets.only(left: 30)),
-        ClipRect(
-          
-          
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 30),
           child: Container(
             alignment: Alignment.center,
             constraints: const BoxConstraints(
               minHeight: 100,
               maxWidth: 700
             ),
-            color: Theme.of(context).appColors.containerColor,
             child: Text("Are you sure you want to delete \"${widget.directory.name}\"? Deleting this folder will permanently destroy the folder and all of its contents"),
-          ),
+          )
         ),
+        
         const SizedBox(height: 10),
         Row(
           children: <Widget>[
@@ -106,7 +86,7 @@ class DirectoryDeleteState extends State<DirectoryDelete> {
                       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10)
                     ),
                     onPressed: () {
-                      
+                      deleteDirectory();
                     }, 
                     child: const Text("Delete Folder"),
                     
@@ -124,7 +104,7 @@ class DirectoryDeleteState extends State<DirectoryDelete> {
                 children: <Widget>[
                   Positioned.fill(
                     child: Container(
-                      color: Theme.of(context).appColors.backgroundDefault,
+                      color: Theme.of(context).appColors.textHover,
                     )
                   ),
                   TextButton(
@@ -133,7 +113,7 @@ class DirectoryDeleteState extends State<DirectoryDelete> {
                       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10)
                     ),
                     onPressed: () {
-                      
+                      cancelDelete();
                     }, 
                     child: const Text("Cancel"),
                     
