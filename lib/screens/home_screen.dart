@@ -1,5 +1,5 @@
 import 'package:fivec_notes/models/file.dart';
-import 'package:fivec_notes/widgets/file_tree.dart';
+import 'package:fivec_notes/widgets/filetree/file_tree.dart';
 import 'package:fivec_notes/widgets/open_document.dart';
 import 'package:fivec_notes/widgets/top_bar.dart';
 import 'package:flutter/material.dart';

@@ -1,8 +1,8 @@
 import 'package:fivec_notes/main.dart';
 import 'package:fivec_notes/models/course.dart';
 import 'package:fivec_notes/models/directory.dart';
-import 'package:fivec_notes/widgets/add_directory.dart';
-import 'package:fivec_notes/widgets/directory_row.dart';
+import 'package:fivec_notes/widgets/directory/add_directory.dart';
+import 'package:fivec_notes/widgets/filetree/directory_row.dart';
 import 'package:flutter/material.dart';
 
 /// The [StatefulWidget] representing the [CourseRow] top level object that composes the [FileTree]

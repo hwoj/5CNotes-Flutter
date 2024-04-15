@@ -10,7 +10,7 @@ class File {
   final String uuid;
 
   /// The string name of the file
-  String? name;
+  String name;
 
   /// The list of the collaborators that have access to the file
   List<User>? collaborators = [];

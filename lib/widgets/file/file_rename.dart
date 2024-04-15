@@ -9,12 +9,16 @@ class FileRename extends StatefulWidget {
   /// The file that is being renamed
   final File file;
 
+  /// The function in the [FileRow] to rename the [File]
+  final Function(String) renameFunc;
+
   /// The main constructor for the [FileRename] widget
   ///
   /// This constructor passes a [File] into the widget
   const FileRename({
     Key? key,
-    required this.file
+    required this.file,
+    required this.renameFunc
   }) : super(key: key);
 
   @override
@@ -37,6 +41,7 @@ class FileRenameState extends State<FileRename> {
     // makesure that the newName string contains valid filename characters (using regex)
 
     // return whether this is the case or not
+    return true;
   }
 
   /// This is the function reponsible for renaming the file given the user input

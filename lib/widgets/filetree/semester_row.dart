@@ -1,6 +1,6 @@
 import 'package:fivec_notes/main.dart';
 import 'package:fivec_notes/models/semester.dart';
-import 'package:fivec_notes/widgets/course_row.dart';
+import 'package:fivec_notes/widgets/filetree/course_row.dart';
 import 'package:flutter/material.dart';
 
 /// The [StatefulWidget] representing the [SemesterRow] top level object that composes the [FileTree]

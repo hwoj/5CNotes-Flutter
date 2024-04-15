@@ -1,9 +1,9 @@
 import 'package:fivec_notes/main.dart';
 import 'package:fivec_notes/models/directory.dart';
 import 'package:fivec_notes/models/file.dart';
-import 'package:fivec_notes/widgets/add_subdirectory.dart';
-import 'package:fivec_notes/widgets/directory_delete.dart';
-import 'package:fivec_notes/widgets/directory_rename.dart';
+import 'package:fivec_notes/widgets/directory/add_subdirectory.dart';
+import 'package:fivec_notes/widgets/directory/directory_delete.dart';
+import 'package:fivec_notes/widgets/directory/directory_rename.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 

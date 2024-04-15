@@ -1,6 +1,6 @@
 import 'package:fivec_notes/models/course.dart';
 import 'package:fivec_notes/models/semester.dart';
-import 'package:fivec_notes/widgets/semester_row.dart';
+import 'package:fivec_notes/widgets/filetree/semester_row.dart';
 import 'package:flutter/material.dart';
 
 /// The [FileTree] is a [StatefulWidget] representing the entirety of the files that the user has access to
