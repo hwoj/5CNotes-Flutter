@@ -49,6 +49,13 @@ class CourseRowState extends State<CourseRow> {
     });
   }
 
+  /// Creates a file within the course
+  ///
+  /// Adds a file to the course at the top level (meaning this file resides in no folder)
+  createSubfile() {
+    
+  }
+
   /// This function will load the courses and files for a given course
   /// 
   /// To enable lazy loading on old courses. When an old course is expanded, it will call this function to retrieve the 
@@ -123,7 +130,9 @@ class CourseRowState extends State<CourseRow> {
                     IconButton(
                       padding: const EdgeInsets.all(2),
                       constraints: const BoxConstraints(),
-                      onPressed: (){},
+                      onPressed: () {
+
+                      },
                       tooltip: "Create file",
                       icon: Icon(
                         Icons.add,

@@ -1,3 +1,5 @@
+import 'package:fivec_notes/models/file.dart';
+
 /// The [Directory] class represents the different directories that exist within a course for a specific user
 /// 
 /// Directories are user specific methods of organizing file structure
@@ -21,6 +23,9 @@ class Directory {
 
   /// The subdirectories of the directory
   final List<Directory> subdirectories = [];
+
+  /// The files inside the directory
+  final List<File> files = [];
 
   /// The primary constructor for the [Directory] class
   ///

@@ -1,3 +1,4 @@
+import 'package:fivec_notes/main.dart';
 import 'package:fivec_notes/models/file.dart';
 import 'package:flutter/material.dart';
 
@@ -30,33 +31,44 @@ class FileRename extends StatefulWidget {
 /// This state contains all of the widgets within the the [FileRename] widget and the logic performed on actions
 class FileRenameState extends State<FileRename> {
 
-  /// The name that the user is renaming the file to
-  String ?name;
+  TextEditingController _renameController = TextEditingController();
 
-  /// This function validates the name the user wants to rename the file to
+  @override
+  void initState() {
+    super.initState();
+    _renameController = TextEditingController(text: widget.file.name);
+  }
+
+  @override
+  void dispose() {
+    _renameController.dispose();
+    super.dispose();
+  }
+
+  /// Ensures the file name is valid
   ///
-  /// This function checks to see if the [newName] follows the allowed file naming conventions and 
-  /// returns a boolean that provides indication of if this is the case or not 
-  bool validateName(String newName) {
-    // makesure that the newName string contains valid filename characters (using regex)
+  /// Uses regex to validate the name of the file being created
+  bool validateName(String name) {
+    // Create regex to validate file name
+     RegExp regex = RegExp(
+      r'^[a-zA-Z0-9_\-\.]+$',
+      caseSensitive: false,
+    );
 
-    // return whether this is the case or not
-    return true;
+    // Check if the file name matches the regular expression
+    return regex.hasMatch(name);
   }
 
   /// This is the function reponsible for renaming the file given the user input
   ///
   /// It will change the name of the file after validating it with [validateName]
   void saveName(String newName) {
-    // call validateName to make sure the name is correct
-
-    // if validated then update name of file object locally
-    // push change to server
-    // close modal and widget
-
-    // if not validated then show error message and keep modal open
-
-    // return
+    if (validateName(newName)) {
+      widget.renameFunc(newName);
+      Navigator.pop(context);
+    } else {
+      return;
+    }
   }
 
   /// The function reponsible for closing the FileRename
@@ -64,7 +76,8 @@ class FileRenameState extends State<FileRename> {
   /// This function will handle the logic for the FileRename widget being closed if the user doesn't 
   /// want to proceed with renaming the file
   void cancelRename() {
-    // close modal and widget
+    
+    Navigator.pop(context);
   }
 
   /// The build function contains the contents of the state
@@ -74,7 +87,89 @@ class FileRenameState extends State<FileRename> {
   Widget build(BuildContext context) {
     // will contain a dialog with a text input area and 2 buttons
     // 1 button for closing the widget, another for submitting the rename
-    return Dialog();
+    return SimpleDialog(
+      title: Text("Rename ${widget.file.name}"),
+      
+      backgroundColor: Theme.of(context).appColors.backgroundRow,
+      children: <Widget>[
+        
+        Padding(
+          padding: const EdgeInsets.only(left: 30, right: 30, top: 20, bottom: 30),
+          child: Column(
+            children: <Widget>[
+              TextField(
+                controller: _renameController,
+                decoration: InputDecoration(
+                  labelText: "Folder Name:",
+                  border: const OutlineInputBorder(),
+                  hintText: widget.file.name
+                ),
+              )
+            ],
+          ),
+        ),
+        
+        const SizedBox(height: 10),
+        Row(
+          children: <Widget>[
+            const Spacer(),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(4),
+              child: Stack(
+                children: <Widget>[
+                  Positioned.fill(
+                    child: Container(
+                      color: Theme.of(context).appColors.backgroundDefault,
+                    )
+                  ),
+                  TextButton(
+                    style: TextButton.styleFrom(
+                      foregroundColor: Theme.of(context).appColors.backgroundRow,
+                      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10)
+                    ),
+                    onPressed: () {
+                     saveName(_renameController.text);
+                    }, 
+                    child: const Text("Rename File"),
+                    
+                  ),
+                ],
+              )
+              
+            ),
+            const SizedBox(
+              width: 10,
+            ),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(4),
+              child: Stack(
+                children: <Widget>[
+                  Positioned.fill(
+                    child: Container(
+                      color: Theme.of(context).appColors.textHover,
+                    )
+                  ),
+                  TextButton(
+                    style: TextButton.styleFrom(
+                      foregroundColor: Theme.of(context).appColors.backgroundRow,
+                      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10)
+                    ),
+                    onPressed: () {
+                      cancelRename();
+                    }, 
+                    child: const Text("Cancel"),
+                    
+                  ),
+                ],
+              )
+              
+            ),
+            const Padding(padding: EdgeInsets.only(right: 30))
+          ],
+        )
+        
+      ],
+    );
   }
 }
 

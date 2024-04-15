@@ -4,6 +4,8 @@ import 'package:fivec_notes/models/file.dart';
 import 'package:fivec_notes/widgets/directory/add_subdirectory.dart';
 import 'package:fivec_notes/widgets/directory/directory_delete.dart';
 import 'package:fivec_notes/widgets/directory/directory_rename.dart';
+import 'package:fivec_notes/widgets/file/create_file.dart';
+import 'package:fivec_notes/widgets/filetree/file_row.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -48,9 +50,6 @@ class DirectoryRowState extends State<DirectoryRow> {
   /// Whether the row is hovered or not
   bool isHovered = false;
 
-  /// Whether the rename icon is hovered or not
-  bool renameHovered = false;
-
 
   /// the files that exist in this directory
   List<File> files = [];
@@ -87,17 +86,23 @@ class DirectoryRowState extends State<DirectoryRow> {
     });
   }
 
+  /// Removes the specified file
+  ///
+  /// Deletes the file from the folder and updates the state of the row
+  void deleteSubfile(File file) {
+    setState(() {
+      widget.directory.files.remove(file);
+    });
+  }
+
   /// The function responsible for creating a new [File] within the current [Directory]
   /// 
   /// This function will create a new [File] to be represented as a [FileRow] within the current [Directory] and [DirectoryRow]
-  createSubFile() {
-    // initialize barebones File object
-
-    // prompt user for file name using the FileRename widget
-
-    // add file to list of files in directory in UI
-
-    // make call to backend to create file in persistent db
+  createSubFile(String fileName) {
+    setState(() {
+      widget.directory.files.add(File(uuid: "wjbkw", name: fileName, author: "12345", createdAt: DateTime(2024), lastEdited: DateTime(2024), course: "123"));
+      isExpanded = true;
+    });
   }
 
   /// The [build] function creates the widget and the subwidgets it contains
@@ -191,7 +196,12 @@ class DirectoryRowState extends State<DirectoryRow> {
                       padding: const EdgeInsets.all(2),
                       constraints: const BoxConstraints(),
                       onPressed: (){
-
+                        showDialog(
+                          context: context, 
+                          builder: (BuildContext context) {
+                            return CreateFile(parentName: widget.directory.name, createFunc: createSubFile);
+                          }
+                        );
                       },
                       tooltip: "Create file",
                       icon: Icon(
@@ -209,7 +219,7 @@ class DirectoryRowState extends State<DirectoryRow> {
             ),
           ),
         ),
-        if (isExpanded)
+        if (isExpanded)...[
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -225,8 +235,24 @@ class DirectoryRowState extends State<DirectoryRow> {
                 ),
               )
             ],
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 10.0),
+                child: ListView.builder(
+                  scrollDirection: Axis.vertical,
+                  shrinkWrap: true,
+                  itemCount: widget.directory.files.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return FileRow(file: widget.directory.files[index], deleteFunc: deleteSubfile,);
+                  }
+                ),
+              )
+            ],
           )
-
+        ]
       ],
     );
   }

@@ -14,6 +14,9 @@ class FileRow extends StatefulWidget {
   /// The file that the row will be representing
   final File file;
 
+  /// function from parent row to delete the file and its row
+  final Function deleteFunc;
+
 
   /// This is the constructor for the [FileRow] that accepts the associated [File] as a parameter
   ///
@@ -21,7 +24,8 @@ class FileRow extends StatefulWidget {
   /// (final) parameters
   const FileRow({
     Key? key,
-    required this.file
+    required this.file,
+    required this.deleteFunc
   }) : super(key: key);
 
   @override
@@ -49,15 +53,17 @@ class FileRowState extends State<FileRow> {
   /// This function is responsible for handling the button command to delete the [File]
   ///
   /// This function will first ask again if the [File] should be deleted and then proceed with the user's action
-  deleteFile() {
-
+  deleteFile(File file) {
+    widget.deleteFunc(file);
   }
 
   /// This function is responsible for handling the button action to rename the [File]
   ///
   /// This function will call on a [FileRename] widget to handle the renaming of the file
   void renameFile(String newName) {
-
+    setState(() {
+      widget.file.name = newName;
+    });
   }
 
   /// This function is responsible for handling opening this [File] in the editor UI
@@ -78,6 +84,9 @@ class FileRowState extends State<FileRow> {
         Material(
           color: Theme.of(context).appColors.backgroundRow,
           child: InkWell(
+            onTap: () {
+              
+            },
             onHover: (hovered) {
               setState(() {
                 isHovered = hovered;
@@ -85,7 +94,7 @@ class FileRowState extends State<FileRow> {
             },
             hoverColor: Theme.of(context).appColors.backgroundDarkerComponent,
             child: Padding(
-              padding: isHovered ? const EdgeInsets.symmetric(vertical: 3, horizontal: 10) : const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+              padding: isHovered ? const EdgeInsets.only(left: 30, top: 3 , bottom: 3, right: 10) : const EdgeInsets.only(left: 30, bottom: 5, top: 5, right: 10),
               child: Row(
                 children: <Widget>[
                   Icon(
@@ -110,7 +119,7 @@ class FileRowState extends State<FileRow> {
                           }
                         );
                       },
-                      tooltip: "Rename Folder",
+                      tooltip: "Rename File",
                       icon: Icon(
                         Icons.create,
                         color: Theme.of(context).appColors.textDefault,
@@ -127,7 +136,7 @@ class FileRowState extends State<FileRow> {
                           }
                         );
                       },
-                      tooltip: "Delete Folder",
+                      tooltip: "Delete File",
                       icon: Icon(
                         Icons.delete_outline,
                         color: Theme.of(context).appColors.textDefault
