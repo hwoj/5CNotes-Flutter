@@ -19,6 +19,9 @@ class Directory {
   /// The course that the directory sits under
   final String course;
 
+  /// The subdirectories of the directory
+  final List<Directory> subdirectories = [];
+
   /// The primary constructor for the [Directory] class
   ///
   /// This constructor will be called when creating [Directory] objects from the file tree or will be called by the [Directory.fromJson] constructor

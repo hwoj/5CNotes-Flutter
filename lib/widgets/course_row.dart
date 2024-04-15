@@ -1,6 +1,7 @@
 import 'package:fivec_notes/main.dart';
 import 'package:fivec_notes/models/course.dart';
 import 'package:fivec_notes/models/directory.dart';
+import 'package:fivec_notes/widgets/add_directory.dart';
 import 'package:fivec_notes/widgets/directory_row.dart';
 import 'package:flutter/material.dart';
 
@@ -56,6 +57,18 @@ class CourseRowState extends State<CourseRow> {
 
   }
 
+  /// The function to create a directory within the Course
+  ///
+  /// This function takes the name sent by the [AddDirectory] widget and creates a new [Directory]
+  /// from it that lives within the [Course]
+  void createDirectory(String directoryName) {
+    setState(() {
+      widget.directories.add(Directory(uuid: "xdd", name: directoryName, parent: ".", user: "-", course: widget.course.uuid));
+      isExpanded = true;  
+    });
+    
+  }
+
   /// The [build] method contains the widgets and content that makeup the [CourseRow]
   ///
   /// This method will be called everytime the state is updated to rebuild the State and widget
@@ -93,8 +106,15 @@ class CourseRowState extends State<CourseRow> {
                     IconButton(
                       padding: const EdgeInsets.all(2),
                       constraints: const BoxConstraints(),
-                      onPressed: () {},
-                      tooltip: "Create Subfolder",
+                      onPressed: () {
+                        showDialog(
+                          context: context, 
+                          builder: (BuildContext context) {
+                            return AddDirectory(parent: widget.course, createDirectory: createDirectory);
+                          }
+                        );
+                      },
+                      tooltip: "Create Folder",
                       icon: Icon(
                         Icons.create_new_folder_outlined,
                         color: Theme.of(context).appColors.textDefault,
@@ -131,7 +151,8 @@ class CourseRowState extends State<CourseRow> {
                 itemBuilder: (BuildContext context, int index) {
                   return DirectoryRow(directory: widget.directories[index], deleteFunction: deleteDirectory,);
                 }
-              )
+                            )
+              
             ],
           )
         
