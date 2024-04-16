@@ -1,8 +1,11 @@
 import 'package:fivec_notes/main.dart';
 import 'package:fivec_notes/models/course.dart';
 import 'package:fivec_notes/models/directory.dart';
+import 'package:fivec_notes/models/file.dart';
 import 'package:fivec_notes/widgets/directory/add_directory.dart';
+import 'package:fivec_notes/widgets/file/create_file.dart';
 import 'package:fivec_notes/widgets/filetree/directory_row.dart';
+import 'package:fivec_notes/widgets/filetree/file_row.dart';
 import 'package:flutter/material.dart';
 
 /// The [StatefulWidget] representing the [CourseRow] top level object that composes the [FileTree]
@@ -17,6 +20,9 @@ class CourseRow extends StatefulWidget {
 
   /// The list of [Directory] objects that exist under the course
   List<Directory> directories = [Directory(uuid: "1234", name: "Some Folder", parent: ".", user: "1234", course: "123")];
+
+  ///
+  List<File> files = [];
 
   /// The default constructor for the [CourseRow]
   ///
@@ -52,8 +58,16 @@ class CourseRowState extends State<CourseRow> {
   /// Creates a file within the course
   ///
   /// Adds a file to the course at the top level (meaning this file resides in no folder)
-  createSubfile() {
-    
+  void createSubfile(String fileName) {
+    setState(() {
+      widget.files.add(File(uuid: "ignr", name: fileName, author: "ngrgn", createdAt: DateTime(2024), lastEdited: DateTime(2024), course: widget.course.uuid));
+    });
+  }
+
+  void deleteSubFile(File file) {
+    setState(() {
+      widget.files.remove(file);
+    });
   }
 
   /// This function will load the courses and files for a given course
@@ -131,7 +145,12 @@ class CourseRowState extends State<CourseRow> {
                       padding: const EdgeInsets.all(2),
                       constraints: const BoxConstraints(),
                       onPressed: () {
-
+                        showDialog(
+                          context: context, 
+                          builder: (BuildContext context) {
+                            return CreateFile(parentName: widget.course.name, createFunc: createSubfile);
+                          }
+                        );
                       },
                       tooltip: "Create file",
                       icon: Icon(
@@ -149,7 +168,7 @@ class CourseRowState extends State<CourseRow> {
             ),
           ),
         ),
-        if (isExpanded) 
+        if (isExpanded) ...[
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -160,10 +179,24 @@ class CourseRowState extends State<CourseRow> {
                 itemBuilder: (BuildContext context, int index) {
                   return DirectoryRow(directory: widget.directories[index], deleteFunction: deleteDirectory,);
                 }
-                            )
+              )
               
             ],
-          )
+          ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ListView.builder(
+              scrollDirection: Axis.vertical,
+              shrinkWrap: true,
+              itemCount: widget.files.length,
+              itemBuilder: (BuildContext context, int index) {
+                return FileRow(file: widget.files[index], deleteFunc: deleteSubFile);
+              }
+            )
+          ],
+        )
+        ]
         
       ],
       );
