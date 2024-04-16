@@ -18,10 +18,10 @@ class CourseRow extends StatefulWidget {
   final Course course;
 
 
-  /// The list of [Directory] objects that exist under the course
+  /// The list of [Directory] objects that exist under the [Course]
   List<Directory> directories = [Directory(uuid: "1234", name: "Some Folder", parent: ".", user: "1234", course: "123")];
 
-  ///
+  /// The list of [File] objects that exist under the [Course]
   List<File> files = [];
 
   /// The default constructor for the [CourseRow]
@@ -49,6 +49,8 @@ class CourseRowState extends State<CourseRow> {
   bool isHovered = false;
 
   /// The method to delete the directory
+  /// 
+  /// Deletes the directory from the list of directories that belong to the course
   deleteDirectory(Directory directory) {
     setState(() {
       widget.directories.remove(directory);
@@ -64,6 +66,9 @@ class CourseRowState extends State<CourseRow> {
     });
   }
 
+  /// Deletes subfile from course
+  ///
+  /// Removes subfile [file] from the list of files part of the course
   void deleteSubFile(File file) {
     setState(() {
       widget.files.remove(file);
