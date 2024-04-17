@@ -1,6 +1,7 @@
 import 'package:fivec_notes/main.dart';
 import 'package:fivec_notes/models/directory.dart';
 import 'package:fivec_notes/models/file.dart';
+import 'package:fivec_notes/widgets/add_subdirectory.dart';
 import 'package:fivec_notes/widgets/directory_delete.dart';
 import 'package:fivec_notes/widgets/directory_rename.dart';
 import 'package:flutter/material.dart';
@@ -16,12 +17,17 @@ class DirectoryRow extends StatefulWidget {
   /// The [Directory] object that the [DirectoryRow] represents
   final Directory directory;
 
+  /// The function from the parent widget to delete the directory
+  final Function(Directory) deleteFunction;
+
+
   /// The constructor for the [DirectoryRow] object
   /// 
   /// This is the default and only constructor for the [DirectoryRow] object
   const DirectoryRow({
     Key? key,
-    required this.directory
+    required this.directory,
+    required this.deleteFunction,
   }) : super (key: key);
 
   @override
@@ -54,35 +60,31 @@ class DirectoryRowState extends State<DirectoryRow> {
 
   /// The function responsible for handling the action to rename the [Directory] from the [DirectoryRow]
   ///
-  /// This function will call on the [DirectoryRename] widget to rename the [Directory]
-  renameDirectory() {
-    // calls on the directory rename widget and passes the directory into it
-    // DirectoryRename handles the rest!
+  /// This function will be passed to the [DirectoryRename] widget to rename the [Directory]
+  renameDirectory(String newName) {
+    setState(() {
+      widget.directory.name = newName;
+    }); 
   }
 
   /// The function responsible for handling the action to delete the [Directory] from the [DirectoryRow]
   ///
   /// This function will confirm whether the the [Directory] and all contents should be deleted and then 
   /// carry out the specified action
-  deleteDirectory() {
-    // Creates a popup to confirm if Directory and all contents should be deleted
-    // if user presses no then return
-
-    // if user presses yes then delete directory and contents on front end
-    // also make call to directory to delete files and directory
+  void deleteDirectory(Directory directory) {
+    setState(() {
+      widget.directory.subdirectories.remove(directory);
+    });
   }
 
   /// The function responsible for creating a subdirectory within the [Directory]
   ///
   /// This function will allow the user to create a new directory that exists underneath the current [DirectoryRow]'s directory
-  createSubDirectory() {
-    // initialize barebones directory object
-
-    // prompts user to input a name for the directory using DirectoryRename widget
-
-    // adds directory to parent directory/parent course (whichever is the parent of this directory row)
-
-    // call on directoryservice to add a new directory
+  void createSubDirectory(String name) {
+    setState(() {
+      widget.directory.subdirectories.add(Directory(uuid: "123456", name: name, parent: widget.directory.uuid, user: "437827", course: ""));
+      isExpanded = true;
+    });
   }
 
   /// The function responsible for creating a new [File] within the current [Directory]
@@ -121,7 +123,7 @@ class DirectoryRowState extends State<DirectoryRow> {
             },
             hoverColor: Theme.of(context).appColors.backgroundDarkerComponent,
             child: Padding(
-              padding: isHovered ? const EdgeInsets.only(left: 30, top: 3, bottom: 3, right: 10) : const EdgeInsets.only(left: 30, top: 5, bottom: 5, right: 10),
+              padding: isHovered ? const EdgeInsets.only(left: 30 , top: 3, bottom: 3, right: 10) : const EdgeInsets.only(left: 30, top: 5, bottom: 5, right: 10),
               child: Row(
                 children: [
                   Icon(
@@ -142,7 +144,7 @@ class DirectoryRowState extends State<DirectoryRow> {
                         showDialog(
                           context: context,
                           builder: (BuildContext context) {
-                            return DirectoryRename(directory: widget.directory);
+                            return DirectoryRename(directory: widget.directory, onRename: renameDirectory,);
                           }
                         );
                       },
@@ -159,7 +161,7 @@ class DirectoryRowState extends State<DirectoryRow> {
                         showDialog(
                           context: context, 
                           builder: (BuildContext context) {
-                            return DirectoryDelete(directory: widget.directory);
+                            return DirectoryDelete(directory: widget.directory, deleteFunction: widget.deleteFunction,);
                           }
                         );
                       },
@@ -172,7 +174,13 @@ class DirectoryRowState extends State<DirectoryRow> {
                     IconButton(
                       padding: const EdgeInsets.all(2),
                       constraints: const BoxConstraints(),
-                      onPressed: () {},
+                      onPressed: () {
+                        showDialog(context: context, 
+                          builder: (BuildContext context) {
+                            return AddSubDirectory(parent: widget.directory, subfolderCreate: createSubDirectory,);
+                          }
+                        );
+                      },
                       tooltip: "Create Subfolder",
                       icon: Icon(
                         Icons.create_new_folder_outlined,
@@ -202,9 +210,21 @@ class DirectoryRowState extends State<DirectoryRow> {
           ),
         ),
         if (isExpanded)
-          const Column(
+          Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [Text("Hello World")],
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 10.0),
+                child: ListView.builder(
+                  scrollDirection: Axis.vertical,
+                  shrinkWrap: true,
+                  itemCount: widget.directory.subdirectories.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return DirectoryRow(directory: widget.directory.subdirectories[index], deleteFunction: deleteDirectory);
+                  }
+                ),
+              )
+            ],
           )
 
       ],
