@@ -1,6 +1,7 @@
 import 'package:fivec_notes/screens/home_screen.dart';
 import 'package:fivec_notes/screens/signup_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 /// The [LoginScreen] widget is a [StatefulWidget] that is responsible for the application login processes
 /// 
@@ -53,13 +54,13 @@ class _LoginScreenState extends State<LoginScreen> {
               controller: _emailController,
               decoration: InputDecoration(labelText: 'Email'),
             ),
-            SizedBox(height: 16.0),
+            SizedBox(height: 10.0),
             TextField(
               controller: _passwordController,
               decoration: InputDecoration(labelText: 'Password'),
               obscureText: true,
             ),
-            SizedBox(height: 16.0),
+            SizedBox(height: 10.0),
             ElevatedButton(
               onPressed: () {
                 // Add authentication logic here
@@ -76,7 +77,6 @@ class _LoginScreenState extends State<LoginScreen> {
                 } else { // TODO: add functionality if password is wrong
                   
                 }
-                
               },
               child: Text('Login'),
             ),
