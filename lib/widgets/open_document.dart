@@ -1,5 +1,6 @@
 import 'package:fivec_notes/models/file.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 
 /// The [OpenDocument] [StatefulWidget] is responsible for the document that is currently being edited by the user
@@ -32,7 +33,7 @@ class OpenDocumentState extends State<OpenDocument> {
   /// The file open in the editor
   File ?file;
 
-  final QuillController _controller = QuillController.basic();
+  QuillController _controller = QuillController.basic();
 
   @override
   void initState() {
@@ -45,23 +46,26 @@ class OpenDocumentState extends State<OpenDocument> {
   /// The build method contains all of the child widgets that belong inside the [OpenDocument] widget
   @override
   Widget build(BuildContext context) {
-    return Container(
-      // child: Column(
-      //   children: [
-      //     const QuillToolbar(
-      //       configurations: QuillToolbarConfigurations(buttonOptions: QuillSimpleToolbarButtonOptions()),
-      //       child: Text("")
-      //     ),
-      //     QuillEditor(
-      //       configurations: QuillEditorConfigurations(
-      //         controller: _controller
-      //       ),
-      //       focusNode: FocusNode(),
-      //       scrollController: ScrollController(),
-             
-      //     ),
-      //   ],
-      // ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: <Widget>[
+        QuillToolbar.simple(
+          configurations: QuillSimpleToolbarConfigurations(
+            controller: _controller
+          )
+        ),
+        Expanded(
+          child: Container(
+            color: Colors.white,
+            child: QuillEditor.basic(
+              configurations: QuillEditorConfigurations(
+                controller: _controller,
+                placeholder: "hello world"
+              )
+            ),
+          ),
+        )
+      ],
     );
   }
 }

@@ -23,9 +23,14 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: TopBar(),
       body: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           FileTree(),
-          OpenDocument(file: File(uuid: "123", name: "bob", author: "bob", createdAt: DateTime(2024), lastEdited: DateTime(2024), course: "somecourse")),
+          const SizedBox(width: 16,),
+          Expanded(
+            child: OpenDocument(file: File(uuid: "123", name: "bob", author: "bob", createdAt: DateTime(2024), lastEdited: DateTime(2024), course: "somecourse")),
+          )
+          
         ]
       ),
     );
