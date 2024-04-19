@@ -18,6 +18,10 @@ class HomeScreen extends StatefulWidget {
 /// 
 /// This state will encompass both the [OpenDocument] and [FileTree] widgets
 class _HomeScreenState extends State<HomeScreen> {
+
+  final GlobalKey<OpenDocumentState> openDocumentKey = GlobalKey();
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,10 +29,10 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          FileTree(),
+          FileTree(docKey: openDocumentKey),
           const SizedBox(width: 16,),
           Expanded(
-            child: OpenDocument(file: File(uuid: "123", name: "bob", author: "bob", createdAt: DateTime(2024), lastEdited: DateTime(2024), course: "somecourse")),
+            child: OpenDocument(key: openDocumentKey, file: File(uuid: "123", name: "bob", author: "bob", createdAt: DateTime(2024), lastEdited: DateTime(2024), course: "somecourse")),
           )
           
         ]

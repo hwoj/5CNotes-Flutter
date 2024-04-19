@@ -6,6 +6,7 @@ import 'package:fivec_notes/widgets/directory/directory_delete.dart';
 import 'package:fivec_notes/widgets/directory/directory_rename.dart';
 import 'package:fivec_notes/widgets/file/create_file.dart';
 import 'package:fivec_notes/widgets/filetree/file_row.dart';
+import 'package:fivec_notes/widgets/open_document.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -22,15 +23,19 @@ class DirectoryRow extends StatefulWidget {
   /// The function from the parent widget to delete the directory
   final Function(Directory) deleteFunction;
 
+  /// The [GlobalKey] to alter the [OpenDocumentState]
+  final GlobalKey<OpenDocumentState> docKey;
+
 
   /// The constructor for the [DirectoryRow] object
   /// 
   /// This is the default and only constructor for the [DirectoryRow] object
   const DirectoryRow({
-    Key? key,
+    super.key,
     required this.directory,
     required this.deleteFunction,
-  }) : super (key: key);
+    required this.docKey
+  });
 
   @override
   State<DirectoryRow> createState() => DirectoryRowState();
@@ -230,7 +235,7 @@ class DirectoryRowState extends State<DirectoryRow> {
                   shrinkWrap: true,
                   itemCount: widget.directory.subdirectories.length,
                   itemBuilder: (BuildContext context, int index) {
-                    return DirectoryRow(directory: widget.directory.subdirectories[index], deleteFunction: deleteDirectory);
+                    return DirectoryRow(directory: widget.directory.subdirectories[index], deleteFunction: deleteDirectory, docKey: widget.docKey,);
                   }
                 ),
               )
@@ -246,7 +251,7 @@ class DirectoryRowState extends State<DirectoryRow> {
                   shrinkWrap: true,
                   itemCount: widget.directory.files.length,
                   itemBuilder: (BuildContext context, int index) {
-                    return FileRow(file: widget.directory.files[index], deleteFunc: deleteSubfile,);
+                    return FileRow(file: widget.directory.files[index], deleteFunc: deleteSubfile, docKey: widget.docKey,);
                   }
                 ),
               )

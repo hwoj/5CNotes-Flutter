@@ -39,11 +39,9 @@ class OpenDocumentState extends State<OpenDocument> {
   /// Takes in a new file who's contents to be displayed in the editor. This 
   /// function will be called by the [FileRow] widget when clicked to pass in the file
   void updateDocument(File file) {
-    print("test");
     setState(() {
       _file = file;
     });
-    print(file.name);
     
   }
 

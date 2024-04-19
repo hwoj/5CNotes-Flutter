@@ -18,16 +18,19 @@ class FileRow extends StatefulWidget {
   /// function from parent row to delete the file and its row
   final Function deleteFunc;
 
+  /// The [GlobalKey] to alter the [OpenDocumentState]
+  final GlobalKey<OpenDocumentState> docKey;
 
   /// This is the constructor for the [FileRow] that accepts the associated [File] as a parameter
   ///
   /// This constructor is implemented as constant because this is an immutable class. Immutable classes have only constant 
   /// (final) parameters
   const FileRow({
-    Key? key,
+    super.key,
     required this.file,
-    required this.deleteFunc
-  }) : super(key: key);
+    required this.deleteFunc,
+    required this.docKey
+  });
 
   @override
   State<FileRow> createState() => FileRowState();
@@ -71,14 +74,13 @@ class FileRowState extends State<FileRow> {
   ///
   /// This file will take the contents of the file and throw them into 
   void openFile() {
-    final GlobalKey<OpenDocumentState> openDocumentKey = GlobalKey();
+    final GlobalKey<OpenDocumentState> openDocumentKey = widget.docKey;
 
     // Access the State object using the GlobalKey
     final OpenDocumentState? openDocumentState = openDocumentKey.currentState;
 
     // Call the function on the State object
     if (openDocumentState != null) {
-      print("hi");
       openDocumentState.updateDocument(widget.file);
     }
   }

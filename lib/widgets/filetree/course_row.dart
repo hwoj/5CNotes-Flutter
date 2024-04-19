@@ -6,6 +6,7 @@ import 'package:fivec_notes/widgets/directory/add_directory.dart';
 import 'package:fivec_notes/widgets/file/create_file.dart';
 import 'package:fivec_notes/widgets/filetree/directory_row.dart';
 import 'package:fivec_notes/widgets/filetree/file_row.dart';
+import 'package:fivec_notes/widgets/open_document.dart';
 import 'package:flutter/material.dart';
 
 /// The [StatefulWidget] representing the [CourseRow] top level object that composes the [FileTree]
@@ -24,13 +25,17 @@ class CourseRow extends StatefulWidget {
   /// The list of [File] objects that exist under the [Course]
   List<File> files = [];
 
+  /// The [GlobalKey] to alter the [OpenDocumentState]
+  final GlobalKey<OpenDocumentState> docKey;
+
   /// The default constructor for the [CourseRow]
   ///
   /// The constructor that will be used to pass in a [course] to the [CourseRow]
   CourseRow({
-    Key? key,
+    super.key,
+    required this.docKey,
     required this.course
-  }) : super(key: key);
+  });
 
   @override
   State<CourseRow> createState() => CourseRowState();
@@ -182,7 +187,7 @@ class CourseRowState extends State<CourseRow> {
                 shrinkWrap: true,
                 itemCount: widget.directories.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return DirectoryRow(directory: widget.directories[index], deleteFunction: deleteDirectory,);
+                  return DirectoryRow(directory: widget.directories[index], deleteFunction: deleteDirectory,docKey: widget.docKey,);
                 }
               )
               
@@ -196,7 +201,7 @@ class CourseRowState extends State<CourseRow> {
               shrinkWrap: true,
               itemCount: widget.files.length,
               itemBuilder: (BuildContext context, int index) {
-                return FileRow(file: widget.files[index], deleteFunc: deleteSubFile);
+                return FileRow(file: widget.files[index], deleteFunc: deleteSubFile, docKey: widget.docKey,);
               }
             )
           ],
