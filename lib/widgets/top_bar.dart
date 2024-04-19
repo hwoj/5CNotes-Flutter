@@ -1,3 +1,4 @@
+import 'package:fivec_notes/main.dart';
 import 'package:fivec_notes/widgets/menu_dropdown.dart';
 import 'package:flutter/material.dart';
 
@@ -42,7 +43,16 @@ class _TopBarState extends State<TopBar> {
       appBar: AppBar(
         actions: <Widget>[
           const MenuDropdown(),
-        ]
+        ],
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Theme.of(context).appColors.backgroundDefault, Theme.of(context).appColors.backgroundRow], 
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+            ), 
+            ), 
+        ),
       ),
       
       );
