@@ -2,6 +2,7 @@ import 'package:fivec_notes/main.dart';
 import 'package:fivec_notes/models/file.dart';
 import 'package:fivec_notes/widgets/file/file_delete.dart';
 import 'package:fivec_notes/widgets/file/file_rename.dart';
+import 'package:fivec_notes/widgets/open_document.dart';
 import 'package:flutter/material.dart';
 
 /// The [FileRow] represents the listing of an individual file in the [FileTree]
@@ -69,8 +70,17 @@ class FileRowState extends State<FileRow> {
   /// This function is responsible for handling opening this [File] in the editor UI
   ///
   /// This file will take the contents of the file and throw them into 
-  openFile() {
+  void openFile() {
+    final GlobalKey<OpenDocumentState> openDocumentKey = GlobalKey();
 
+    // Access the State object using the GlobalKey
+    final OpenDocumentState? openDocumentState = openDocumentKey.currentState;
+
+    // Call the function on the State object
+    if (openDocumentState != null) {
+      print("hi");
+      openDocumentState.updateDocument(widget.file);
+    }
   }
 
   /// This is the [build] function for the [FileRow] and defines the contents of the widget
@@ -85,7 +95,7 @@ class FileRowState extends State<FileRow> {
           color: Theme.of(context).appColors.backgroundRow,
           child: InkWell(
             onTap: () {
-              
+              openFile();
             },
             onHover: (hovered) {
               setState(() {
