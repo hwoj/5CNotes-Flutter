@@ -3,6 +3,10 @@ import 'package:fivec_notes/widgets/top_bar.dart';
 import 'package:flutter/material.dart';
 /// Settings Screen TODO
 /// 
+/// Light Mode
+/// Dark Mode 
+/// Change Password 
+/// Save files to Device
 /// 
 
 class SettingsScreen extends StatefulWidget {
