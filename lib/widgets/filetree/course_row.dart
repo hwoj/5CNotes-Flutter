@@ -68,7 +68,12 @@ class CourseRowState extends State<CourseRow> {
   void createSubfile(String fileName) {
     setState(() {
       widget.files.add(File(uuid: "ignr", name: fileName, author: "ngrgn", createdAt: DateTime(2024), lastEdited: DateTime(2024), course: widget.course.uuid));
+      isExpanded = true;
     });
+    final OpenDocumentState? openDocumentState = widget.docKey.currentState;
+    if (openDocumentState != null) {
+      openDocumentState.updateDocument(widget.files.last);
+    }
   }
 
   /// Deletes subfile from course

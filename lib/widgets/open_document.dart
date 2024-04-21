@@ -40,11 +40,18 @@ class OpenDocumentState extends State<OpenDocument> {
   /// function will be called by the [FileRow] widget when clicked to pass in the file
   void updateDocument(File file) {
     setState(() {
+      saveFile();
       _file = file;
     });
     
   }
 
+  /// Saves the contents of the [File] that is open in the [OpenDocument]
+  ///
+  /// Called upon carriage return being hit and when a new [File] is opened
+  void saveFile() {
+    
+  }
   
 
   @override
@@ -56,10 +63,6 @@ class OpenDocumentState extends State<OpenDocument> {
 
 
 
-  doesstuff() {
-    print(_controller.document.toDelta());
-  }
-
   /// The build method that handles the state being made and remade
   ///
   /// The build method contains all of the child widgets that belong inside the [OpenDocument] widget
@@ -69,7 +72,6 @@ class OpenDocumentState extends State<OpenDocument> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
         Text(_file.name),
-        TextButton(onPressed: doesstuff, child: Text("click me!")),
         QuillToolbar.simple(
           configurations: QuillSimpleToolbarConfigurations(
             controller: _controller

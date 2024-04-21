@@ -107,6 +107,10 @@ class DirectoryRowState extends State<DirectoryRow> {
     setState(() {
       widget.directory.files.add(File(uuid: "wjbkw", name: fileName, author: "12345", createdAt: DateTime(2024), lastEdited: DateTime(2024), course: "123"));
       isExpanded = true;
+      final OpenDocumentState? openDocumentState = widget.docKey.currentState;
+      if (openDocumentState != null) {
+        openDocumentState.updateDocument(widget.directory.files.last);
+      }
     });
   }
 
