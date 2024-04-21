@@ -8,7 +8,7 @@ import 'package:fivec_notes/widgets/file/create_file.dart';
 import 'package:fivec_notes/widgets/filetree/file_row.dart';
 import 'package:fivec_notes/widgets/open_document.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:fivec_notes/services/api_services/filetree_service.dart';
 
 /// The [DirectoryRow] [StatefulWidget] is the widget responsible for an individual [Directory] in the [FileTree]
 ///
@@ -62,6 +62,18 @@ class DirectoryRowState extends State<DirectoryRow> {
   /// the directories that exist in this directory
   List<Directory> subdirectories = [];
 
+  ///test stuf
+  ///
+  ///gfrg
+  void addFile() async {
+    widget.directory.files.add(await FileTreeService.getFile("da805499-268d-411b-a34a-ee8fb47d185a"));
+  }
+
+  void initState() {
+    addFile();
+    super.initState();
+  }
+
   /// The function responsible for handling the action to rename the [Directory] from the [DirectoryRow]
   ///
   /// This function will be passed to the [DirectoryRename] widget to rename the [Directory]
@@ -103,9 +115,11 @@ class DirectoryRowState extends State<DirectoryRow> {
   /// The function responsible for creating a new [File] within the current [Directory]
   /// 
   /// This function will create a new [File] to be represented as a [FileRow] within the current [Directory] and [DirectoryRow]
-  createSubFile(String fileName) {
+  createSubFile(String fileName) async {
+    File file = await FileTreeService.sendFile(fileName, "bobthesheep", "vfbvbuyfwfvy");
     setState(() {
-      widget.directory.files.add(File(uuid: "wjbkw", name: fileName, author: "12345", createdAt: DateTime(2024), lastEdited: DateTime(2024), course: "123"));
+      
+      widget.directory.files.add(file);
       isExpanded = true;
       final OpenDocumentState? openDocumentState = widget.docKey.currentState;
       if (openDocumentState != null) {

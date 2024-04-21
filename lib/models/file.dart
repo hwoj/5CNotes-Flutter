@@ -13,16 +13,16 @@ class File {
   String name;
 
   /// The list of the collaborators that have access to the file
-  List<User>? collaborators = [];
+  List<dynamic>? collaborators = [];
 
   /// The uuid of the author of the file
   final String author;
 
   /// The UTC server time timestamp for when the file was created
-  final DateTime createdAt;
+  final String createdAt;
 
   /// The UTC server time timestamp for the last database persistent edit of the file
-  DateTime? lastEdited;
+  String? lastEdited;
 
   /// The UUID for the course that the file belongs to
   final String course;

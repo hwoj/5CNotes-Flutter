@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:fivec_notes/models/file.dart';
+import 'package:http/http.dart';
 
 /// This class encapsulates all the interfaces for [File] objects in the local file system as well as the OT and REST API
 ///
@@ -36,18 +39,42 @@ class FileTreeService {
   ///
   /// This function is called to help initialize the [FileTree] widget
   retrieveFileTree() {
-    // requests the file tree and metadata for the elements in the filetree that the user has acces to
-
-    // returns a tuple with one list of files and one list of directories
+    
   }
 
   /// Gets the contents of a file using the file metadata
   ///
   /// Requests the contents of the file from the backend using the id from the [file] argument
-  getFile(File file) {
+  static Future<File> getFile(String uuid) async {
     // send get request to server to get contents of the file using the id of the file passed into the function
-
+    final response = await get(Uri.parse("http://localhost:8080/files/${uuid}"));
     // overwrite the contents of the local file or create new file on disk if doesn't exist on disk yet
+    if (response.statusCode == 200) {
+      return File.fromJson(jsonDecode(response.body));
+    } else {
+      throw Exception('failed to load ur mom');
+    }
+  }
+
+  static Future<File> sendFile(String name, String author, String course) async {
+    final response = await post(
+      Uri.parse('http://localhost:8080/file'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, String>{
+        'author': author,
+        'name': name,
+        'course': course,
+      }),
+    );
+
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      return File.fromJson(jsonDecode(response.body));
+    } else {
+      throw Exception(response.statusCode);
+    }
+
   }
 
 }

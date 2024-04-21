@@ -67,7 +67,7 @@ class CourseRowState extends State<CourseRow> {
   /// Adds a file to the course at the top level (meaning this file resides in no folder)
   void createSubfile(String fileName) {
     setState(() {
-      widget.files.add(File(uuid: "ignr", name: fileName, author: "ngrgn", createdAt: DateTime(2024), lastEdited: DateTime(2024), course: widget.course.uuid));
+      widget.files.add(File(uuid: "ignr", name: fileName, author: "ngrgn", createdAt: "2024", lastEdited: "2024", course: widget.course.uuid));
       isExpanded = true;
     });
     final OpenDocumentState? openDocumentState = widget.docKey.currentState;
