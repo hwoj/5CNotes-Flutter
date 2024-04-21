@@ -1,4 +1,4 @@
-import 'package:fivec_notes/widgets/manage_access_dropdown.dart';
+import 'package:fivec_notes/widgets/file/manage_access_dropdown.dart';
 import 'package:flutter/material.dart';
 
   /// Creates app instance of the ManageAccess modal page.

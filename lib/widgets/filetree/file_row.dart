@@ -2,6 +2,7 @@ import 'package:fivec_notes/main.dart';
 import 'package:fivec_notes/models/file.dart';
 import 'package:fivec_notes/widgets/file/file_delete.dart';
 import 'package:fivec_notes/widgets/file/file_rename.dart';
+import 'package:fivec_notes/widgets/file/manage_access_modal.dart';
 import 'package:flutter/material.dart';
 
 /// The [FileRow] represents the listing of an individual file in the [FileTree]
@@ -111,7 +112,7 @@ class FileRowState extends State<FileRow> {
                     IconButton(
                       padding: const EdgeInsets.all(2),
                       constraints: const BoxConstraints(),
-                      onPressed: (){
+                      onPressed: () {
                         showDialog(
                           context: context,
                           builder: (BuildContext context) {
@@ -128,7 +129,7 @@ class FileRowState extends State<FileRow> {
                     IconButton(
                       padding: const EdgeInsets.all(2),
                       constraints: const BoxConstraints(),
-                      onPressed: (){
+                      onPressed: () {
                         showDialog(
                           context: context, 
                           builder: (BuildContext context) {
@@ -142,7 +143,24 @@ class FileRowState extends State<FileRow> {
                         color: Theme.of(context).appColors.textDefault
                       ),
                     ),
-                    
+                    IconButton( // Share icon, will display manage access modal
+                    // TODO: run this in your machine since Flutter is bugging out in mine.
+                      padding: const EdgeInsets.all(2),
+                      constraints: const BoxConstraints(),
+                      onPressed: () {
+                        showDialog(
+                          context: context, 
+                          builder: (BuildContext context) {
+                            return ManageAccessModal();
+                          }
+                        );
+                      },
+                      tooltip: "Share File",
+                      icon: Icon(
+                        Icons.share,
+                        color: Theme.of(context).appColors.textDefault,
+                      )
+                      ), 
                   ]
                 ],
               )
