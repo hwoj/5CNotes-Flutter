@@ -44,17 +44,19 @@ class _ManageAccessModalState extends State<ManageAccessModal> {
                 controller: _emailController,
                 decoration: const InputDecoration(labelText: "Type in the email of desired user to give access to."),
                 ),
+              SizedBox(height: 16.0), // Space between widgets
               ManageAccessDropdown(),
+              SizedBox(height: 16.0), // Space between widgets
               ElevatedButton(
                 onPressed: () {
                   // TODO: Add document sharing functionality 
                   // need to send HTTP request and retrieve response from the backend
                 }, 
-                child: Text("Share")),
+                child: Text("Share")
+                ),
             ],)
         )
       );
-  
   }
 }
 
