@@ -1,35 +1,35 @@
 import 'package:fivec_notes/widgets/manage_access_dropdown.dart';
 import 'package:flutter/material.dart';
 
-/// The class will be used to create a manage access 
-/// modal page, which will be used to update permissions for a given file.
-class ManageAccessModal extends StatefulWidget {
   /// Creates app instance of the ManageAccess modal page.
   /// 
   /// The modal page will control the sharing features.  
   /// Thus, it will have a text box to enter a user's email,
   /// along with a scroll-down menu to give them either read
   /// or write access.
+class ManageAccessModal extends StatefulWidget {
+
   
   State<ManageAccessModal> createState() => _ManageAccessModalState();
  
 }
-
+/// Instantiates the instance of of the Manage Access modal.
 class _ManageAccessModalState extends State<ManageAccessModal> {
-   @override
+
+  /// Controller used to allow user to type email of recipient user to
+  /// which the file will be shared. 
+  TextEditingController _emailController = TextEditingController();
+
+  /// Constructs the Modal using the [Dialogue] widget.
+  ///
+  /// The build method will return a [Dialogue] widget, which is the modal.
+  /// The subwidgets of the modal will be displayed vertically in top-down order
+  /// The modal displays a textbox to type the email of a recipient user,
+  /// A dropdown to choose between read or write access.
+  /// A button that will share the file upon being pressed.
+  @override
   Widget build(BuildContext context) {
-
-
-    TextEditingController _emailController = TextEditingController();
-    /// The [ShowDialogue] widget will produce the modal
-    /// screen. This screen will take the context [BuildContext] context
-    /// and take a builder parameter, which will take an [AlertDialogue] widget.
-    /// In the [AlertDialogue widget], there will be text editing controller defined 
-    /// to allow a user to add another by typing their address.  It will also take a 
-    /// [Scrollable] widget that will allow the user choose if someone gets read or write 
-    /// access.  Finally, there must be a button defined such that updates permission.
-    /// Finally, include a button that will close the modal page using the Navigation.of(context).pop()
-    /// function.  
+    
     return Dialog(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0)),
@@ -57,6 +57,13 @@ class _ManageAccessModalState extends State<ManageAccessModal> {
             ],)
         )
       );
+  }
+  
+  /// Dispose of email text controller
+  @override
+  void dispose() {
+    _emailController.dispose();
+    super.dispose();
   }
 }
 
