@@ -16,9 +16,9 @@ class OpenDocument extends StatefulWidget {
   ///
   /// This constructor will pass the file into the widget
   const OpenDocument({
-    Key? key,
+    super.key,
     required this.file
-  }) : super(key: key);
+  });
 
   @override
   State<OpenDocument> createState() => OpenDocumentState();
@@ -28,40 +28,68 @@ class OpenDocument extends StatefulWidget {
 ///
 /// This state contains all of the contents of the widget and will reload upon any changes to its properties
 class OpenDocumentState extends State<OpenDocument> {
-  
-  /// The file open in the editor
-  File ?file;
 
-  final QuillController _controller = QuillController.basic();
+  late File _file;
+  
+
+  QuillController _controller = QuillController.basic();
+
+  /// Updates the document that is open in the editor
+  ///
+  /// Takes in a new file who's contents to be displayed in the editor. This 
+  /// function will be called by the [FileRow] widget when clicked to pass in the file
+  void updateDocument(File file) {
+    setState(() {
+      saveFile();
+      _file = file;
+    });
+    
+  }
+
+  /// Saves the contents of the [File] that is open in the [OpenDocument]
+  ///
+  /// Called upon carriage return being hit and when a new [File] is opened
+  void saveFile() {
+    
+  }
+  
 
   @override
   void initState() {
     super.initState();
-    file = widget.file;
+    _file = widget.file;
+
   }
+
+
 
   /// The build method that handles the state being made and remade
   ///
   /// The build method contains all of the child widgets that belong inside the [OpenDocument] widget
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: [
-          const QuillToolbar(
-            configurations: QuillToolbarConfigurations(buttonOptions: QuillSimpleToolbarButtonOptions()),
-            child: Text("")
-          ),
-          QuillEditor(
-            configurations: QuillEditorConfigurations(
-              controller: _controller
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: <Widget>[
+        Text(_file.name),
+        QuillToolbar.simple(
+          configurations: QuillSimpleToolbarConfigurations(
+            controller: _controller
+          )
+        ),
+        Expanded(
+          child: Container(
+            padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 12),
+            color: Colors.white,
+            child: QuillEditor.basic(
+              configurations: QuillEditorConfigurations(
+                controller: _controller,
+                placeholder: "hello world"
+              )
             ),
-            focusNode: FocusNode(),
-            scrollController: ScrollController(),
-             
           ),
-        ],
-      ),
+        )
+      ],
     );
   }
 }

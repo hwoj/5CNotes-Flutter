@@ -1,6 +1,7 @@
 import 'package:fivec_notes/models/course.dart';
 import 'package:fivec_notes/models/semester.dart';
 import 'package:fivec_notes/widgets/filetree/semester_row.dart';
+import 'package:fivec_notes/widgets/open_document.dart';
 import 'package:flutter/material.dart';
 
 /// The [FileTree] is a [StatefulWidget] representing the entirety of the files that the user has access to
@@ -9,6 +10,18 @@ import 'package:flutter/material.dart';
 /// This will exist on the left side of the [HomeScreen] screen. It will allow users to select files to edit as well as 
 /// perform actions on the files and directories
 class FileTree extends StatefulWidget {
+
+  /// The [GlobalKey] to alter the [OpenDocumentState]
+  final GlobalKey<OpenDocumentState> docKey;
+
+  /// The constructor for the [FileTree]
+  ///
+  /// This constructor takes in the [docKey] for the [OpenDocumentState] to 
+  /// pass down to the [FileRow]
+  const FileTree({
+    super.key,
+    required this.docKey
+  });
 
   @override
   State<FileTree> createState() => FileTreeState();
@@ -72,7 +85,7 @@ class FileTreeState extends State<FileTree> {
             shrinkWrap: true,
             itemCount: semesters.length,
             itemBuilder: (BuildContext context, int index) {
-              return SemesterRow(semester: semesters[index]);
+              return SemesterRow(docKey: widget.docKey, semester: semesters[index]);
             }
           ),
         )

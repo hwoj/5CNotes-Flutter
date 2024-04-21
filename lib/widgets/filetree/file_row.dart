@@ -2,6 +2,7 @@ import 'package:fivec_notes/main.dart';
 import 'package:fivec_notes/models/file.dart';
 import 'package:fivec_notes/widgets/file/file_delete.dart';
 import 'package:fivec_notes/widgets/file/file_rename.dart';
+import 'package:fivec_notes/widgets/open_document.dart';
 import 'package:flutter/material.dart';
 
 /// The [FileRow] represents the listing of an individual file in the [FileTree]
@@ -17,16 +18,19 @@ class FileRow extends StatefulWidget {
   /// function from parent row to delete the file and its row
   final Function deleteFunc;
 
+  /// The [GlobalKey] to alter the [OpenDocumentState]
+  final GlobalKey<OpenDocumentState> docKey;
 
   /// This is the constructor for the [FileRow] that accepts the associated [File] as a parameter
   ///
   /// This constructor is implemented as constant because this is an immutable class. Immutable classes have only constant 
   /// (final) parameters
   const FileRow({
-    Key? key,
+    super.key,
     required this.file,
-    required this.deleteFunc
-  }) : super(key: key);
+    required this.deleteFunc,
+    required this.docKey
+  });
 
   @override
   State<FileRow> createState() => FileRowState();
@@ -69,8 +73,16 @@ class FileRowState extends State<FileRow> {
   /// This function is responsible for handling opening this [File] in the editor UI
   ///
   /// This file will take the contents of the file and throw them into 
-  openFile() {
+  void openFile() {
+    final GlobalKey<OpenDocumentState> openDocumentKey = widget.docKey;
 
+    // Access the State object using the GlobalKey
+    final OpenDocumentState? openDocumentState = openDocumentKey.currentState;
+
+    // Call the function on the State object
+    if (openDocumentState != null) {
+      openDocumentState.updateDocument(widget.file);
+    }
   }
 
   /// This is the [build] function for the [FileRow] and defines the contents of the widget
@@ -85,7 +97,7 @@ class FileRowState extends State<FileRow> {
           color: Theme.of(context).appColors.backgroundRow,
           child: InkWell(
             onTap: () {
-              
+              openFile();
             },
             onHover: (hovered) {
               setState(() {

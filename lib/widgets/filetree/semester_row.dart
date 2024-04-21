@@ -1,6 +1,7 @@
 import 'package:fivec_notes/main.dart';
 import 'package:fivec_notes/models/semester.dart';
 import 'package:fivec_notes/widgets/filetree/course_row.dart';
+import 'package:fivec_notes/widgets/open_document.dart';
 import 'package:flutter/material.dart';
 
 /// The [StatefulWidget] representing the [SemesterRow] top level object that composes the [FileTree]
@@ -15,14 +16,18 @@ class SemesterRow extends StatefulWidget {
   /// The [Semester] object that the [SemesterRow] is representing
   final Semester semester;
 
+  /// The [GlobalKey] to alter the [OpenDocumentState]
+  final GlobalKey<OpenDocumentState> docKey;
+
   /// The default constructor for the [SemesterRow]
   ///
   /// The constructor that will be used to pass in a [semester] to the [SemesterRow]
   const SemesterRow({
-    Key? key,
+    super.key,
     required this.semester,
-    this.isInitiallyExpanded = false
-  }) : super(key: key);
+    this.isInitiallyExpanded = false,
+    required this.docKey
+  });
 
   @override
   State<SemesterRow> createState() => SemesterRowState();
@@ -97,7 +102,7 @@ class SemesterRowState extends State<SemesterRow> {
                 shrinkWrap: true,
                 itemCount: widget.semester.courses.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return CourseRow(course: widget.semester.courses[index]);
+                  return CourseRow(course: widget.semester.courses[index], docKey: widget.docKey,);
                 }
                 ),
               
