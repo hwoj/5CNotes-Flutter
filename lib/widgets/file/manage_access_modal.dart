@@ -30,20 +30,22 @@ class _ManageAccessModalState extends State<ManageAccessModal> {
   @override
   Widget build(BuildContext context) {
     
-    return Dialog(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10.0)),
-        child: Container(
-          height: 200.0,
-          width: 200.0,
-          child: Column(
+    return SimpleDialog(
+        title: Text("Manage Access"),
+        children: <Widget>[
+          Column(
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              TextField(
-                controller: _emailController,
-                decoration: const InputDecoration(labelText: "Type in the email of desired user to give access to."),
+              Padding(
+                padding: const EdgeInsets.all(30.0),
+                child: Container(
+                  child: TextField(
+                    controller: _emailController,
+                    decoration: const InputDecoration(labelText: "User email"),
+                    ),
                 ),
+              ),
               SizedBox(height: 16.0), // Space between widgets
               ManageAccessDropdown(),
               SizedBox(height: 16.0), // Space between widgets
@@ -55,7 +57,7 @@ class _ManageAccessModalState extends State<ManageAccessModal> {
                 child: Text("Share")
                 ),
             ],)
-        )
+        ]
       );
   }
   

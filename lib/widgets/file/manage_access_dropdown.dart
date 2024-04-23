@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 /// List of access options for a given file (Read or write)
-const List<String> accessOptions = <String>["Read, Write"];
+const List<String> accessOptions = <String>["Read", "Write"];
 
 /// Dropdown menu will display the different access option that could be given to another user.
 /// As of now, only read and write access can be given. 
