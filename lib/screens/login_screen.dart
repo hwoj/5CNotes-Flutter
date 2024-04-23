@@ -50,17 +50,26 @@ class _LoginScreenState extends State<LoginScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            TextField(
-              controller: _emailController,
-              decoration: InputDecoration(labelText: 'Email'),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 200.0, vertical: 15.0),
+              child: Container(
+                child: TextField(
+                  controller: _emailController,
+                  decoration: InputDecoration(labelText: 'Email'),
+                ),
+              ),
             ),
-            SizedBox(height: 10.0),
-            TextField(
-              controller: _passwordController,
-              decoration: InputDecoration(labelText: 'Password'),
-              obscureText: true,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 200.0, vertical: 15.0),
+              child: Container(
+                child: TextField(
+                  controller: _passwordController,
+                  decoration: InputDecoration(labelText: 'Password'),
+                  obscureText: true,
+                ),
+              ),
             ),
-            SizedBox(height: 10.0),
+            SizedBox(height: 30.0),
             ElevatedButton(
               onPressed: () {
                 // Add authentication logic here
