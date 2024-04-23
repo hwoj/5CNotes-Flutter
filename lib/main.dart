@@ -1,3 +1,4 @@
+import 'package:fivec_notes/screens/home_screen.dart';
 import 'package:fivec_notes/screens/splash_screen.dart';
 import 'package:fivec_notes/themes/app_colors_theme.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,9 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      routes: {
+        '/home': (context) => HomeScreen()
+      },
       home: SplashScreen(),
       theme: Theme.of(context).copyWith(
         extensions: [

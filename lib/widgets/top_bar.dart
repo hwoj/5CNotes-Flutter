@@ -11,6 +11,8 @@ import 'package:flutter/material.dart';
 /// [PreferredSizeWidget]
 class TopBar extends StatefulWidget implements PreferredSizeWidget {
 
+  /// Whether the back arrow in the toolbar should show
+ 
 
   /// Creates the app widget to build the structure of the topbar. 
   /// 
@@ -32,44 +34,41 @@ class _TopBarState extends State<TopBar> {
   /// to logout. 
    
 
-
-   @override
+  @override
   Widget build(BuildContext context) {
     /// The [AppBar] widget should have 
     /// [IconButton] widgets to define the back button and hamburger menu on the top left,
     /// [FlutterLogo] logo in the center, and a [ShowDialogue] manage access and [Scrollable] user dropdown menu on the 
     /// top right.  Use the function Navigation.of(context).push() Navigation.of(context).pop()
     /// to move back and forth between screens.
-      return PreferredSize(
-        preferredSize: const Size.fromHeight(200),
-        child: AppBar(
-          title: TextButton(
-            onPressed: (){
-              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
-            },
-            child: Text(
-              "5CNotes",
-              style: TextStyle(
-                color: Theme.of(context).appColors.backgroundRow,
-                fontWeight: FontWeight.w700,
-                fontSize: 20
-              )
-            ),
+    print(ModalRoute.of(context)?.settings.name);
+      return AppBar(
+        title: TextButton(
+          onPressed: (){
+            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
+          },
+          child: Text(
+            "5CNotes",
+            style: TextStyle(
+              color: Theme.of(context).appColors.backgroundRow,
+              fontWeight: FontWeight.w700,
+              fontSize: 20
+            )
           ),
-          shadowColor: const Color(0x33222222),
-          iconTheme: IconThemeData(color: Theme.of(context).appColors.backgroundRow),
-          actions: <Widget>[
-            const MenuDropdown(),
-          ],
-          flexibleSpace: Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [Theme.of(context).appColors.backgroundDefault, const Color(0xFF9E9DFD)], 
-                begin: Alignment.centerLeft,
-                end: Alignment.centerRight,
-              ), 
-              ), 
-          ),
+        ),
+        shadowColor: const Color(0x33222222),
+        iconTheme: IconThemeData(color: Theme.of(context).appColors.backgroundRow),
+        actions: <Widget>[
+          const MenuDropdown(),
+        ],
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Theme.of(context).appColors.backgroundDefault, const Color(0xFF9E9DFD)], 
+              begin: Alignment.centerLeft,
+              end: Alignment.centerRight,
+            ), 
+            ), 
         ),
       );
       
