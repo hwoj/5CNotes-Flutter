@@ -1,4 +1,5 @@
 import 'package:fivec_notes/main.dart';
+import 'package:fivec_notes/screens/home_screen.dart';
 import 'package:fivec_notes/widgets/menu_dropdown.dart';
 import 'package:flutter/material.dart';
 
@@ -39,23 +40,40 @@ class _TopBarState extends State<TopBar> {
     /// [FlutterLogo] logo in the center, and a [ShowDialogue] manage access and [Scrollable] user dropdown menu on the 
     /// top right.  Use the function Navigation.of(context).push() Navigation.of(context).pop()
     /// to move back and forth between screens.
-    return Scaffold(
-      appBar: AppBar(
-        actions: <Widget>[
-          const MenuDropdown(),
-        ],
-        flexibleSpace: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Theme.of(context).appColors.backgroundDefault, Theme.of(context).appColors.backgroundRow], 
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-            ), 
-            ), 
+      return PreferredSize(
+        preferredSize: const Size.fromHeight(200),
+        child: AppBar(
+          title: TextButton(
+            onPressed: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
+            },
+            child: Text(
+              "5CNotes",
+              style: TextStyle(
+                color: Theme.of(context).appColors.backgroundRow,
+                fontWeight: FontWeight.w700,
+                fontSize: 20
+              )
+            ),
+          ),
+          shadowColor: const Color(0x33222222),
+          iconTheme: IconThemeData(color: Theme.of(context).appColors.backgroundRow),
+          actions: <Widget>[
+            const MenuDropdown(),
+          ],
+          flexibleSpace: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [Theme.of(context).appColors.backgroundDefault, const Color(0xFF9E9DFD)], 
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
+              ), 
+              ), 
+          ),
         ),
-      ),
-      
       );
+      
+    
     }
 
 
