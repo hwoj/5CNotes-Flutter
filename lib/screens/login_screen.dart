@@ -1,3 +1,4 @@
+import 'package:fivec_notes/main.dart';
 import 'package:fivec_notes/screens/home_screen.dart';
 import 'package:fivec_notes/screens/signup_screen.dart';
 import 'package:flutter/material.dart';
@@ -21,8 +22,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   // Initialize username and password text editing controller 
   // to take the user input.
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
   /// Takes the information of the parent widget and 
   /// return a [Scaffold], which defines the structure, layout,
   /// color of the login page features
@@ -66,24 +67,41 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
             const SizedBox(height: 30.0),
-            ElevatedButton(
-              onPressed: () {
-                // Add authentication logic here
-                String email = _emailController.text;
-                String password = _passwordController.text;
-                // dummy values for correct email and password, will change later 
-                String correctEmail = "";
-                String correctPassword = ""; 
-                if (email == correctEmail && password == correctPassword) { 
-                  Navigator.push(
-                    context, 
-                    MaterialPageRoute(builder: (context) => HomeScreen()),
-                  );
-                } else { // TODO: add functionality if password is wrong
-                  
-                }
-              },
-              child: const Text('Login'),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(4),
+              child: Stack(
+                children: <Widget>[
+                  Positioned.fill(
+                    child: Container(
+                      color: Theme.of(context).appColors.backgroundDefault,
+                      ),
+                    ),
+                    TextButton(
+                      style: TextButton.styleFrom(
+                      textStyle: const TextStyle(fontSize: 10),
+                      foregroundColor: Theme.of(context).appColors.backgroundRow,
+                      padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20)
+                      ), 
+                    onPressed: () {
+                      // Add authentication logic here
+                      String email = _emailController.text;
+                      String password = _passwordController.text;
+                      // dummy values for correct email and password, will change later 
+                      String correctEmail = "";
+                      String correctPassword = ""; 
+                      if (email == correctEmail && password == correctPassword) { 
+                        Navigator.push(
+                          context, 
+                          MaterialPageRoute(builder: (context) => HomeScreen()),
+                        );
+                      } else { // TODO: add functionality if password is wrong
+                        
+                      }
+                    },
+                    child: const Text('Login'),
+            ),
+                  ],
+                )
             ),
             const SizedBox(height: 30),
           TextButton(

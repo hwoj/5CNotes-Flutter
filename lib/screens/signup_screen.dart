@@ -1,3 +1,4 @@
+import 'package:fivec_notes/main.dart';
 import 'package:fivec_notes/screens/email_verification_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:fivec_notes/screens/home_screen.dart';
@@ -19,9 +20,9 @@ class _SignUpScreenState extends State<SignupScreen> {
 
   /// create text editing controllers for the email, password, 
   /// and confirm password fields.
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
-  TextEditingController _confirmPasswordController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confirmPasswordController = TextEditingController();
   /// creates the structure/layout of the page.  This will include a
   /// email, password, and confirm password text box, and a button to 
   /// submit the entered fields.
@@ -74,38 +75,54 @@ class _SignUpScreenState extends State<SignupScreen> {
                 obscureText: true,
               ),
             ),
-            ElevatedButton(
-              onPressed: () {
-                // Add signup logic here
-                String email = _emailController.text;
-                String password = _passwordController.text;
-                String confirmPassword = _confirmPasswordController.text;
-
-                if (password == confirmPassword) {
-                  Navigator.push(
-                    context, 
-                    MaterialPageRoute(builder: (context) => EmailVerificationScreen()));
-                  // Implement signup logic here
-                } else {
-                  // Passwords don't match, show an error message
-                  showDialog(
-                    context: context,
-                    builder: (context) => AlertDialog(
-                      title: const Text('Error'),
-                      content: const Text('Passwords do not match.'),
-                      actions: [
-                        TextButton(
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                          child: const Text('OK'),
-                        ),
-                      ],
+            ClipRRect(
+              borderRadius: BorderRadius.circular(4),
+              child: Stack(
+                children: <Widget>[
+                  Positioned.fill(
+                    child: Container(
+                      color: Theme.of(context).appColors.backgroundDefault,
+                      ),
                     ),
-                  );
-                }
-              },
+                  TextButton(
+                    style: TextButton.styleFrom(
+                      foregroundColor: Theme.of(context).appColors.backgroundRow,
+                      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10)
+                    ),
+                    onPressed: () {
+                      // Add signup logic here
+                      String email = _emailController.text;
+                      String password = _passwordController.text;
+                      String confirmPassword = _confirmPasswordController.text;
+
+                      if (password == confirmPassword) {
+                        Navigator.push(
+                          context, 
+                          MaterialPageRoute(builder: (context) => EmailVerificationScreen()));
+                        // Implement signup logic here
+                      } else {
+                        // Passwords don't match, show an error message
+                        showDialog(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                            title: const Text('Error'),
+                            content: const Text('Passwords do not match.'),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: const Text('OK'),
+                              ),
+                            ],
+                          ),
+                        );
+                      }
+                    },
               child: const Text('Sign Up'),
+            ),
+                ]
+              )
             ),
           ],
         ),

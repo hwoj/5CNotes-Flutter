@@ -1,4 +1,5 @@
 
+import 'package:fivec_notes/main.dart';
 import 'package:fivec_notes/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -14,7 +15,7 @@ class EmailVerificationScreen extends StatefulWidget {
 class _EmailVerificationState extends State<EmailVerificationScreen> {
 
   // Instantiate text editing controller for the email verification text box. 
-  TextEditingController _verificationController = TextEditingController();
+  final TextEditingController _verificationController = TextEditingController();
 
   /// Creates the structure/layout fo the Email verification page.
   /// It should create a text box that will take the verification code.
@@ -30,50 +31,69 @@ class _EmailVerificationState extends State<EmailVerificationScreen> {
     /// else, prompt error message.
     return  Scaffold(
       appBar: AppBar(
-        title: Text('Enter the 6-digit code sent to your email address'),
+        title: const Text('Enter the 6-digit code sent to your email address'),
       ),
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            TextField(
-              controller: _verificationController,
-              decoration: InputDecoration(labelText: 'Enter the 6-digit code'),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 200.0, vertical: 15.0),
+              child: TextField(
+                controller: _verificationController,
+                decoration: const InputDecoration(labelText: 'Enter the 6-digit code'),
+              ),
             ),
             
             
-            SizedBox(height: 16.0),
-            ElevatedButton(
-              onPressed: () {
-                // Add signup logic here
-                String code = _verificationController.text;
-                String correctCode = "123456"; // dummy value, will change later
-                if (code == correctCode) { 
-                  Navigator.push(
-                    context, 
-                    MaterialPageRoute(builder: (context) => HomeScreen()));
-                  // Implement signup logic here
-                } else {
-                  // Passwords don't match, show an error message
-                  showDialog(
-                    context: context,
-                    builder: (context) => AlertDialog(
-                      title: Text('Error'),
-                      content: Text('Code is incorect'),
-                      actions: [
-                        TextButton(
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                          child: Text('OK'),
-                        ),
-                      ],
+            const SizedBox(height: 16.0),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(4),
+              child: Stack(
+                children: <Widget>[
+                  Positioned.fill(
+                    child: Container(
+                      color: Theme.of(context).appColors.backgroundDefault,
+                      ),
                     ),
-                  );
-                }
-              },
-              child: Text('Signup'),
+                TextButton(
+                  style: TextButton.styleFrom(
+                        foregroundColor: Theme.of(context).appColors.backgroundRow,
+                        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10)
+                      ),
+                onPressed: () {
+                  // Add signup logic here
+                  String code = _verificationController.text;
+                  String correctCode = "123456"; // dummy value, will change later
+                  if (code == correctCode) { 
+                    Navigator.push(
+                      context, 
+                      MaterialPageRoute(builder: (context) => HomeScreen()));
+                    // Implement signup logic here
+                  } else {
+                    // Passwords don't match, show an error message
+                    showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                        title: const Text('Error'),
+                        content: const Text('Code is incorrect'),
+                        actions: [
+                          TextButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: const Text('OK'),
+                          ),
+                        ],
+                      ),
+                    );
+                  }
+                },
+              child: const Text('Sign Up'),
+            ),
+                  ],
+                )
             ),
           ],
         ),
@@ -82,6 +102,7 @@ class _EmailVerificationState extends State<EmailVerificationScreen> {
   }
 
   /// Removes controller for each verification code text box.
+  @override
   void dispose() {   
     _verificationController.dispose();
     super.dispose();

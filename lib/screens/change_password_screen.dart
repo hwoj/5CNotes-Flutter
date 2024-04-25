@@ -1,3 +1,4 @@
+import 'package:fivec_notes/main.dart';
 import 'package:fivec_notes/screens/email_verification_screen.dart';
 import 'package:fivec_notes/screens/login_screen.dart';
 import 'package:flutter/material.dart';
@@ -20,9 +21,9 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
 
   /// create text editing controllers for the old password, new password, 
   /// and confirm new password fields.
-  TextEditingController _oldPasswordController = TextEditingController();
-  TextEditingController _newPasswordController = TextEditingController();
-  TextEditingController _confirmPasswordController = TextEditingController();
+  final TextEditingController _oldPasswordController = TextEditingController();
+  final TextEditingController _newPasswordController = TextEditingController();
+  final TextEditingController _confirmPasswordController = TextEditingController();
   /// creates the structure/layout of the page.  
   /// 
   /// This will include an old password, new password, and confirm new password text box, and a button to 
@@ -65,37 +66,53 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
               ),
             ),
             const SizedBox(height: 16.0),
-            ElevatedButton(
-              onPressed: () {
-                // Add change password logic here
-                String oldPassword = _oldPasswordController.text;
-                String newPassword = _newPasswordController.text;
-                String confirmPassword = _confirmPasswordController.text;
-
-                if (newPassword == confirmPassword) {
-                  Navigator.push(
-                    context, 
-                    MaterialPageRoute(builder: (context) => LoginScreen()));
-                } else {
-                  // Passwords don't match, show an error message
-                  showDialog(
-                    context: context,
-                    builder: (context) => AlertDialog(
-                      title: const Text('Error'),
-                      content: const Text('Passwords do not match.'),
-                      actions: [
-                        TextButton(
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                          child: const Text('OK'),
-                        ),
-                      ],
+            ClipRRect(
+              borderRadius: BorderRadius.circular(4),
+              child: Stack(
+                children: <Widget>[
+                  Positioned.fill(
+                    child: Container(
+                      color: Theme.of(context).appColors.backgroundDefault,
+                      ),
                     ),
-                  );
-                }
-              },
-              child: const Text('Confirm Change'),
+                  TextButton(
+                    style: TextButton.styleFrom(
+                      foregroundColor: Theme.of(context).appColors.backgroundRow,
+                      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10)
+                    ),
+                    onPressed: () {
+                      // Add change password logic here
+                      String oldPassword = _oldPasswordController.text;
+                      String newPassword = _newPasswordController.text;
+                      String confirmPassword = _confirmPasswordController.text;
+
+                      if (newPassword == confirmPassword) {
+                        Navigator.push(
+                          context, 
+                          MaterialPageRoute(builder: (context) => LoginScreen()));
+                      } else {
+                        // Passwords don't match, show an error message
+                        showDialog(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                            title: const Text('Error'),
+                            content: const Text('Passwords do not match.'),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: const Text('OK'),
+                              ),
+                            ],
+                          ),
+                        );
+                      }
+                    },
+                    child: const Text('Confirm Change'),
+            ),
+                ]
+              )
             ),
           ],
         ),
