@@ -3,7 +3,7 @@ import 'package:fivec_notes/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:fivec_notes/screens/home_screen.dart';
 
-/// The [SignupScreen] is a [StatefulWidget] that will handle all UI elements and interactions for signing up a [User]
+/// The [ChangePassword] is a [StatefulWidget] that will handle all UI elements and interactions for signing up a [User]
 /// 
 /// This screen will be stateful so that it can handle the changes to the data that the user is inputting and update accordingly
 class ChangePasswordScreen extends StatefulWidget {
@@ -18,29 +18,17 @@ class ChangePasswordScreen extends StatefulWidget {
 /// email, password, and confirm password textbox.
 class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
 
-  /// create text editing controllers for the email, password, 
-  /// and confirm password fields.
+  /// create text editing controllers for the old password, new password, 
+  /// and confirm new password fields.
   TextEditingController _oldPasswordController = TextEditingController();
   TextEditingController _newPasswordController = TextEditingController();
   TextEditingController _confirmPasswordController = TextEditingController();
-  /// creates the structure/layout of the page.  This will include a
-  /// email, password, and confirm password text box, and a button to 
+  /// creates the structure/layout of the page.  
+  /// 
+  /// This will include an old password, new password, and confirm new password text box, and a button to 
   /// submit the entered fields.
   @override
   Widget build(BuildContext context) {
-    /// The [Scaffold] widget takes in two parameters:
-    /// appBar and body
-    /// Define and [AppBar] widget to label the title for the appBar
-    /// Define a [Padding] widget for the body.
-    /// The [Padding] widget will have subfields that will define the 
-    /// structure of the UI.
-    /// Use EdgeInsets.all() to define margin offsets.
-    /// Define a [Column] field for the child field:
-    /// The [Column] widget will have two textfields and a button 
-    /// defined for its children.  
-    /// Use the onPressed() function and use Navigation.of(context).push
-    /// to navigate the user to the email verification page if the password confirmation
-    /// matches the original password, if not, prompt the user to type the input again.
     return Scaffold(
       appBar: AppBar(
         title: const Text('Change Password'),
@@ -88,7 +76,6 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                   Navigator.push(
                     context, 
                     MaterialPageRoute(builder: (context) => LoginScreen()));
-                  // Implement signup logic here
                 } else {
                   // Passwords don't match, show an error message
                   showDialog(
@@ -116,7 +103,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
     );
   }
 
-  /// Removes the email, password, and confirm password 
+  /// Removes the old password, new password, and confirm new password 
   /// after the user exits the signup page
   @override
   void dispose() {
