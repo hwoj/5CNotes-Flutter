@@ -1,3 +1,5 @@
+import 'dart:io' as io;
+
 import 'package:fivec_notes/models/course.dart';
 import 'package:fivec_notes/models/semester.dart';
 import 'package:fivec_notes/models/user.dart';
@@ -53,9 +55,9 @@ class CourseService {
 
   /// This function will upload the course schedule for a user to the server
   ///
-  /// Taking a provided [user] and a [courseSchedule] they will be sent to the server to be processed and added to the database
-  bool postCourseSchedule(User user, List<Course> courseSchedule) {
-    // convert the list of courses to an array of json objects
+  /// 
+  bool postCourseSchedule(io.File? file, String? link) {
+    
 
     // send a post request to the server for the endpoint matching the id of the provided user and a request body of the JSON objects
 

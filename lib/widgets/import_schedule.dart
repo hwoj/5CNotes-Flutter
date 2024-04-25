@@ -31,7 +31,9 @@ class ImportScheduleState extends State<ImportSchedule> {
   Future<void> _pickFile() async{
     FilePickerResult? result = await FilePicker.platform.pickFiles();
 
-    if (result != null) {
+    final RegExp validIcsRegex = RegExp(r'\.ics$');
+
+    if (result != null && validIcsRegex.hasMatch(result.files.single.path!)) {
       setState(() {
         selectedFile = File(result.files.single.path!);
       });
