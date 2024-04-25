@@ -43,24 +43,29 @@ class _LoginScreenState extends State<LoginScreen> {
     /// Else, Tell them that their password is incorrect.
     return Scaffold(
       appBar: AppBar(
-        title: Text('Login'),
+        title: const Text('Login'),
       ),
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            TextField(
-              controller: _emailController,
-              decoration: InputDecoration(labelText: 'Email'),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 200.0, vertical: 15.0),
+              child: TextField(
+                controller: _emailController,
+                decoration: const InputDecoration(labelText: 'Email'),
+              ),
             ),
-            SizedBox(height: 10.0),
-            TextField(
-              controller: _passwordController,
-              decoration: InputDecoration(labelText: 'Password'),
-              obscureText: true,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 200.0, vertical: 15.0),
+              child: TextField(
+                controller: _passwordController,
+                decoration: const InputDecoration(labelText: 'Password'),
+                obscureText: true,
+              ),
             ),
-            SizedBox(height: 10.0),
+            const SizedBox(height: 30.0),
             ElevatedButton(
               onPressed: () {
                 // Add authentication logic here
@@ -78,7 +83,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   
                 }
               },
-              child: Text('Login'),
+              child: const Text('Login'),
             ),
             const SizedBox(height: 30),
           TextButton(

@@ -1,48 +1,37 @@
 import 'package:fivec_notes/screens/email_verification_screen.dart';
+import 'package:fivec_notes/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:fivec_notes/screens/home_screen.dart';
 
-/// The [SignupScreen] is a [StatefulWidget] that will handle all UI elements and interactions for signing up a [User]
+/// The [ChangePassword] is a [StatefulWidget] that will handle all UI elements and interactions for signing up a [User]
 /// 
 /// This screen will be stateful so that it can handle the changes to the data that the user is inputting and update accordingly
-class SignupScreen extends StatefulWidget {
+class ChangePasswordScreen extends StatefulWidget {
   /// Create new instance of a _SingUpPageState
   @override
-  State<SignupScreen> createState() => _SignUpScreenState();
+  State<ChangePasswordScreen> createState() => _ChangePasswordScreenState();
 }
 
 /// Monitors the state of the Signup page.
 ///  
 /// Keeps track of information passed into the 
 /// email, password, and confirm password textbox.
-class _SignUpScreenState extends State<SignupScreen> {
+class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
 
-  /// create text editing controllers for the email, password, 
-  /// and confirm password fields.
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
+  /// create text editing controllers for the old password, new password, 
+  /// and confirm new password fields.
+  TextEditingController _oldPasswordController = TextEditingController();
+  TextEditingController _newPasswordController = TextEditingController();
   TextEditingController _confirmPasswordController = TextEditingController();
-  /// creates the structure/layout of the page.  This will include a
-  /// email, password, and confirm password text box, and a button to 
+  /// creates the structure/layout of the page.  
+  /// 
+  /// This will include an old password, new password, and confirm new password text box, and a button to 
   /// submit the entered fields.
   @override
   Widget build(BuildContext context) {
-    /// The [Scaffold] widget takes in two parameters:
-    /// appBar and body
-    /// Define and [AppBar] widget to label the title for the appBar
-    /// Define a [Padding] widget for the body.
-    /// The [Padding] widget will have subfields that will define the 
-    /// structure of the UI.
-    /// Use EdgeInsets.all() to define margin offsets.
-    /// Define a [Column] field for the child field:
-    /// The [Column] widget will have two textfields and a button 
-    /// defined for its children.  
-    /// Use the onPressed() function and use Navigation.of(context).push
-    /// to navigate the user to the email verification page if the password confirmation
-    /// matches the original password, if not, prompt the user to type the input again.
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Sign Up'),
+        title: const Text('Change Password'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -52,16 +41,17 @@ class _SignUpScreenState extends State<SignupScreen> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 200.0, vertical: 15.0),
               child: TextField(
-                controller: _emailController,
-                decoration: const InputDecoration(labelText: 'Email'),
+                controller: _oldPasswordController,
+                decoration: const InputDecoration(labelText: 'Old Password'),
+                obscureText: true,
               ),
             ),
             const SizedBox(height: 16.0),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 200.0, vertical: 15.0),
               child: TextField(
-                controller: _passwordController,
-                decoration: const InputDecoration(labelText: 'Password'),
+                controller: _newPasswordController,
+                decoration: const InputDecoration(labelText: 'New Password'),
                 obscureText: true,
               ),
             ),
@@ -70,22 +60,22 @@ class _SignUpScreenState extends State<SignupScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 200.0, vertical: 15.0),
               child: TextField(
                 controller: _confirmPasswordController,
-                decoration: const InputDecoration(labelText: 'Confirm Password'),
+                decoration: const InputDecoration(labelText: 'Confirm New Password'),
                 obscureText: true,
               ),
             ),
+            const SizedBox(height: 16.0),
             ElevatedButton(
               onPressed: () {
-                // Add signup logic here
-                String email = _emailController.text;
-                String password = _passwordController.text;
+                // Add change password logic here
+                String oldPassword = _oldPasswordController.text;
+                String newPassword = _newPasswordController.text;
                 String confirmPassword = _confirmPasswordController.text;
 
-                if (password == confirmPassword) {
+                if (newPassword == confirmPassword) {
                   Navigator.push(
                     context, 
-                    MaterialPageRoute(builder: (context) => EmailVerificationScreen()));
-                  // Implement signup logic here
+                    MaterialPageRoute(builder: (context) => LoginScreen()));
                 } else {
                   // Passwords don't match, show an error message
                   showDialog(
@@ -105,7 +95,7 @@ class _SignUpScreenState extends State<SignupScreen> {
                   );
                 }
               },
-              child: const Text('Sign Up'),
+              child: const Text('Confirm Change'),
             ),
           ],
         ),
@@ -113,14 +103,14 @@ class _SignUpScreenState extends State<SignupScreen> {
     );
   }
 
-  /// Removes the email, password, and confirm password 
+  /// Removes the old password, new password, and confirm new password 
   /// after the user exits the signup page
   @override
   void dispose() {
 
     /// call the dispose method on all three text editing controllers
-    _emailController.dispose();
-    _passwordController.dispose();
+    _oldPasswordController.dispose();
+    _newPasswordController.dispose();
     _confirmPasswordController.dispose();
     super.dispose();
   }
