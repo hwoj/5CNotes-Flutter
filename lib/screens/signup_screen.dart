@@ -1,3 +1,4 @@
+import 'package:fivec_notes/main.dart';
 import 'package:fivec_notes/screens/email_verification_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:fivec_notes/screens/home_screen.dart';
@@ -74,38 +75,56 @@ class _SignUpScreenState extends State<SignupScreen> {
                 obscureText: true,
               ),
             ),
-            ElevatedButton(
-              onPressed: () {
-                // Add signup logic here
-                String email = _emailController.text;
-                String password = _passwordController.text;
-                String confirmPassword = _confirmPasswordController.text;
-
-                if (password == confirmPassword) {
-                  Navigator.push(
-                    context, 
-                    MaterialPageRoute(builder: (context) => EmailVerificationScreen()));
-                  // Implement signup logic here
-                } else {
-                  // Passwords don't match, show an error message
-                  showDialog(
-                    context: context,
-                    builder: (context) => AlertDialog(
-                      title: const Text('Error'),
-                      content: const Text('Passwords do not match.'),
-                      actions: [
-                        TextButton(
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                          child: const Text('OK'),
-                        ),
-                      ],
+            const SizedBox(height: 30.0),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(4),
+              child: Stack(
+                children: <Widget>[
+                  Positioned.fill(
+                    child: Container(
+                      color: Theme.of(context).appColors.backgroundDefault,
+                      ),
                     ),
-                  );
-                }
-              },
+                  TextButton(
+                    style: TextButton.styleFrom(
+                      textStyle: const TextStyle(fontSize: 15),
+                      foregroundColor: Theme.of(context).appColors.backgroundRow,
+                      padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20)
+                    ),
+                    onPressed: () {
+                      // Add signup logic here
+                      String email = _emailController.text;
+                      String password = _passwordController.text;
+                      String confirmPassword = _confirmPasswordController.text;
+
+                      if (password == confirmPassword) {
+                        Navigator.push(
+                          context, 
+                          MaterialPageRoute(builder: (context) => EmailVerificationScreen()));
+                        // Implement signup logic here
+                      } else {
+                        // Passwords don't match, show an error message
+                        showDialog(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                            title: const Text('Error'),
+                            content: const Text('Passwords do not match.'),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: const Text('OK'),
+                              ),
+                            ],
+                          ),
+                        );
+                      }
+                    },
               child: const Text('Sign Up'),
+            ),
+                ]
+              )
             ),
           ],
         ),
