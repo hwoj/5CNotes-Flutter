@@ -1,5 +1,6 @@
 import 'package:fivec_notes/screens/login_screen.dart';
 import 'package:fivec_notes/screens/settings_screen.dart';
+import 'package:fivec_notes/widgets/import_schedule.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -29,13 +30,17 @@ class MenuDropdownState extends State<MenuDropdown> {
   Widget build(BuildContext context) {
     return PopupMenuButton(
         itemBuilder: (context) {
-          return [
+          return const [
             PopupMenuItem<int>(
               value: 0,
               child: Text("Settings"),
             ),
             PopupMenuItem<int>(
               value: 1,
+              child: Text("Import Schedule"),
+            ),
+            PopupMenuItem<int>(
+              value: 2,
               child: Text("Logout"),
             ),
           ];
@@ -46,6 +51,13 @@ class MenuDropdownState extends State<MenuDropdown> {
               context, 
               MaterialPageRoute(builder: (context) => SettingsScreen())
               );
+          } else if (value == 1) {
+            showDialog(
+              context: context, 
+              builder: (BuildContext context) {
+                return ImportSchedule();
+              }
+            );
           } else {
             Navigator.push(
               context, 
