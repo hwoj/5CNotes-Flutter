@@ -1,5 +1,4 @@
-import 'package:fivec_notes/main.dart';
-import 'package:fivec_notes/themes/app_colors_theme.dart';
+import 'package:fivec_notes/screens/change_password_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:fivec_notes/widgets/top_bar.dart';
 import 'package:flutter/material.dart';
@@ -22,21 +21,13 @@ class SettingsScreen extends StatefulWidget {
 class _SettingsScreenState extends State<SettingsScreen> {
   ThemeMode themeMode = ThemeMode.system;
 
-  void toggleTheme(ThemeMode mode) {
-    setState(() {
-      themeMode = mode;
-    }
-
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
        appBar: TopBar(),
      body: Padding(
-       padding: EdgeInsets.all(16.0),
+       padding: const EdgeInsets.all(16.0),
        child: ListView(
          children: <Widget>[
            ListTile(
@@ -44,13 +35,37 @@ class _SettingsScreenState extends State<SettingsScreen> {
             trailing: Switch(
               value: isDarkMode,
               onChanged: (isOn) {
-                isOn
-                ? toggleTheme(ThemeMode.dark)
-                : toggleTheme(ThemeMode.light);
+                
                }
                )
-           )
-
+           ),
+           ListTile(
+            title: const Text("Change Password"),
+            trailing: TextButton(
+              style: TextButton.styleFrom(
+                textStyle: const TextStyle(fontSize: 10),
+              ),
+              onPressed: () {
+                Navigator.push(
+                  context, 
+                  MaterialPageRoute(builder: (context) => ChangePasswordScreen()),
+                );
+              },
+              child: const Text('Change'),
+            ),
+           ),
+          ListTile(
+            title: const Text("Save files to device"),
+            trailing: TextButton(
+              style: TextButton.styleFrom(
+                textStyle: const TextStyle(fontSize: 10),
+              ),
+              onPressed: () {
+                // TODO: save files to local device
+              },
+              child: const Text("Save"),
+            )
+          ),
         ],
        )
        )
