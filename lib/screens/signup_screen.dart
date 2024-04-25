@@ -75,6 +75,7 @@ class _SignUpScreenState extends State<SignupScreen> {
                 obscureText: true,
               ),
             ),
+            const SizedBox(height: 30.0),
             ClipRRect(
               borderRadius: BorderRadius.circular(4),
               child: Stack(
@@ -86,8 +87,9 @@ class _SignUpScreenState extends State<SignupScreen> {
                     ),
                   TextButton(
                     style: TextButton.styleFrom(
+                      textStyle: const TextStyle(fontSize: 15),
                       foregroundColor: Theme.of(context).appColors.backgroundRow,
-                      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10)
+                      padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20)
                     ),
                     onPressed: () {
                       // Add signup logic here

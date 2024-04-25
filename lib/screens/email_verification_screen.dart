@@ -59,13 +59,14 @@ class _EmailVerificationState extends State<EmailVerificationScreen> {
                     ),
                 TextButton(
                   style: TextButton.styleFrom(
-                        foregroundColor: Theme.of(context).appColors.backgroundRow,
-                        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10)
+                      textStyle: const TextStyle(fontSize: 15),
+                      foregroundColor: Theme.of(context).appColors.backgroundRow,
+                      padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20)
                       ),
                 onPressed: () {
                   // Add signup logic here
                   String code = _verificationController.text;
-                  String correctCode = "123456"; // dummy value, will change later
+                  String correctCode = ""; // dummy value, will change later
                   if (code == correctCode) { 
                     Navigator.push(
                       context, 

@@ -78,7 +78,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     TextButton(
                       style: TextButton.styleFrom(
-                      textStyle: const TextStyle(fontSize: 10),
+                      textStyle: const TextStyle(fontSize: 15),
                       foregroundColor: Theme.of(context).appColors.backgroundRow,
                       padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20)
                       ), 
