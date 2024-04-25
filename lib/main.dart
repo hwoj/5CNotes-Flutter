@@ -1,4 +1,4 @@
-import 'package:fivec_notes/screens/splash_screen.dart';
+import 'package:fivec_notes/screens/login_screen.dart';
 import 'package:fivec_notes/themes/app_colors_theme.dart';
 import 'package:flutter/material.dart';
 void main() {
@@ -11,10 +11,15 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: SplashScreen(),
+      home: LoginScreen(),
       theme: Theme.of(context).copyWith(
         extensions: [
           AppColorsTheme.light()
+        ]
+      ),
+      darkTheme: Theme.of(context).copyWith(
+        extensions: [
+          AppColorsTheme.dark()
         ]
       ),
     );
