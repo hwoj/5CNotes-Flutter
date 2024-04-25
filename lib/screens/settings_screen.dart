@@ -2,7 +2,8 @@ import 'package:fivec_notes/screens/change_password_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:fivec_notes/widgets/top_bar.dart';
 import 'package:flutter/material.dart';
-
+import 'package:provider/provider.dart';
+import 'package:fivec_notes/themes/theme_provider.dart';
 /// Screen that will allow a user to change their app settings.
 /// 
 /// Options available are to switch between light and dark mode, change password,
@@ -34,7 +35,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             trailing: Switch(
               value: isDarkMode,
               onChanged: (isOn) {
-                // TODO: Add functionality
+                Provider.of<ThemeProvider>(context).toggleTheme();
                }
                )
            ),

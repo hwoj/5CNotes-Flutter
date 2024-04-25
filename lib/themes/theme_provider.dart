@@ -1,25 +1,26 @@
 import 'package:fivec_notes/themes/app_colors_theme.dart';
+import 'package:fivec_notes/themes/theme_data.dart';
 import 'package:flutter/material.dart';
 
 /// Changes the theme between light and dark mode for the app
 
 class ThemeProvider with ChangeNotifier {
-  AppColorsTheme _theme = AppColorsTheme.light();
+  ThemeData _theme = lightMode;
   
   // Theme getter
-  AppColorsTheme get theme => _theme;
+  ThemeData get theme => _theme;
 
   // Theme setter
-  set themeData(AppColorsTheme theme) {
+  set themeData(ThemeData theme) {
       _theme = theme;
   }
 
   /// Toggles between light and dark mode
   void toggleTheme() {
-    if (_theme == AppColorsTheme.light()) {
-      _theme = AppColorsTheme.dark();
+    if (_theme == lightMode) {
+      _theme = darkMode;
     } else {
-      _theme = AppColorsTheme.light();
+      _theme = lightMode;
     }
   }
 }
