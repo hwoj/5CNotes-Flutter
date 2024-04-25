@@ -22,8 +22,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   // Initialize username and password text editing controller 
   // to take the user input.
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
   /// Takes the information of the parent widget and 
   /// return a [Scaffold], which defines the structure, layout,
   /// color of the login page features

@@ -15,7 +15,7 @@ class EmailVerificationScreen extends StatefulWidget {
 class _EmailVerificationState extends State<EmailVerificationScreen> {
 
   // Instantiate text editing controller for the email verification text box. 
-  final TextEditingController _verificationController = TextEditingController();
+  TextEditingController _verificationController = TextEditingController();
 
   /// Creates the structure/layout fo the Email verification page.
   /// It should create a text box that will take the verification code.

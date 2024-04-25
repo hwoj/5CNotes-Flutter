@@ -21,9 +21,9 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
 
   /// create text editing controllers for the old password, new password, 
   /// and confirm new password fields.
-  final TextEditingController _oldPasswordController = TextEditingController();
-  final TextEditingController _newPasswordController = TextEditingController();
-  final TextEditingController _confirmPasswordController = TextEditingController();
+  TextEditingController _oldPasswordController = TextEditingController();
+  TextEditingController _newPasswordController = TextEditingController();
+  TextEditingController _confirmPasswordController = TextEditingController();
   /// creates the structure/layout of the page.  
   /// 
   /// This will include an old password, new password, and confirm new password text box, and a button to 

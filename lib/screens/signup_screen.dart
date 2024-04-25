@@ -20,9 +20,9 @@ class _SignUpScreenState extends State<SignupScreen> {
 
   /// create text editing controllers for the email, password, 
   /// and confirm password fields.
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmPasswordController = TextEditingController();
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
+  TextEditingController _confirmPasswordController = TextEditingController();
   /// creates the structure/layout of the page.  This will include a
   /// email, password, and confirm password text box, and a button to 
   /// submit the entered fields.
