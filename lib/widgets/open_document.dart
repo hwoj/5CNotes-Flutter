@@ -1,4 +1,5 @@
 import 'package:fivec_notes/models/file.dart';
+import 'package:fivec_notes/widgets/open_file_row.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 
@@ -71,7 +72,7 @@ class OpenDocumentState extends State<OpenDocument> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
-        Text(_file.name),
+        OpenFileRow(),
         QuillToolbar.simple(
           configurations: QuillSimpleToolbarConfigurations(
             controller: _controller
