@@ -76,17 +76,18 @@ class FileTreeState extends State<FileTree> {
   @override
   Widget build(BuildContext context) {
     return Column(
-
+      mainAxisSize: MainAxisSize.max,
       children: [
-        SizedBox(
-          height: 800, 
-          width: 500,
-          child: ListView.builder(
-            shrinkWrap: true,
-            itemCount: semesters.length,
-            itemBuilder: (BuildContext context, int index) {
-              return SemesterRow(docKey: widget.docKey, semester: semesters[index]);
-            }
+        Expanded(
+          child: Container(
+            width: 500,
+            child: ListView.builder(
+              shrinkWrap: true,
+              itemCount: semesters.length,
+              itemBuilder: (BuildContext context, int index) {
+                return SemesterRow(docKey: widget.docKey, semester: semesters[index]);
+              }
+            ),
           ),
         )
       ],

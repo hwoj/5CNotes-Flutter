@@ -41,7 +41,6 @@ class _TopBarState extends State<TopBar> {
     /// [FlutterLogo] logo in the center, and a [ShowDialogue] manage access and [Scrollable] user dropdown menu on the 
     /// top right.  Use the function Navigation.of(context).push() Navigation.of(context).pop()
     /// to move back and forth between screens.
-    print(ModalRoute.of(context)?.settings.name);
       return AppBar(
         title: TextButton(
           onPressed: (){
