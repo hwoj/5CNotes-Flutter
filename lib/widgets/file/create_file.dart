@@ -35,6 +35,8 @@ class CreateFileState extends State<CreateFile> {
 
   TextEditingController _controller = TextEditingController();
 
+  bool _invalidName = false;
+
   @override
   initState() {
     _controller = TextEditingController(text: "");
@@ -72,7 +74,11 @@ class CreateFileState extends State<CreateFile> {
   ///
   /// validates name and passes it to parent row
   void createFile() {
-    if (validateName(_controller.text)) {
+
+    setState(() {
+      _invalidName = !validateName(_controller.text);
+    });
+    if (!_invalidName) {
       widget.createFunc(_controller.text);
       Navigator.pop(context);
     } else {
@@ -90,7 +96,16 @@ class CreateFileState extends State<CreateFile> {
           padding: const EdgeInsets.only(left: 30, top: 20, bottom: 30, right: 30),
           child: Column(
             children: [
-              TextField(
+              if (_invalidName) ...[
+                const Text(
+                  "Please enter a valid file name. The name must include no spaces",
+                  softWrap: true,
+                  style: TextStyle(
+                    color: Colors.red
+                  ),
+                ),
+                const SizedBox(height: 15,)
+               ] ,TextField(
                 controller: _controller,
                 decoration: const InputDecoration(
                   labelText: "File Name:",

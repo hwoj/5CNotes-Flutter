@@ -33,6 +33,8 @@ class AddSubDirectoryState extends State<AddSubDirectory> {
 
   TextEditingController _controller = TextEditingController();
 
+  bool _invalidName = false;
+
   @override
   void initState() {
     super.initState();
@@ -71,7 +73,10 @@ class AddSubDirectoryState extends State<AddSubDirectory> {
   ///
   /// This function creates a subfolder within the parent
   void createSubfolder() {
-    if (validateName(_controller.text)) {
+    setState(() {
+      _invalidName = !validateName(_controller.text);
+    });
+    if (!_invalidName) {
       widget.subfolderCreate(_controller.text);
       Navigator.pop(context);
     } else {
@@ -89,6 +94,16 @@ class AddSubDirectoryState extends State<AddSubDirectory> {
           padding: const EdgeInsets.only(left: 30, right: 30, top: 20, bottom: 30),
           child: Column(
             children: [
+              if (_invalidName) ...[
+                const Text(
+                  "Please enter a valid folder name",
+                  softWrap: true,
+                  style: TextStyle(
+                    color: Colors.red
+                  ),
+                ),
+                const SizedBox(height: 15,)
+              ],
               TextField(
                 controller: _controller,
                 decoration: const InputDecoration(

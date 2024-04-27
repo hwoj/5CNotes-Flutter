@@ -33,6 +33,8 @@ class AddDirectoryState extends State<AddDirectory> {
 
   TextEditingController _controller = TextEditingController();
 
+  bool _invalidName = false;
+
   @override
   void initState() {
     super.initState();
@@ -73,7 +75,10 @@ class AddDirectoryState extends State<AddDirectory> {
   ///
   /// validates the new name and then sends it to parent widget using provided function
   void createFolder() {
-    if (validateName(_controller.text)) {
+    setState(() {
+      _invalidName = !validateName(_controller.text);
+    });
+    if (!_invalidName) {
       widget.createDirectory(_controller.text);
       Navigator.pop(context);
     } else {
@@ -89,7 +94,17 @@ class AddDirectoryState extends State<AddDirectory> {
         Padding(
           padding: const EdgeInsets.only(left: 30, right: 30, top: 20, bottom: 30),
           child: Column(
-            children: [
+            children:  <Widget>[
+              if (_invalidName) ...[
+                const Text(
+                  "Please enter a valid folder name",
+                  softWrap: true,
+                  style: TextStyle(
+                    color: Colors.red
+                  ),
+                ),
+                const SizedBox(height: 15,)
+              ],
               TextField(
                 controller: _controller,
                 decoration: const InputDecoration(

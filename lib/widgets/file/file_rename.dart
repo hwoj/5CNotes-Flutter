@@ -33,6 +33,8 @@ class FileRenameState extends State<FileRename> {
 
   TextEditingController _renameController = TextEditingController();
 
+  bool _invalidName = false;
+
   @override
   void initState() {
     super.initState();
@@ -63,7 +65,10 @@ class FileRenameState extends State<FileRename> {
   ///
   /// It will change the name of the file after validating it with [validateName]
   void saveName(String newName) {
-    if (validateName(newName)) {
+    setState(() {
+      _invalidName = !validateName(newName);
+    });
+    if (!_invalidName) {
       widget.renameFunc(newName);
       Navigator.pop(context);
     } else {
@@ -97,10 +102,20 @@ class FileRenameState extends State<FileRename> {
           padding: const EdgeInsets.only(left: 30, right: 30, top: 20, bottom: 30),
           child: Column(
             children: <Widget>[
+              if (_invalidName) ...[
+                const Text(
+                  "Please enter a valid file name. Must include no spaces",
+                  softWrap: true,
+                  style: TextStyle(
+                    color: Colors.red
+                  ),
+                ),
+                const SizedBox(height: 15,)
+              ],
               TextField(
                 controller: _renameController,
                 decoration: InputDecoration(
-                  labelText: "Folder Name:",
+                  labelText: "File Name:",
                   border: const OutlineInputBorder(),
                   hintText: widget.file.name
                 ),

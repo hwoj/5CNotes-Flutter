@@ -34,6 +34,8 @@ class DirectoryRenameState extends State<DirectoryRename> {
   /// The Controller that controls the textfield
   TextEditingController _renameController = TextEditingController();
 
+  bool _invalidName = false;
+
   @override
   void initState() {
     super.initState();
@@ -70,7 +72,10 @@ class DirectoryRenameState extends State<DirectoryRename> {
   /// [newName] is the name being passed in
   void saveName(String newName) {
     // call validateName on the newName parameter
-    if (validateName(newName)) {
+    setState(() {
+      _invalidName = !validateName(newName);
+    });
+    if (!_invalidName) {
       widget.onRename(newName);
       Navigator.pop(context);
     } else {
@@ -104,6 +109,16 @@ class DirectoryRenameState extends State<DirectoryRename> {
           padding: const EdgeInsets.only(left: 30, right: 30, top: 20, bottom: 30),
           child: Column(
             children: <Widget>[
+              if (_invalidName) ...[
+                const Text(
+                  "Please enter a valid folder name",
+                  softWrap: true,
+                  style: TextStyle(
+                    color: Colors.red
+                  ),
+                ),
+                const SizedBox(height: 15,)
+              ],
               TextField(
                 controller: _renameController,
                 decoration: InputDecoration(
