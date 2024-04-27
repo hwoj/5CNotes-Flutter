@@ -72,7 +72,7 @@ class OpenDocumentState extends State<OpenDocument> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
-        OpenFileRow(),
+        OpenFileRow(file: _file),
         QuillToolbar.simple(
           configurations: QuillSimpleToolbarConfigurations(
             controller: _controller
