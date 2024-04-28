@@ -46,9 +46,10 @@ class OpenFileRowState extends State<OpenFileRow> {
       children: [
         Text(
           widget.file.name,
-          style: const TextStyle(
+          style: TextStyle(
             fontWeight: FontWeight.w500,
-            fontSize: 20
+            fontSize: 20,
+            color: Theme.of(context).appColors.textDefault
           ),
         ),
         const SizedBox(width: 15,),

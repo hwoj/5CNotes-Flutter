@@ -2,7 +2,6 @@ import 'package:fivec_notes/main.dart';
 import 'package:fivec_notes/screens/home_screen.dart';
 import 'package:fivec_notes/screens/signup_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 /// The [LoginScreen] widget is a [StatefulWidget] that is responsible for the application login processes
 /// 

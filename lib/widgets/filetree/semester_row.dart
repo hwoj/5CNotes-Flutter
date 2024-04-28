@@ -67,7 +67,7 @@ class SemesterRowState extends State<SemesterRow> {
         Material(
           color: Theme.of(context).appColors.backgroundRow,
           child: InkWell(
-            hoverColor: Theme.of(context).appColors.backgroundDarkerComponent,
+            hoverColor: Theme.of(context).appColors.backgroundRowHover,
             
             onTap: () {
               setState(() {
@@ -81,10 +81,16 @@ class SemesterRowState extends State<SemesterRow> {
                 
                 children: [
                   
-                  Text(widget.semester.name),
+                  Text(
+                    widget.semester.name,
+                    style: TextStyle(
+                      color: Theme.of(context).appColors.textDefault
+                    ),
+                  ),
                   const Spacer(),
                   Icon(
-                    isExpanded ? Icons.expand_less : Icons.expand_more
+                    isExpanded ? Icons.expand_less : Icons.expand_more,
+                    color: Theme.of(context).appColors.textDefault
                   ),
                 ],
               ),

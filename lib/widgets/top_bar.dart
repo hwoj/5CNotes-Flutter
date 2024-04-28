@@ -49,21 +49,21 @@ class _TopBarState extends State<TopBar> {
           child: Text(
             "5CNotes",
             style: TextStyle(
-              color: Theme.of(context).appColors.backgroundRow,
+              color: Theme.of(context).appColors.appBarText,
               fontWeight: FontWeight.w700,
               fontSize: 20
             )
           ),
         ),
         shadowColor: const Color(0x33222222),
-        iconTheme: IconThemeData(color: Theme.of(context).appColors.backgroundRow),
+        iconTheme: IconThemeData(color: Theme.of(context).appColors.appBarText),
         actions: <Widget>[
           const MenuDropdown(),
         ],
         flexibleSpace: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
-              colors: [Theme.of(context).appColors.backgroundDefault, const Color(0xFF9E9DFD)], 
+              colors: [Theme.of(context).appColors.appBarStart, Theme.of(context).appColors.appBarEnd], 
               begin: Alignment.centerLeft,
               end: Alignment.centerRight,
             ), 

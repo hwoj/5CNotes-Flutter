@@ -1,8 +1,7 @@
 import 'package:fivec_notes/main.dart';
-import 'package:fivec_notes/screens/email_verification_screen.dart';
+
 import 'package:fivec_notes/screens/login_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:fivec_notes/screens/home_screen.dart';
 
 /// The [ChangePassword] is a [StatefulWidget] that will handle all UI elements and interactions for signing up a [User]
 /// 

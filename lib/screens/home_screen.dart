@@ -1,3 +1,4 @@
+import 'package:fivec_notes/main.dart';
 import 'package:fivec_notes/models/file.dart';
 import 'package:fivec_notes/widgets/filetree/file_tree.dart';
 import 'package:fivec_notes/widgets/open_document.dart';
@@ -25,6 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).appColors.backgroundRow,
       appBar: TopBar(),
       body: Row(
         crossAxisAlignment: CrossAxisAlignment.start,

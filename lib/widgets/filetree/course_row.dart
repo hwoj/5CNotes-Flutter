@@ -126,7 +126,7 @@ class CourseRowState extends State<CourseRow> {
                 isHovered = hovered;
               });
             },
-            hoverColor: Theme.of(context).appColors.backgroundDarkerComponent,
+            hoverColor: Theme.of(context).appColors.backgroundRowHover,
             child: Padding(
               padding: isHovered ? const EdgeInsets.only(left: 20, top: 3, bottom: 3, right: 10) : const EdgeInsets.only(left: 20, top: 5, bottom: 5, right: 10),
               child: Row(
@@ -176,7 +176,8 @@ class CourseRowState extends State<CourseRow> {
                   ],
                     
                   Icon(
-                    isExpanded ? Icons.expand_less : Icons.expand_more
+                    isExpanded ? Icons.expand_less : Icons.expand_more,
+                    color: Theme.of(context).appColors.textDefault
                   ),
                 ],
               ),

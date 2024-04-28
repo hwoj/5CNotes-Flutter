@@ -104,7 +104,7 @@ class FileRowState extends State<FileRow> {
                 isHovered = hovered;
               });
             },
-            hoverColor: Theme.of(context).appColors.backgroundDarkerComponent,
+            hoverColor: Theme.of(context).appColors.backgroundRowHover,
             child: Padding(
               padding: isHovered ? const EdgeInsets.only(left: 30, top: 3 , bottom: 3, right: 10) : const EdgeInsets.only(left: 30, bottom: 5, top: 5, right: 10),
               child: Row(

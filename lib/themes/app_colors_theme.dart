@@ -22,9 +22,22 @@ class AppColorsTheme extends ThemeExtension<AppColorsTheme> {
   ///
   static const _darkerOffWhite = Color(0xFFE5E6EA);
 
+  ///
   static const _evenDarkerOffWhite = Color(0xFFD2D1D7);
 
+  ///
+  static const _offBlack = Color(0xFF222326); 
 
+  static const _lighterOffBlack = Color(0xFF434449);
+
+  ///
+  static const _darkBlue = Color(0xFF081E58);
+
+  static const _lightText = Color(0xFFFBFAFC);
+
+  static const _lightBlue = Color(0xFF9E9DFD);
+
+  static const _darkestBlue = Color(0xFF030F26);
 
   /***** actual color variables used throughout the app *****/
 
@@ -38,7 +51,7 @@ class AppColorsTheme extends ThemeExtension<AppColorsTheme> {
   final Color backgroundRow;
 
   ///
-  final Color backgroundDarkerComponent;
+  final Color backgroundRowHover;
 
   /// default application text color
   final Color textDefault;
@@ -49,6 +62,15 @@ class AppColorsTheme extends ThemeExtension<AppColorsTheme> {
   /// Container background color
   final Color containerColor;
 
+  ///
+  final Color appBarText;
+
+  ///
+  final Color appBarStart;
+  
+  ///
+  final Color appBarEnd;
+
   /// Internal constructor used in factories
   ///
   /// This is a private constructor only available to be called by the light theme and dart theme constructors
@@ -56,10 +78,13 @@ class AppColorsTheme extends ThemeExtension<AppColorsTheme> {
     required this.backgroundDefault,
     required this.backgroundInput,
     required this.backgroundRow,
-    required this.backgroundDarkerComponent,
+    required this.backgroundRowHover,
     required this.textDefault,
     required this.textHover,
-    required this.containerColor
+    required this.containerColor,
+    required this.appBarText,
+    required this.appBarStart,
+    required this.appBarEnd
   });
 
   /// Lightmode factory
@@ -70,10 +95,13 @@ class AppColorsTheme extends ThemeExtension<AppColorsTheme> {
       backgroundDefault: _blue,
       backgroundInput: _blue,
       backgroundRow: _offwhite,
-      backgroundDarkerComponent: _darkerOffWhite,
-      textDefault: _darktext,
+      backgroundRowHover: _darkerOffWhite,
+      textDefault: _lighterText,
       textHover: _lighterText,
-      containerColor: _evenDarkerOffWhite
+      containerColor: _evenDarkerOffWhite,
+      appBarText: _lighterText,
+      appBarStart: _blue,
+      appBarEnd: _lightBlue
     );
   }
 
@@ -84,11 +112,14 @@ class AppColorsTheme extends ThemeExtension<AppColorsTheme> {
     return const AppColorsTheme._internal(
       backgroundDefault: _blue,
       backgroundInput: _blue,
-      backgroundRow: _blue,
-      backgroundDarkerComponent: _blue,
-      textDefault: _blue,
-      textHover: _lighterText,
-      containerColor: _evenDarkerOffWhite
+      backgroundRow: _offBlack,
+      backgroundRowHover: _lighterOffBlack,
+      textDefault: _lightText,
+      textHover: _lightText,
+      containerColor: _evenDarkerOffWhite,
+      appBarText: _lightText,
+      appBarStart: _darkBlue,
+      appBarEnd: _darkBlue
     );
   }
 
