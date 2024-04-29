@@ -28,16 +28,19 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       backgroundColor: Theme.of(context).appColors.backgroundRow,
       appBar: TopBar(),
-      body: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          FileTree(docKey: openDocumentKey),
-          const SizedBox(width: 16,),
-          Expanded(
-            child: OpenDocument(key: openDocumentKey, file: File(uuid: "123", name: "bob", author: "bob", createdAt: DateTime(2024), lastEdited: DateTime(2024), course: "somecourse")),
-          )
-          
-        ]
+      body: Padding(
+        padding: const EdgeInsets.only(top: 8.0),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            FileTree(docKey: openDocumentKey),
+            const SizedBox(width: 16,),
+            Expanded(
+              child: OpenDocument(key: openDocumentKey, file: File(uuid: "123", name: "bob", author: "bob", createdAt: DateTime(2024), lastEdited: DateTime(2024), course: "somecourse")),
+            )
+            
+          ]
+        ),
       ),
     );
   }

@@ -99,7 +99,7 @@ class AppColorsTheme extends ThemeExtension<AppColorsTheme> {
       textDefault: _lighterText,
       textHover: _lighterText,
       containerColor: _evenDarkerOffWhite,
-      appBarText: _lighterText,
+      appBarText: _lightText,
       appBarStart: _blue,
       appBarEnd: _lightBlue
     );
