@@ -90,7 +90,13 @@ class CreateFileState extends State<CreateFile> {
   @override
   Widget build(BuildContext context) {
     return SimpleDialog(
-      title: const Text("Create new file"),
+      backgroundColor: Theme.of(context).appColors.backgroundRow,
+      title: Text(
+        "Create new file",
+        style: TextStyle(
+          color: Theme.of(context).appColors.textDefault
+        ),
+      ),
       children: [
         Padding(
           padding: const EdgeInsets.only(left: 30, top: 20, bottom: 30, right: 30),
@@ -105,7 +111,11 @@ class CreateFileState extends State<CreateFile> {
                   ),
                 ),
                 const SizedBox(height: 15,)
-               ] ,TextField(
+               ],
+              TextField(
+                style: TextStyle(
+                  color: Theme.of(context).appColors.textDefault
+                ),
                 controller: _controller,
                 decoration: const InputDecoration(
                   labelText: "File Name:",
@@ -125,18 +135,23 @@ class CreateFileState extends State<CreateFile> {
                 children: <Widget>[
                   Positioned.fill(
                     child: Container(
-                      color: Theme.of(context).appColors.backgroundDefault,
+                      color: Theme.of(context).appColors.primaryButton,
                     )
                   ),
                   TextButton(
                     style: TextButton.styleFrom(
-                      foregroundColor: Theme.of(context).appColors.backgroundRow,
+                      foregroundColor: Theme.of(context).appColors.primaryButton,
                       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10)
                     ),
                     onPressed: () {
                       createFile();
                     }, 
-                    child: const Text("Create File"),
+                    child: Text(
+                      "Create File",
+                      style: TextStyle(
+                        color: Theme.of(context).appColors.primaryButtonText
+                      ),
+                    ),
                   )
                 ],
               ),
