@@ -125,14 +125,6 @@ class OpenDocumentState extends State<OpenDocument> {
                         )
                       ),
                     ),
-                    QuillToolbarFontFamilyButton(
-                      controller: _controller,
-                      options: QuillToolbarFontFamilyButtonOptions(
-                        style: TextStyle(
-                          color: Theme.of(context).appColors.textDefault
-                        )
-                      ),
-                    ),
                     QuillToolbarFontSizeButton(
                       controller: _controller,
                       options: QuillToolbarFontSizeButtonOptions(
@@ -377,7 +369,7 @@ class OpenDocumentState extends State<OpenDocument> {
                     ),
                     QuillToolbarToggleStyleButton(
                       controller: _controller,
-                      attribute: Attribute.inlineCode,
+                      attribute: Attribute.codeBlock,
                       options: QuillToolbarToggleStyleButtonOptions(
                         iconTheme: QuillIconTheme(
                           iconButtonSelectedData: IconButtonData(
@@ -447,6 +439,40 @@ class OpenDocumentState extends State<OpenDocument> {
                         )
                       ),
                     ),
+                    QuillToolbarLinkStyleButton(
+                      controller: _controller,
+                      options: QuillToolbarLinkStyleButtonOptions(
+                        iconTheme: QuillIconTheme(
+                          iconButtonSelectedData: IconButtonData(
+                            style: IconButton.styleFrom(
+                              foregroundColor: Theme.of(context).appColors.textDefault
+                            )
+                          ),
+                          iconButtonUnselectedData: IconButtonData(
+                            style: IconButton.styleFrom(
+                              foregroundColor: Theme.of(context).appColors.textDefault
+                            )
+                          )
+                        )
+                      ),
+                    ),
+                    QuillToolbarSearchButton(
+                      controller: _controller,
+                      options: QuillToolbarSearchButtonOptions(
+                        iconTheme: QuillIconTheme(
+                          iconButtonSelectedData: IconButtonData(
+                            style: IconButton.styleFrom(
+                              foregroundColor: Theme.of(context).appColors.textDefault
+                            )
+                          ),
+                          iconButtonUnselectedData: IconButtonData(
+                            style: IconButton.styleFrom(
+                              foregroundColor: Theme.of(context).appColors.textDefault
+                            )
+                          )
+                        )
+                      ),
+                    )
                   ]
                 ),
               ),
