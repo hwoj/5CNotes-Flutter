@@ -35,6 +35,7 @@ class OpenDocumentState extends State<OpenDocument> {
   
 
   QuillController _controller = QuillController.basic();
+  
 
   /// Updates the document that is open in the editor
   ///
@@ -60,6 +61,7 @@ class OpenDocumentState extends State<OpenDocument> {
   void initState() {
     super.initState();
     _file = widget.file;
+    _controller.formatSelection(ColorAttribute('#${Theme.of(context).appColors.defaultDocumentText}'));
 
   }
 
@@ -176,6 +178,78 @@ class OpenDocumentState extends State<OpenDocument> {
                   ),
                   controller: _controller,
                   attribute: Attribute.underline,
+                ),
+                QuillToolbarToggleStyleButton(
+                  controller: _controller, 
+                  attribute: Attribute.strikeThrough,
+                  options: QuillToolbarToggleStyleButtonOptions(
+                    iconTheme: QuillIconTheme(
+                      iconButtonSelectedData: IconButtonData(
+                        style: IconButton.styleFrom(
+                          foregroundColor: Theme.of(context).appColors.textDefault
+                        )
+                      ),
+                      iconButtonUnselectedData: IconButtonData(
+                        style: IconButton.styleFrom(
+                          foregroundColor: Theme.of(context).appColors.textDefault
+                        )
+                      )
+                    )
+                  ),
+                ),
+                QuillToolbarToggleStyleButton(
+                  controller: _controller, 
+                  attribute: Attribute.inlineCode,
+                  options: QuillToolbarToggleStyleButtonOptions(
+                    iconTheme: QuillIconTheme(
+                      iconButtonSelectedData: IconButtonData(
+                        style: IconButton.styleFrom(
+                          foregroundColor: Theme.of(context).appColors.textDefault
+                        )
+                      ),
+                      iconButtonUnselectedData: IconButtonData(
+                        style: IconButton.styleFrom(
+                          foregroundColor: Theme.of(context).appColors.textDefault
+                        )
+                      )
+                    )
+                  ),
+                ),
+                QuillToolbarToggleStyleButton(
+                  controller: _controller, 
+                  attribute: Attribute.superscript,
+                  options: QuillToolbarToggleStyleButtonOptions(
+                    iconTheme: QuillIconTheme(
+                      iconButtonSelectedData: IconButtonData(
+                        style: IconButton.styleFrom(
+                          foregroundColor: Theme.of(context).appColors.textDefault
+                        )
+                      ),
+                      iconButtonUnselectedData: IconButtonData(
+                        style: IconButton.styleFrom(
+                          foregroundColor: Theme.of(context).appColors.textDefault
+                        )
+                      )
+                    )
+                  ),
+                ),
+                QuillToolbarToggleStyleButton(
+                  controller: _controller, 
+                  attribute: Attribute.subscript,
+                  options: QuillToolbarToggleStyleButtonOptions(
+                    iconTheme: QuillIconTheme(
+                      iconButtonSelectedData: IconButtonData(
+                        style: IconButton.styleFrom(
+                          foregroundColor: Theme.of(context).appColors.textDefault
+                        )
+                      ),
+                      iconButtonUnselectedData: IconButtonData(
+                        style: IconButton.styleFrom(
+                          foregroundColor: Theme.of(context).appColors.textDefault
+                        )
+                      )
+                    )
+                  ),
                 ),
                 QuillToolbarClearFormatButton(
                   controller: _controller,
@@ -370,7 +444,7 @@ class OpenDocumentState extends State<OpenDocument> {
             child: QuillEditor.basic(
               configurations: QuillEditorConfigurations(
                 controller: _controller,
-                placeholder: "Start typing..."
+                placeholder: "Start typing...",
               )
             ),
           ),

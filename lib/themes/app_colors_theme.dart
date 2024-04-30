@@ -89,6 +89,9 @@ class AppColorsTheme extends ThemeExtension<AppColorsTheme> {
   ///
   final Color warningButton;
 
+  ///
+  final Color defaultDocumentText;
+
   /// Internal constructor used in factories
   ///
   /// This is a private constructor only available to be called by the light theme and dart theme constructors
@@ -106,7 +109,8 @@ class AppColorsTheme extends ThemeExtension<AppColorsTheme> {
     required this.editorColor,
     required this.primaryButton,
     required this.primaryButtonText,
-    required this.warningButton
+    required this.warningButton,
+    required this.defaultDocumentText
   });
 
   /// Lightmode factory
@@ -127,7 +131,8 @@ class AppColorsTheme extends ThemeExtension<AppColorsTheme> {
       editorColor: Colors.white,
       primaryButton: _blue,
       primaryButtonText: _lightText,
-      warningButton: Colors.red
+      warningButton: Colors.red,
+      defaultDocumentText: Colors.white
     );
   }
 
@@ -149,7 +154,8 @@ class AppColorsTheme extends ThemeExtension<AppColorsTheme> {
       editorColor: _darkestGrey,
       primaryButton: _lightBlue,
       primaryButtonText: _darkText,
-      warningButton: _lightRed
+      warningButton: _lightRed,
+      defaultDocumentText: Colors.white
     );
   }
 
