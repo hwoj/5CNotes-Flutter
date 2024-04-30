@@ -29,7 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: Theme.of(context).appColors.backgroundRow,
       appBar: TopBar(),
       body: Padding(
-        padding: const EdgeInsets.only(top: 8.0),
+        padding: const EdgeInsets.only(top: 10.0),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

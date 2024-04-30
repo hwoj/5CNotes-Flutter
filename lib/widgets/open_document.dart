@@ -1,3 +1,4 @@
+import 'package:fivec_notes/main.dart';
 import 'package:fivec_notes/models/file.dart';
 import 'package:fivec_notes/widgets/open_file_row.dart';
 import 'package:flutter/material.dart';
@@ -87,11 +88,11 @@ class OpenDocumentState extends State<OpenDocument> {
         Expanded(
           child: Container(
             padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 12),
-            color: Colors.white,
+            color: Theme.of(context).appColors.editorColor,
             child: QuillEditor.basic(
               configurations: QuillEditorConfigurations(
                 controller: _controller,
-                placeholder: "hello world"
+                placeholder: "Start typing..."
               )
             ),
           ),

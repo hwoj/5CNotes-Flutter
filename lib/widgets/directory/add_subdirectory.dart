@@ -88,7 +88,13 @@ class AddSubDirectoryState extends State<AddSubDirectory> {
   @override
   Widget build(BuildContext context) {
     return SimpleDialog(
-      title: Text("Create subfolder for ${widget.parent.name}"),
+      backgroundColor: Theme.of(context).appColors.backgroundRow,
+      title: Text(
+        "Create subfolder for ${widget.parent.name}",
+        style: TextStyle(
+          color: Theme.of(context).appColors.textDefault
+        ),
+      ),
       children: <Widget>[
         Padding(
           padding: const EdgeInsets.only(left: 30, right: 30, top: 20, bottom: 30),
@@ -106,6 +112,9 @@ class AddSubDirectoryState extends State<AddSubDirectory> {
               ],
               TextField(
                 controller: _controller,
+                style: TextStyle(
+                  color: Theme.of(context).appColors.textDefault
+                ),
                 decoration: const InputDecoration(
                   labelText: "Subfolder Name:",
                   border: OutlineInputBorder()
@@ -124,18 +133,23 @@ class AddSubDirectoryState extends State<AddSubDirectory> {
                 children: <Widget>[
                   Positioned.fill(
                     child: Container(
-                      color: Theme.of(context).appColors.backgroundDefault,
+                      color: Theme.of(context).appColors.primaryButton,
                     )
                   ),
                   TextButton(
                     style: TextButton.styleFrom(
-                      foregroundColor: Theme.of(context).appColors.backgroundRow,
+                      foregroundColor: Theme.of(context).appColors.primaryButton,
                       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10)
                     ),
                     onPressed: () {
                       createSubfolder();
                     }, 
-                    child: const Text("Create Folder"),
+                    child: Text(
+                      "Create Folder",
+                      style: TextStyle(
+                        color: Theme.of(context).appColors.primaryButtonText
+                      ),
+                    ),
                     
                   ),
                 ],
