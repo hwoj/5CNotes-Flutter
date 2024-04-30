@@ -50,7 +50,12 @@ class FileDeleteState extends State<FileDelete> {
   @override
   Widget build(BuildContext context) {
     return SimpleDialog (
-      title: Text("Delete ${widget.file.name}"),
+      title: Text(
+        "Delete ${widget.file.name}",
+        style: TextStyle(
+          color: Theme.of(context).appColors.textDefault
+        ),
+      ),
       backgroundColor: Theme.of(context).appColors.backgroundRow,
       children: [
          Padding(
@@ -61,7 +66,12 @@ class FileDeleteState extends State<FileDelete> {
               minHeight: 100,
               maxWidth: 700
             ),
-            child: Text("Are you sure you want to delete \"${widget.file.name}\"? Deleting this file will permanently destroy its contents"),
+            child: Text(
+              "Are you sure you want to delete \"${widget.file.name}\"? Deleting this file will permanently destroy its contents",
+              style: TextStyle(
+                color: Theme.of(context).appColors.textDefault
+              ),
+            ),
           )
         ),
         
@@ -75,7 +85,7 @@ class FileDeleteState extends State<FileDelete> {
                 children: <Widget>[
                   Positioned.fill(
                     child: Container(
-                      color: const Color(0xFFFF0000),
+                      color: Theme.of(context).appColors.warningButton,
                     )
                   ),
                   TextButton(

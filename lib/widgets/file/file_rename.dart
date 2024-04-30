@@ -93,7 +93,12 @@ class FileRenameState extends State<FileRename> {
     // will contain a dialog with a text input area and 2 buttons
     // 1 button for closing the widget, another for submitting the rename
     return SimpleDialog(
-      title: Text("Rename ${widget.file.name}"),
+      title: Text(
+        "Rename ${widget.file.name}",
+        style: TextStyle(
+          color: Theme.of(context).appColors.textDefault
+        ),
+      ),
       
       backgroundColor: Theme.of(context).appColors.backgroundRow,
       children: <Widget>[
@@ -114,6 +119,9 @@ class FileRenameState extends State<FileRename> {
               ],
               TextField(
                 controller: _renameController,
+                style: TextStyle(
+                  color: Theme.of(context).appColors.textDefault
+                ),
                 decoration: InputDecoration(
                   labelText: "File Name:",
                   border: const OutlineInputBorder(),

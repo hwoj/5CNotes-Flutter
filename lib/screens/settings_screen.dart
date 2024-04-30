@@ -24,55 +24,71 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       appBar: TopBar(),
-     body: Padding(
-       padding: const EdgeInsets.all(16.0),
-       child: ListView(
-         children: <Widget>[
-          Consumer(
-            builder: (BuildContext context, ThemeNotifier themeNotifier, _) {
-              return ListTile(
-                title: const Text("Switch to Dark Mode"),
-                trailing: Switch(
-                  value: themeNotifier.themeMode == ThemeMode.dark,
-                  onChanged: (isOn) {
-                    themeNotifier.toggleTheme();
-                  }
-                  )
-              );
-            }
-          ),
-           
-           ListTile(
-            title: const Text("Change Password"),
-            trailing: TextButton(
-              style: TextButton.styleFrom(
-                textStyle: const TextStyle(fontSize: 10),
-              ),
-              onPressed: () {
-                Navigator.push(
-                  context, 
-                  MaterialPageRoute(builder: (context) => ChangePasswordScreen()),
+      backgroundColor: Theme.of(context).appColors.backgroundRow,
+      appBar: TopBar(),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: ListView(
+          children: <Widget>[
+            Consumer(
+              builder: (BuildContext context, ThemeNotifier themeNotifier, _) {
+                return ListTile(
+                  title: Text(
+                    "Switch to Dark Mode",
+                    style: TextStyle(
+                      color: Theme.of(context).appColors.textDefault
+                    ),
+                  ),
+                  trailing: Switch(
+                    value: themeNotifier.themeMode == ThemeMode.dark,
+                    onChanged: (isOn) {
+                      themeNotifier.toggleTheme();
+                    }
+                    )
                 );
-              },
-              child: const Text('Change'),
+              }
             ),
-           ),
-          ListTile(
-            title: const Text("Save files to device"),
-            trailing: TextButton(
-              style: TextButton.styleFrom(
-                textStyle: const TextStyle(fontSize: 10),
+            
+            ListTile(
+              title: Text(
+                "Change Password",
+                style: TextStyle(
+                  color: Theme.of(context).appColors.textDefault
+                ),
               ),
-              onPressed: () {
-                // TODO: save files to local device
-              },
-              child: const Text("Save"),
-            )
-          ),
-        ],
-       )
-       )
+              trailing: TextButton(
+                style: TextButton.styleFrom(
+                  textStyle: const TextStyle(fontSize: 10),
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context, 
+                    MaterialPageRoute(builder: (context) => ChangePasswordScreen()),
+                  );
+                },
+                child: const Text('Change'),
+              ),
+            ),
+            ListTile(
+              title: Text(
+                "Save files to device",
+                style: TextStyle(
+                  color: Theme.of(context).appColors.textDefault
+                ),
+              ),
+              trailing: TextButton(
+                style: TextButton.styleFrom(
+                  textStyle: const TextStyle(fontSize: 10),
+                ),
+                onPressed: () {
+                  // TODO: save files to local device
+                },
+                child: const Text("Save"),
+              )
+            ),
+          ],
+        )
+        )
     );
   }
 }

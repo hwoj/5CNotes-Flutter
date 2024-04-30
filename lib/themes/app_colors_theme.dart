@@ -14,7 +14,7 @@ class AppColorsTheme extends ThemeExtension<AppColorsTheme> {
   static const _offwhite = Color(0xFFFBFAFC);
 
   /// regular text color for widgets
-  static const _darktext = Color(0xFF222326);
+  static const _darkText = Color(0xFF222326);
 
   ///
   static const _lighterText = Color(0xFF64656c);
@@ -37,7 +37,13 @@ class AppColorsTheme extends ThemeExtension<AppColorsTheme> {
 
   static const _lightBlue = Color(0xFF9E9DFD);
 
-  static const _darkestBlue = Color(0xFF030F26);
+  // static const _darkestBlue = Color(0xFF030F26);
+
+  static const _darkestGrey = Color(0xFF1A1B1D);
+
+  static const _lightestBlue = Color(0xFFCCC8FF);
+
+  static const _lightRed = Color(0xFFff7777);
 
   /***** actual color variables used throughout the app *****/
 
@@ -71,6 +77,21 @@ class AppColorsTheme extends ThemeExtension<AppColorsTheme> {
   ///
   final Color appBarEnd;
 
+  ///
+  final Color editorColor;
+
+  ///
+  final Color primaryButton;
+
+  ///
+  final Color primaryButtonText;
+
+  ///
+  final Color warningButton;
+
+  ///
+  final Color defaultDocumentText;
+
   /// Internal constructor used in factories
   ///
   /// This is a private constructor only available to be called by the light theme and dart theme constructors
@@ -84,7 +105,12 @@ class AppColorsTheme extends ThemeExtension<AppColorsTheme> {
     required this.containerColor,
     required this.appBarText,
     required this.appBarStart,
-    required this.appBarEnd
+    required this.appBarEnd,
+    required this.editorColor,
+    required this.primaryButton,
+    required this.primaryButtonText,
+    required this.warningButton,
+    required this.defaultDocumentText
   });
 
   /// Lightmode factory
@@ -96,12 +122,17 @@ class AppColorsTheme extends ThemeExtension<AppColorsTheme> {
       backgroundInput: _blue,
       backgroundRow: _offwhite,
       backgroundRowHover: _darkerOffWhite,
-      textDefault: _lighterText,
+      textDefault: _darkText,
       textHover: _lighterText,
       containerColor: _evenDarkerOffWhite,
       appBarText: _lightText,
       appBarStart: _blue,
-      appBarEnd: _lightBlue
+      appBarEnd: _lightBlue,
+      editorColor: Colors.white,
+      primaryButton: _blue,
+      primaryButtonText: _lightText,
+      warningButton: Colors.red,
+      defaultDocumentText: Colors.white
     );
   }
 
@@ -119,7 +150,12 @@ class AppColorsTheme extends ThemeExtension<AppColorsTheme> {
       containerColor: _evenDarkerOffWhite,
       appBarText: _lightText,
       appBarStart: _darkBlue,
-      appBarEnd: _darkBlue
+      appBarEnd: _darkBlue,
+      editorColor: _darkestGrey,
+      primaryButton: _lightBlue,
+      primaryButtonText: _darkText,
+      warningButton: _lightRed,
+      defaultDocumentText: Colors.white
     );
   }
 

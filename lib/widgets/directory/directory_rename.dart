@@ -101,7 +101,12 @@ class DirectoryRenameState extends State<DirectoryRename> {
   @override
   Widget build(BuildContext context) {
     return SimpleDialog(
-      title: Text("Rename \"${widget.directory.name}\"" ),
+      title: Text(
+        "Rename \"${widget.directory.name}\"",
+        style: TextStyle(
+          color: Theme.of(context).appColors.textDefault
+        ),  
+      ),
       backgroundColor: Theme.of(context).appColors.backgroundRow,
       children: <Widget>[
         
@@ -121,6 +126,9 @@ class DirectoryRenameState extends State<DirectoryRename> {
               ],
               TextField(
                 controller: _renameController,
+                style: TextStyle(
+                  color: Theme.of(context).appColors.textDefault
+                ),
                 decoration: InputDecoration(
                   labelText: "Folder Name:",
                   border: const OutlineInputBorder(),
@@ -141,18 +149,23 @@ class DirectoryRenameState extends State<DirectoryRename> {
                 children: <Widget>[
                   Positioned.fill(
                     child: Container(
-                      color: Theme.of(context).appColors.backgroundDefault,
+                      color: Theme.of(context).appColors.primaryButton,
                     )
                   ),
                   TextButton(
                     style: TextButton.styleFrom(
-                      foregroundColor: Theme.of(context).appColors.backgroundRow,
+                      foregroundColor: Theme.of(context).appColors.primaryButton,
                       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10)
                     ),
                     onPressed: () {
                      saveName(_renameController.text);
                     }, 
-                    child: const Text("Rename Folder"),
+                    child: Text(
+                      "Rename Folder",
+                      style: TextStyle(
+                        color: Theme.of(context).appColors.primaryButtonText
+                      ),
+                    ),
                     
                   ),
                 ],

@@ -89,7 +89,13 @@ class AddDirectoryState extends State<AddDirectory> {
   @override
   Widget build(BuildContext context) {
     return SimpleDialog(
-      title: Text("Create Folder for ${widget.parent.name}"),
+      backgroundColor: Theme.of(context).appColors.backgroundRow,
+      title: Text(
+        "Create Folder for ${widget.parent.name}",
+        style: TextStyle(
+          color: Theme.of(context).appColors.textDefault
+        ),
+      ),
       children: <Widget>[
         Padding(
           padding: const EdgeInsets.only(left: 30, right: 30, top: 20, bottom: 30),
@@ -107,6 +113,9 @@ class AddDirectoryState extends State<AddDirectory> {
               ],
               TextField(
                 controller: _controller,
+                style: TextStyle(
+                  color: Theme.of(context).appColors.textDefault
+                ),
                 decoration: const InputDecoration(
                   labelText: "Folder Name:",
                   border: OutlineInputBorder()
@@ -125,18 +134,23 @@ class AddDirectoryState extends State<AddDirectory> {
                 children: <Widget>[
                   Positioned.fill(
                     child: Container(
-                      color: Theme.of(context).appColors.backgroundDefault,
+                      color: Theme.of(context).appColors.primaryButton,
                     )
                   ),
                   TextButton(
                     style: TextButton.styleFrom(
-                      foregroundColor: Theme.of(context).appColors.backgroundRow,
+                      foregroundColor: Theme.of(context).appColors.primaryButton,
                       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10)
                     ),
                     onPressed: () {
                       createFolder();
                     }, 
-                    child: const Text("Create Folder"),
+                    child: Text(
+                      "Create Folder",
+                      style: TextStyle(
+                        color: Theme.of(context).appColors.primaryButtonText
+                      ),
+                    ),
                     
                   ),
                 ],
