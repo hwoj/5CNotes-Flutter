@@ -247,10 +247,10 @@ packages:
     dependency: "direct main"
     description:
       name: flutter_quill
-      sha256: "8950da24ad6622d48333997e7a454d5154842f909c962b1f1b87409b031ced06"
+      sha256: "51d5a9d2eef893875fa2dc29ea5be9ec07e03255fee9bacd5b4b329fa871d9a5"
       url: "https://pub.dev"
     source: hosted
-    version: "9.3.6"
+    version: "9.3.9"
   flutter_test:
     dependency: "direct dev"
     description: flutter

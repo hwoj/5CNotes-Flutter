@@ -221,7 +221,8 @@ class DirectoryRowState extends State<DirectoryRow> {
                   ],
                     
                   Icon(
-                    isExpanded ? Icons.expand_less : Icons.expand_more
+                    isExpanded ? Icons.expand_less : Icons.expand_more,
+                    color: Theme.of(context).appColors.textDefault,
                   ),
                 ],
               ),
