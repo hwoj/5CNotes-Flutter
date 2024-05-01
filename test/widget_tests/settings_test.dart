@@ -9,10 +9,9 @@ void main() {
   // test change password button
 
   // test saving files to local device 
-  
-  testWidgets("widget", (tester) async {
-    await tester.pumpWidget(SettingsScreen());
 
+  testWidgets("Settings Test", (tester) async {
+    await tester.pumpWidget(SettingsScreen());
   }
   );
   

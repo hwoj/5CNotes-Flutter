@@ -9,7 +9,7 @@ void main() {
 
   // test password and confirm password texts are the same
 
-  testWidgets("widget", (tester) async {
+  testWidgets("Sign in Test", (tester) async {
     await tester.pumpWidget(SignupScreen());
 
   }

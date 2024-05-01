@@ -13,9 +13,9 @@ void main() {
   // test initially empty controllers
 
   
-  testWidgets("widget", (tester) async {
+  testWidgets("Login Test", (tester) async {
     await tester.pumpWidget(LoginScreen());
-
+    
   }
   );
 

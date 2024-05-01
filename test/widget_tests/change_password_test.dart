@@ -14,7 +14,7 @@ void main() {
 
   // test new password and confirm password texts match 
 
-  testWidgets("widget", (tester) async {
+  testWidgets("Change Password Test", (tester) async {
     await tester.pumpWidget(ChangePasswordScreen());
 
   }
