@@ -14,7 +14,7 @@ void main() {
   
   testWidgets("Email Verification Test", (tester) async {
     await tester.pumpWidget(EmailVerificationScreen());
-
+    
   }
   );
   
