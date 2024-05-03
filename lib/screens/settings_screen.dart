@@ -59,7 +59,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             isOn ? themeNotifier.setTheme(ThemeMode.dark) : themeNotifier.setTheme(ThemeMode.light);
                             prefs.setBool("isDarkMode", isOn);
                           }
-                          )
+                        )
                       );
                     }
                   ),
@@ -84,22 +84,24 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       child: const Text('Change'),
                     ),
                   ),
-                  ListTile(
-                    title: Text(
-                      "Save files to device",
-                      style: TextStyle(
-                        color: Theme.of(context).appColors.textDefault
-                      ),
-                    ),
-                    trailing: TextButton(
-                      style: TextButton.styleFrom(
-                        textStyle: const TextStyle(fontSize: 10),
-                      ),
-                      onPressed: () {
-                        // TODO: save files to local device
-                      },
-                      child: const Text("Save"),
-                    )
+                  Consumer (
+                    builder: (BuildContext context, ThemeNotifier themeNotifier, _) {
+                      return ListTile(
+                        title: Text(
+                          "Save files to device",
+                          style: TextStyle(
+                            color: Theme.of(context).appColors.textDefault
+                          ),
+                        ),
+                        trailing: Switch(
+                          value: true ,
+                          onChanged: (shouldSave) {
+                            prefs.setBool("saveLocally", shouldSave);
+                          }
+                        )
+                      );
+                    }
+                     
                   ),
                 ],
               )
@@ -160,14 +162,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         color: Theme.of(context).appColors.textDefault
                       ),
                     ),
-                    trailing: TextButton(
-                      style: TextButton.styleFrom(
-                        textStyle: const TextStyle(fontSize: 10),
-                      ),
-                      onPressed: () {
-                        // TODO: save files to local device
+                    trailing: Switch(
+                      value: snapshot.connectionState == ConnectionState.done,
+                      onChanged: (isOn) {
+
                       },
-                      child: const Text("Save"),
+
                     )
                   ),
                 ],

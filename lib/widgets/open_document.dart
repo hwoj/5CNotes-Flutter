@@ -109,428 +109,447 @@ class OpenDocumentState extends State<OpenDocument> {
   /// The build method contains all of the child widgets that belong inside the [OpenDocument] widget
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: <Widget>[
-        Row(
-          children: [
-            const SizedBox(width: 15),
-            OpenFileRow(file: _file, saveFunc: saveFile),
-            const SizedBox(width: 20,)
-          ],
-        ),
-        QuillToolbar(
-          configurations: const QuillToolbarConfigurations(),
-          child: Row(
-            children: [
-              Expanded(
-                child: Wrap(
-                  children: <Widget>[
-                    QuillToolbarHistoryButton(
-                      isUndo: true,
-                      controller: _controller,
-                      options: QuillToolbarHistoryButtonOptions(
-                        iconTheme: QuillIconTheme(
-                          iconButtonSelectedData: IconButtonData(
-                            style: IconButton.styleFrom(
-                              foregroundColor: Theme.of(context).appColors.textDefault
-                            )
-                          ),
-                          iconButtonUnselectedData: IconButtonData(
-                            style: IconButton.styleFrom(
-                              foregroundColor: Theme.of(context).appColors.textDefault
-                            )
-                          )
-                        )
-                      ),
-                    ),
-                    QuillToolbarHistoryButton(
-                      isUndo: false,
-                      controller: _controller,
-                      options: QuillToolbarHistoryButtonOptions(
-                        iconTheme: QuillIconTheme(
-                          iconButtonSelectedData: IconButtonData(
-                            style: IconButton.styleFrom(
-                              foregroundColor: Theme.of(context).appColors.textDefault
-                            )
-                          ),
-                          iconButtonUnselectedData: IconButtonData(
-                            style: IconButton.styleFrom(
-                              foregroundColor: Theme.of(context).appColors.textDefault
-                            )
-                          )
-                        )
-                      ),
-                    ),
-                    QuillToolbarFontSizeButton(
-                      controller: _controller,
-                      options: QuillToolbarFontSizeButtonOptions(
-                        style: TextStyle(
-                          color: Theme.of(context).appColors.textDefault
-                        ),
-                      ),
-                    ),
-                    QuillToolbarToggleStyleButton(
-                      options: QuillToolbarToggleStyleButtonOptions(
-                        iconTheme: QuillIconTheme(
-                          iconButtonSelectedData: IconButtonData(
-                            style: IconButton.styleFrom(
-                              foregroundColor: Theme.of(context).appColors.textDefault
-                            )
-                          ),
-                          iconButtonUnselectedData: IconButtonData(
-                            style: IconButton.styleFrom(
-                              foregroundColor: Theme.of(context).appColors.textDefault
-                            )
-                          )
-                        )
-                      ),
-                      controller: _controller,
-                      attribute: Attribute.bold,
-                    ),
-                    QuillToolbarToggleStyleButton(
-                      options: QuillToolbarToggleStyleButtonOptions(
-                        iconTheme: QuillIconTheme(
-                          iconButtonSelectedData: IconButtonData(
-                            style: IconButton.styleFrom(
-                              foregroundColor: Theme.of(context).appColors.textDefault
-                            )
-                          ),
-                          iconButtonUnselectedData: IconButtonData(
-                            style: IconButton.styleFrom(
-                              foregroundColor: Theme.of(context).appColors.textDefault
-                            )
-                          )
-                        )
-                      ),
-                      controller: _controller,
-                      attribute: Attribute.italic,
-                    ),
-                    QuillToolbarToggleStyleButton(
-                      options: QuillToolbarToggleStyleButtonOptions(
-                        iconTheme: QuillIconTheme(
-                          iconButtonSelectedData: IconButtonData(
-                            style: IconButton.styleFrom(
-                              foregroundColor: Theme.of(context).appColors.textDefault
-                            )
-                          ),
-                          iconButtonUnselectedData: IconButtonData(
-                            style: IconButton.styleFrom(
-                              foregroundColor: Theme.of(context).appColors.textDefault
-                            )
-                          )
-                        )
-                      ),
-                      controller: _controller,
-                      attribute: Attribute.underline,
-                    ),
-                    QuillToolbarToggleStyleButton(
-                      controller: _controller, 
-                      attribute: Attribute.strikeThrough,
-                      options: QuillToolbarToggleStyleButtonOptions(
-                        iconTheme: QuillIconTheme(
-                          iconButtonSelectedData: IconButtonData(
-                            style: IconButton.styleFrom(
-                              foregroundColor: Theme.of(context).appColors.textDefault
-                            )
-                          ),
-                          iconButtonUnselectedData: IconButtonData(
-                            style: IconButton.styleFrom(
-                              foregroundColor: Theme.of(context).appColors.textDefault
-                            )
-                          )
-                        )
-                      ),
-                    ),
-                    QuillToolbarToggleStyleButton(
-                      controller: _controller, 
-                      attribute: Attribute.inlineCode,
-                      options: QuillToolbarToggleStyleButtonOptions(
-                        iconTheme: QuillIconTheme(
-                          iconButtonSelectedData: IconButtonData(
-                            style: IconButton.styleFrom(
-                              foregroundColor: Theme.of(context).appColors.textDefault
-                            )
-                          ),
-                          iconButtonUnselectedData: IconButtonData(
-                            style: IconButton.styleFrom(
-                              foregroundColor: Theme.of(context).appColors.textDefault
-                            )
-                          )
-                        )
-                      ),
-                    ),
-                    QuillToolbarToggleStyleButton(
-                      controller: _controller, 
-                      attribute: Attribute.superscript,
-                      options: QuillToolbarToggleStyleButtonOptions(
-                        iconTheme: QuillIconTheme(
-                          iconButtonSelectedData: IconButtonData(
-                            style: IconButton.styleFrom(
-                              foregroundColor: Theme.of(context).appColors.textDefault
-                            )
-                          ),
-                          iconButtonUnselectedData: IconButtonData(
-                            style: IconButton.styleFrom(
-                              foregroundColor: Theme.of(context).appColors.textDefault
-                            )
-                          )
-                        )
-                      ),
-                    ),
-                    QuillToolbarToggleStyleButton(
-                      controller: _controller, 
-                      attribute: Attribute.subscript,
-                      options: QuillToolbarToggleStyleButtonOptions(
-                        iconTheme: QuillIconTheme(
-                          iconButtonSelectedData: IconButtonData(
-                            style: IconButton.styleFrom(
-                              foregroundColor: Theme.of(context).appColors.textDefault
-                            )
-                          ),
-                          iconButtonUnselectedData: IconButtonData(
-                            style: IconButton.styleFrom(
-                              foregroundColor: Theme.of(context).appColors.textDefault
-                            )
-                          )
-                        )
-                      ),
-                    ),
-                    QuillToolbarClearFormatButton(
-                      controller: _controller,
-                      options: QuillToolbarBaseButtonOptions(
-                        iconTheme: QuillIconTheme(
-                          iconButtonSelectedData: IconButtonData(
-                            style: IconButton.styleFrom(
-                              foregroundColor: Theme.of(context).appColors.textDefault
-                            )
-                          ),
-                          iconButtonUnselectedData: IconButtonData(
-                            style: IconButton.styleFrom(
-                              foregroundColor: Theme.of(context).appColors.textDefault
-                            )
-                          )
-                        )
-                      ),
-                    ),
-                    const VerticalDivider(),
-                    QuillToolbarColorButton(
-                      controller: _controller,
-                      isBackground: false,
-                      options: QuillToolbarColorButtonOptions(
-                        iconTheme: QuillIconTheme(
-                          iconButtonSelectedData: IconButtonData(
-                            style: IconButton.styleFrom(
-                              foregroundColor: Theme.of(context).appColors.textDefault
-                            )
-                          ),
-                          iconButtonUnselectedData: IconButtonData(
-                            style: IconButton.styleFrom(
-                              foregroundColor: Theme.of(context).appColors.textDefault
-                            )
-                          )
-                        )
-                      ),
-                    ),
-                    QuillToolbarColorButton(
-                      controller: _controller,
-                      isBackground: true,
-                      options: QuillToolbarColorButtonOptions(
-                        iconTheme: QuillIconTheme(
-                          iconButtonSelectedData: IconButtonData(
-                            style: IconButton.styleFrom(
-                              foregroundColor: Theme.of(context).appColors.textDefault
-                            )
-                          ),
-                          iconButtonUnselectedData: IconButtonData(
-                            style: IconButton.styleFrom(
-                              foregroundColor: Theme.of(context).appColors.textDefault
-                            )
-                          )
-                        )
-                      ),
-                    ),
-                    const VerticalDivider(),
-                    QuillToolbarToggleCheckListButton(
-                      controller: _controller,
-                      options: QuillToolbarToggleCheckListButtonOptions(
-                        iconTheme: QuillIconTheme(
-                          iconButtonSelectedData: IconButtonData(
-                            style: IconButton.styleFrom(
-                              foregroundColor: Theme.of(context).appColors.textDefault
-                            )
-                          ),
-                          iconButtonUnselectedData: IconButtonData(
-                            style: IconButton.styleFrom(
-                              foregroundColor: Theme.of(context).appColors.textDefault
-                            )
-                          )
-                        )
-                      ),
-                    ),
-                    QuillToolbarToggleStyleButton(
-                      controller: _controller,
-                      attribute: Attribute.ol,
-                      options: QuillToolbarToggleStyleButtonOptions(
-                        iconTheme: QuillIconTheme(
-                          iconButtonSelectedData: IconButtonData(
-                            style: IconButton.styleFrom(
-                              foregroundColor: Theme.of(context).appColors.textDefault
-                            )
-                          ),
-                          iconButtonUnselectedData: IconButtonData(
-                            style: IconButton.styleFrom(
-                              foregroundColor: Theme.of(context).appColors.textDefault
-                            )
-                          )
-                        )
-                      ),
-                    ),
-                    QuillToolbarToggleStyleButton(
-                      controller: _controller,
-                      attribute: Attribute.ul,
-                      options: QuillToolbarToggleStyleButtonOptions(
-                        iconTheme: QuillIconTheme(
-                          iconButtonSelectedData: IconButtonData(
-                            style: IconButton.styleFrom(
-                              foregroundColor: Theme.of(context).appColors.textDefault
-                            )
-                          ),
-                          iconButtonUnselectedData: IconButtonData(
-                            style: IconButton.styleFrom(
-                              foregroundColor: Theme.of(context).appColors.textDefault
-                            )
-                          )
-                        )
-                      ),
-                    ),
-                    QuillToolbarToggleStyleButton(
-                      controller: _controller,
-                      attribute: Attribute.codeBlock,
-                      options: QuillToolbarToggleStyleButtonOptions(
-                        iconTheme: QuillIconTheme(
-                          iconButtonSelectedData: IconButtonData(
-                            style: IconButton.styleFrom(
-                              foregroundColor: Theme.of(context).appColors.textDefault
-                            )
-                          ),
-                          iconButtonUnselectedData: IconButtonData(
-                            style: IconButton.styleFrom(
-                              foregroundColor: Theme.of(context).appColors.textDefault
-                            )
-                          )
-                        )
-                      ),
-                    ),
-                    QuillToolbarToggleStyleButton(
-                      controller: _controller,
-                      attribute: Attribute.blockQuote,
-                      options: QuillToolbarToggleStyleButtonOptions(
-                        iconTheme: QuillIconTheme(
-                          iconButtonSelectedData: IconButtonData(
-                            style: IconButton.styleFrom(
-                              foregroundColor: Theme.of(context).appColors.textDefault
-                            )
-                          ),
-                          iconButtonUnselectedData: IconButtonData(
-                            style: IconButton.styleFrom(
-                              foregroundColor: Theme.of(context).appColors.textDefault
-                            )
-                          )
-                        )
-                      ),
-                    ),
-                    QuillToolbarIndentButton(
-                      controller: _controller,
-                      isIncrease: true,
-                      options: QuillToolbarIndentButtonOptions(
-                        iconTheme: QuillIconTheme(
-                          iconButtonSelectedData: IconButtonData(
-                            style: IconButton.styleFrom(
-                              foregroundColor: Theme.of(context).appColors.textDefault
-                            )
-                          ),
-                          iconButtonUnselectedData: IconButtonData(
-                            style: IconButton.styleFrom(
-                              foregroundColor: Theme.of(context).appColors.textDefault
-                            )
-                          )
-                        )
-                      ),
-                    ),
-                    QuillToolbarIndentButton(
-                      controller: _controller,
-                      isIncrease: false,
-                      options: QuillToolbarIndentButtonOptions(
-                        iconTheme: QuillIconTheme(
-                          iconButtonSelectedData: IconButtonData(
-                            style: IconButton.styleFrom(
-                              foregroundColor: Theme.of(context).appColors.textDefault
-                            )
-                          ),
-                          iconButtonUnselectedData: IconButtonData(
-                            style: IconButton.styleFrom(
-                              foregroundColor: Theme.of(context).appColors.textDefault
-                            )
-                          )
-                        )
-                      ),
-                    ),
-                    // QuillToolbarLinkStyleButton(
-                    //   controller: _controller,
-                    //   options: QuillToolbarLinkStyleButtonOptions(
-                    //     iconTheme: QuillIconTheme(
-                    //       iconButtonSelectedData: IconButtonData(
-                    //         style: IconButton.styleFrom(
-                    //           foregroundColor: Theme.of(context).appColors.textDefault
-                    //         )
-                    //       ),
-                    //       iconButtonUnselectedData: IconButtonData(
-                    //         style: IconButton.styleFrom(
-                    //           foregroundColor: Theme.of(context).appColors.textDefault
-                    //         )
-                    //       )
-                    //     )
-                    //   ),
-                    // ),
-                    QuillToolbarSearchButton(
-                      controller: _controller,
-                      options: QuillToolbarSearchButtonOptions(
-                        iconTheme: QuillIconTheme(
-                          iconButtonSelectedData: IconButtonData(
-                            style: IconButton.styleFrom(
-                              foregroundColor: Theme.of(context).appColors.textDefault
-                            )
-                          ),
-                          iconButtonUnselectedData: IconButtonData(
-                            style: IconButton.styleFrom(
-                              foregroundColor: Theme.of(context).appColors.textDefault
-                            )
-                          )
-                        )
-                      ),
-                    )
-                  ]
+    if (_file.uuid == "-"){
+      return Column(
+        
+        children: <Widget> [
+          Expanded(
+            child: Center(
+              child: Text(
+                "No Open File",
+                style: TextStyle(
+                  color: Theme.of(context).appColors.textDefault,
+                  fontSize: 18
                 ),
               ),
-              
-            ],
-          ),
-          
-        ),
-        Expanded(
-          child: Container(
-            padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 12),
-            color: Theme.of(context).appColors.editorColor,
-            child: QuillEditor.basic(
-              configurations: QuillEditorConfigurations(
-                controller: _controller,
-                placeholder: "Start typing...",
-              )
             ),
           ),
-        )
-      ],
-    );
+        ],
+      );
+    } else {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          Row(
+            children: [
+              const SizedBox(width: 15),
+              OpenFileRow(file: _file, saveFunc: saveFile),
+              const SizedBox(width: 20,)
+            ],
+          ),
+          QuillToolbar(
+            configurations: const QuillToolbarConfigurations(),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Wrap(
+                    children: <Widget>[
+                      QuillToolbarHistoryButton(
+                        isUndo: true,
+                        controller: _controller,
+                        options: QuillToolbarHistoryButtonOptions(
+                          iconTheme: QuillIconTheme(
+                            iconButtonSelectedData: IconButtonData(
+                              style: IconButton.styleFrom(
+                                foregroundColor: Theme.of(context).appColors.textDefault
+                              )
+                            ),
+                            iconButtonUnselectedData: IconButtonData(
+                              style: IconButton.styleFrom(
+                                foregroundColor: Theme.of(context).appColors.textDefault
+                              )
+                            )
+                          )
+                        ),
+                      ),
+                      QuillToolbarHistoryButton(
+                        isUndo: false,
+                        controller: _controller,
+                        options: QuillToolbarHistoryButtonOptions(
+                          iconTheme: QuillIconTheme(
+                            iconButtonSelectedData: IconButtonData(
+                              style: IconButton.styleFrom(
+                                foregroundColor: Theme.of(context).appColors.textDefault
+                              )
+                            ),
+                            iconButtonUnselectedData: IconButtonData(
+                              style: IconButton.styleFrom(
+                                foregroundColor: Theme.of(context).appColors.textDefault
+                              )
+                            )
+                          )
+                        ),
+                      ),
+                      QuillToolbarFontSizeButton(
+                        controller: _controller,
+                        options: QuillToolbarFontSizeButtonOptions(
+                          style: TextStyle(
+                            color: Theme.of(context).appColors.textDefault
+                          ),
+                        ),
+                      ),
+                      QuillToolbarToggleStyleButton(
+                        options: QuillToolbarToggleStyleButtonOptions(
+                          iconTheme: QuillIconTheme(
+                            iconButtonSelectedData: IconButtonData(
+                              style: IconButton.styleFrom(
+                                foregroundColor: Theme.of(context).appColors.textDefault
+                              )
+                            ),
+                            iconButtonUnselectedData: IconButtonData(
+                              style: IconButton.styleFrom(
+                                foregroundColor: Theme.of(context).appColors.textDefault
+                              )
+                            )
+                          )
+                        ),
+                        controller: _controller,
+                        attribute: Attribute.bold,
+                      ),
+                      QuillToolbarToggleStyleButton(
+                        options: QuillToolbarToggleStyleButtonOptions(
+                          iconTheme: QuillIconTheme(
+                            iconButtonSelectedData: IconButtonData(
+                              style: IconButton.styleFrom(
+                                foregroundColor: Theme.of(context).appColors.textDefault
+                              )
+                            ),
+                            iconButtonUnselectedData: IconButtonData(
+                              style: IconButton.styleFrom(
+                                foregroundColor: Theme.of(context).appColors.textDefault
+                              )
+                            )
+                          )
+                        ),
+                        controller: _controller,
+                        attribute: Attribute.italic,
+                      ),
+                      QuillToolbarToggleStyleButton(
+                        options: QuillToolbarToggleStyleButtonOptions(
+                          iconTheme: QuillIconTheme(
+                            iconButtonSelectedData: IconButtonData(
+                              style: IconButton.styleFrom(
+                                foregroundColor: Theme.of(context).appColors.textDefault
+                              )
+                            ),
+                            iconButtonUnselectedData: IconButtonData(
+                              style: IconButton.styleFrom(
+                                foregroundColor: Theme.of(context).appColors.textDefault
+                              )
+                            )
+                          )
+                        ),
+                        controller: _controller,
+                        attribute: Attribute.underline,
+                      ),
+                      QuillToolbarToggleStyleButton(
+                        controller: _controller, 
+                        attribute: Attribute.strikeThrough,
+                        options: QuillToolbarToggleStyleButtonOptions(
+                          iconTheme: QuillIconTheme(
+                            iconButtonSelectedData: IconButtonData(
+                              style: IconButton.styleFrom(
+                                foregroundColor: Theme.of(context).appColors.textDefault
+                              )
+                            ),
+                            iconButtonUnselectedData: IconButtonData(
+                              style: IconButton.styleFrom(
+                                foregroundColor: Theme.of(context).appColors.textDefault
+                              )
+                            )
+                          )
+                        ),
+                      ),
+                      QuillToolbarToggleStyleButton(
+                        controller: _controller, 
+                        attribute: Attribute.inlineCode,
+                        options: QuillToolbarToggleStyleButtonOptions(
+                          iconTheme: QuillIconTheme(
+                            iconButtonSelectedData: IconButtonData(
+                              style: IconButton.styleFrom(
+                                foregroundColor: Theme.of(context).appColors.textDefault
+                              )
+                            ),
+                            iconButtonUnselectedData: IconButtonData(
+                              style: IconButton.styleFrom(
+                                foregroundColor: Theme.of(context).appColors.textDefault
+                              )
+                            )
+                          )
+                        ),
+                      ),
+                      QuillToolbarToggleStyleButton(
+                        controller: _controller, 
+                        attribute: Attribute.superscript,
+                        options: QuillToolbarToggleStyleButtonOptions(
+                          iconTheme: QuillIconTheme(
+                            iconButtonSelectedData: IconButtonData(
+                              style: IconButton.styleFrom(
+                                foregroundColor: Theme.of(context).appColors.textDefault
+                              )
+                            ),
+                            iconButtonUnselectedData: IconButtonData(
+                              style: IconButton.styleFrom(
+                                foregroundColor: Theme.of(context).appColors.textDefault
+                              )
+                            )
+                          )
+                        ),
+                      ),
+                      QuillToolbarToggleStyleButton(
+                        controller: _controller, 
+                        attribute: Attribute.subscript,
+                        options: QuillToolbarToggleStyleButtonOptions(
+                          iconTheme: QuillIconTheme(
+                            iconButtonSelectedData: IconButtonData(
+                              style: IconButton.styleFrom(
+                                foregroundColor: Theme.of(context).appColors.textDefault
+                              )
+                            ),
+                            iconButtonUnselectedData: IconButtonData(
+                              style: IconButton.styleFrom(
+                                foregroundColor: Theme.of(context).appColors.textDefault
+                              )
+                            )
+                          )
+                        ),
+                      ),
+                      QuillToolbarClearFormatButton(
+                        controller: _controller,
+                        options: QuillToolbarBaseButtonOptions(
+                          iconTheme: QuillIconTheme(
+                            iconButtonSelectedData: IconButtonData(
+                              style: IconButton.styleFrom(
+                                foregroundColor: Theme.of(context).appColors.textDefault
+                              )
+                            ),
+                            iconButtonUnselectedData: IconButtonData(
+                              style: IconButton.styleFrom(
+                                foregroundColor: Theme.of(context).appColors.textDefault
+                              )
+                            )
+                          )
+                        ),
+                      ),
+                      const VerticalDivider(),
+                      QuillToolbarColorButton(
+                        controller: _controller,
+                        isBackground: false,
+                        options: QuillToolbarColorButtonOptions(
+                          iconTheme: QuillIconTheme(
+                            iconButtonSelectedData: IconButtonData(
+                              style: IconButton.styleFrom(
+                                foregroundColor: Theme.of(context).appColors.textDefault
+                              )
+                            ),
+                            iconButtonUnselectedData: IconButtonData(
+                              style: IconButton.styleFrom(
+                                foregroundColor: Theme.of(context).appColors.textDefault
+                              )
+                            )
+                          )
+                        ),
+                      ),
+                      QuillToolbarColorButton(
+                        controller: _controller,
+                        isBackground: true,
+                        options: QuillToolbarColorButtonOptions(
+                          iconTheme: QuillIconTheme(
+                            iconButtonSelectedData: IconButtonData(
+                              style: IconButton.styleFrom(
+                                foregroundColor: Theme.of(context).appColors.textDefault
+                              )
+                            ),
+                            iconButtonUnselectedData: IconButtonData(
+                              style: IconButton.styleFrom(
+                                foregroundColor: Theme.of(context).appColors.textDefault
+                              )
+                            )
+                          )
+                        ),
+                      ),
+                      const VerticalDivider(),
+                      QuillToolbarToggleCheckListButton(
+                        controller: _controller,
+                        options: QuillToolbarToggleCheckListButtonOptions(
+                          iconTheme: QuillIconTheme(
+                            iconButtonSelectedData: IconButtonData(
+                              style: IconButton.styleFrom(
+                                foregroundColor: Theme.of(context).appColors.textDefault
+                              )
+                            ),
+                            iconButtonUnselectedData: IconButtonData(
+                              style: IconButton.styleFrom(
+                                foregroundColor: Theme.of(context).appColors.textDefault
+                              )
+                            )
+                          )
+                        ),
+                      ),
+                      QuillToolbarToggleStyleButton(
+                        controller: _controller,
+                        attribute: Attribute.ol,
+                        options: QuillToolbarToggleStyleButtonOptions(
+                          iconTheme: QuillIconTheme(
+                            iconButtonSelectedData: IconButtonData(
+                              style: IconButton.styleFrom(
+                                foregroundColor: Theme.of(context).appColors.textDefault
+                              )
+                            ),
+                            iconButtonUnselectedData: IconButtonData(
+                              style: IconButton.styleFrom(
+                                foregroundColor: Theme.of(context).appColors.textDefault
+                              )
+                            )
+                          )
+                        ),
+                      ),
+                      QuillToolbarToggleStyleButton(
+                        controller: _controller,
+                        attribute: Attribute.ul,
+                        options: QuillToolbarToggleStyleButtonOptions(
+                          iconTheme: QuillIconTheme(
+                            iconButtonSelectedData: IconButtonData(
+                              style: IconButton.styleFrom(
+                                foregroundColor: Theme.of(context).appColors.textDefault
+                              )
+                            ),
+                            iconButtonUnselectedData: IconButtonData(
+                              style: IconButton.styleFrom(
+                                foregroundColor: Theme.of(context).appColors.textDefault
+                              )
+                            )
+                          )
+                        ),
+                      ),
+                      QuillToolbarToggleStyleButton(
+                        controller: _controller,
+                        attribute: Attribute.codeBlock,
+                        options: QuillToolbarToggleStyleButtonOptions(
+                          iconTheme: QuillIconTheme(
+                            iconButtonSelectedData: IconButtonData(
+                              style: IconButton.styleFrom(
+                                foregroundColor: Theme.of(context).appColors.textDefault
+                              )
+                            ),
+                            iconButtonUnselectedData: IconButtonData(
+                              style: IconButton.styleFrom(
+                                foregroundColor: Theme.of(context).appColors.textDefault
+                              )
+                            )
+                          )
+                        ),
+                      ),
+                      QuillToolbarToggleStyleButton(
+                        controller: _controller,
+                        attribute: Attribute.blockQuote,
+                        options: QuillToolbarToggleStyleButtonOptions(
+                          iconTheme: QuillIconTheme(
+                            iconButtonSelectedData: IconButtonData(
+                              style: IconButton.styleFrom(
+                                foregroundColor: Theme.of(context).appColors.textDefault
+                              )
+                            ),
+                            iconButtonUnselectedData: IconButtonData(
+                              style: IconButton.styleFrom(
+                                foregroundColor: Theme.of(context).appColors.textDefault
+                              )
+                            )
+                          )
+                        ),
+                      ),
+                      QuillToolbarIndentButton(
+                        controller: _controller,
+                        isIncrease: true,
+                        options: QuillToolbarIndentButtonOptions(
+                          iconTheme: QuillIconTheme(
+                            iconButtonSelectedData: IconButtonData(
+                              style: IconButton.styleFrom(
+                                foregroundColor: Theme.of(context).appColors.textDefault
+                              )
+                            ),
+                            iconButtonUnselectedData: IconButtonData(
+                              style: IconButton.styleFrom(
+                                foregroundColor: Theme.of(context).appColors.textDefault
+                              )
+                            )
+                          )
+                        ),
+                      ),
+                      QuillToolbarIndentButton(
+                        controller: _controller,
+                        isIncrease: false,
+                        options: QuillToolbarIndentButtonOptions(
+                          iconTheme: QuillIconTheme(
+                            iconButtonSelectedData: IconButtonData(
+                              style: IconButton.styleFrom(
+                                foregroundColor: Theme.of(context).appColors.textDefault
+                              )
+                            ),
+                            iconButtonUnselectedData: IconButtonData(
+                              style: IconButton.styleFrom(
+                                foregroundColor: Theme.of(context).appColors.textDefault
+                              )
+                            )
+                          )
+                        ),
+                      ),
+                      // QuillToolbarLinkStyleButton(
+                      //   controller: _controller,
+                      //   options: QuillToolbarLinkStyleButtonOptions(
+                      //     iconTheme: QuillIconTheme(
+                      //       iconButtonSelectedData: IconButtonData(
+                      //         style: IconButton.styleFrom(
+                      //           foregroundColor: Theme.of(context).appColors.textDefault
+                      //         )
+                      //       ),
+                      //       iconButtonUnselectedData: IconButtonData(
+                      //         style: IconButton.styleFrom(
+                      //           foregroundColor: Theme.of(context).appColors.textDefault
+                      //         )
+                      //       )
+                      //     )
+                      //   ),
+                      // ),
+                      QuillToolbarSearchButton(
+                        controller: _controller,
+                        options: QuillToolbarSearchButtonOptions(
+                          iconTheme: QuillIconTheme(
+                            iconButtonSelectedData: IconButtonData(
+                              style: IconButton.styleFrom(
+                                foregroundColor: Theme.of(context).appColors.textDefault
+                              )
+                            ),
+                            iconButtonUnselectedData: IconButtonData(
+                              style: IconButton.styleFrom(
+                                foregroundColor: Theme.of(context).appColors.textDefault
+                              )
+                            )
+                          )
+                        ),
+                      )
+                    ]
+                  ),
+                ),
+                
+              ],
+            ),
+            
+          ),
+          Expanded(
+            child: Container(
+              padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 12),
+              color: Theme.of(context).appColors.editorColor,
+              child: QuillEditor.basic(
+                configurations: QuillEditorConfigurations(
+                  controller: _controller,
+                  placeholder: "Start typing...",
+                )
+              ),
+            ),
+          )
+        ],
+      );
+    }
   }
 }

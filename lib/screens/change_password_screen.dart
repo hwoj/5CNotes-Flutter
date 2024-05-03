@@ -30,8 +30,15 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).appColors.backgroundRow,
       appBar: AppBar(
-        title: const Text('Change Password'),
+        backgroundColor: Theme.of(context).appColors.appBarStart,
+        title: Text(
+          'Change Password',
+          style: TextStyle(
+            color: Theme.of(context).appColors.appBarText
+          ),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -43,8 +50,16 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
               child: TextField(
                 key: const Key("old password"),
                 controller: _oldPasswordController,
-                decoration: const InputDecoration(labelText: 'Old Password'),
+                decoration: InputDecoration(
+                  labelText: 'Old Password',
+                  labelStyle: TextStyle(
+                    color: Theme.of(context).appColors.textDefault
+                  )
+                ),
                 obscureText: true,
+                style: TextStyle(
+                  color: Theme.of(context).appColors.textDefault
+                ),
               ),
             ),
             const SizedBox(height: 16.0),
@@ -53,8 +68,16 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
               child: TextField(
                 key: const Key("new password"),
                 controller: _newPasswordController,
-                decoration: const InputDecoration(labelText: 'New Password'),
+                decoration: InputDecoration(
+                  labelText: 'New Password',
+                  labelStyle: TextStyle(
+                    color: Theme.of(context).appColors.textDefault
+                  )
+                ),
                 obscureText: true,
+                style: TextStyle(
+                  color: Theme.of(context).appColors.textDefault
+                ),
               ),
             ),
             const SizedBox(height: 16.0),
@@ -63,8 +86,16 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
               child: TextField(
                 key: const Key("confirm password"),
                 controller: _confirmPasswordController,
-                decoration: const InputDecoration(labelText: 'Confirm New Password'),
+                decoration: InputDecoration(
+                  labelText: 'Confirm New Password',
+                  labelStyle: TextStyle(
+                    color: Theme.of(context).appColors.textDefault
+                  )
+                ),
                 obscureText: true,
+                style: TextStyle(
+                  color: Theme.of(context).appColors.textDefault
+                ),
               ),
             ),
             const SizedBox(height: 16.0),
@@ -74,14 +105,14 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                 children: <Widget>[
                   Positioned.fill(
                     child: Container(
-                      color: Theme.of(context).appColors.backgroundDefault,
-                      ),
+                      color: Theme.of(context).appColors.primaryButton,
                     ),
+                  ),
                   TextButton(
                     key: const Key("change password button"),
                     style: TextButton.styleFrom(
                       textStyle: const TextStyle(fontSize: 15),
-                      foregroundColor: Theme.of(context).appColors.backgroundRow,
+                      foregroundColor: Theme.of(context).appColors.primaryButton,
                       padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20)
                     ),
                     onPressed: () {
@@ -133,7 +164,12 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                         );
                       }
                     },
-                    child: const Text('Confirm Change'),
+                    child: Text(
+                      'Confirm Change',
+                      style: TextStyle(
+                        color: Theme.of(context).appColors.primaryButtonText
+                      ),
+                    ),
             ),
                 ]
               )
