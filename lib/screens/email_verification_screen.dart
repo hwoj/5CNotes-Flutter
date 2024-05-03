@@ -66,7 +66,7 @@ class _EmailVerificationState extends State<EmailVerificationScreen> {
                 onPressed: () {
                   // Add signup logic here
                   String code = _verificationController.text;
-                  String correctCode = ""; // dummy value, will change later
+                  String correctCode = "123"; // dummy value, will change later
                   if (code == correctCode) { 
                     Navigator.pushNamedAndRemoveUntil(context, '/home', ModalRoute.withName("/home"));
                     // Implement signup logic here

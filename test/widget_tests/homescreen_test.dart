@@ -29,7 +29,6 @@ void main() {
       child: Consumer(
         builder: (BuildContext context, ThemeNotifier themeNotifier, _) {
           return MaterialApp(
-
             home: HomeScreen(),
             themeMode: themeNotifier.themeMode,
             theme: Theme.of(context).copyWith(
