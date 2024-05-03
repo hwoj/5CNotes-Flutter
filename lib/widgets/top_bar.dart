@@ -44,7 +44,7 @@ class _TopBarState extends State<TopBar> {
       return AppBar(
         title: TextButton(
           onPressed: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
+            Navigator.pushNamed(context, '/home');
           },
           child: Text(
             "5CNotes",

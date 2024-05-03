@@ -56,6 +56,7 @@ class _LoginScreenState extends State<LoginScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Padding(
+              key: const Key("Email text box"),
               padding: const EdgeInsets.symmetric(horizontal: 200.0, vertical: 15.0),
               child: TextField(
                 controller: _emailController,
@@ -63,6 +64,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
             Padding(
+              key: const Key("Password text box"),
               padding: const EdgeInsets.symmetric(horizontal: 200.0, vertical: 15.0),
               child: TextField(
                 controller: _passwordController,
@@ -81,6 +83,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                     TextButton(
+                      key: const Key("Login button"),
                       style: TextButton.styleFrom(
                       textStyle: const TextStyle(fontSize: 15),
                       foregroundColor: Theme.of(context).appColors.backgroundRow,
@@ -91,15 +94,28 @@ class _LoginScreenState extends State<LoginScreen> {
                       String email = _emailController.text;
                       String password = _passwordController.text;
                       // dummy values for correct email and password, will change later 
-                      String correctEmail = "";
-                      String correctPassword = ""; 
+                      String correctEmail = "email";
+                      String correctPassword = "password"; 
                       if (email == correctEmail && password == correctPassword) { 
-                        Navigator.push(
-                          context, 
-                          MaterialPageRoute(builder: (context) => HomeScreen()),
+                        final homescreenRoute = MaterialPageRoute(builder: (_) => HomeScreen());
+                        Navigator.push(context, homescreenRoute);
+                      } else { // Display modal if email or password is incorrect
+                        showDialog(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                            key: const Key("Incorrect email or password modal"),
+                            title: const Text('Error'),
+                            content: const Text('Either username or password is incorrect.'),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop(); // dismiss modal
+                                },
+                                child: const Text('OK'),
+                              ),
+                            ],
+                          ),
                         );
-                      } else { // TODO: add functionality if password is wrong
-                        
                       }
                     },
                     child: const Text('Login'),

@@ -57,6 +57,7 @@ class _SignUpScreenState extends State<SignupScreen> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 200.0, vertical: 15.0),
               child: TextField(
+                key: const Key("Register email"),
                 controller: _emailController,
                 decoration: const InputDecoration(labelText: 'Email'),
               ),
@@ -65,6 +66,7 @@ class _SignUpScreenState extends State<SignupScreen> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 200.0, vertical: 15.0),
               child: TextField(
+                key: const Key("Register password"),
                 controller: _passwordController,
                 decoration: const InputDecoration(labelText: 'Password'),
                 obscureText: true,
@@ -74,6 +76,7 @@ class _SignUpScreenState extends State<SignupScreen> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 200.0, vertical: 15.0),
               child: TextField(
+                key: const Key("Confirm password"),
                 controller: _confirmPasswordController,
                 decoration: const InputDecoration(labelText: 'Confirm Password'),
                 obscureText: true,
@@ -90,6 +93,7 @@ class _SignUpScreenState extends State<SignupScreen> {
                       ),
                     ),
                   TextButton(
+                    key: const Key("Signup button"),
                     style: TextButton.styleFrom(
                       textStyle: const TextStyle(fontSize: 15),
                       foregroundColor: Theme.of(context).appColors.primaryButton,
@@ -100,17 +104,32 @@ class _SignUpScreenState extends State<SignupScreen> {
                       String email = _emailController.text;
                       String password = _passwordController.text;
                       String confirmPassword = _confirmPasswordController.text;
-
-                      if (password == confirmPassword) {
-                        Navigator.push(
-                          context, 
-                          MaterialPageRoute(builder: (context) => EmailVerificationScreen()));
+                      if (password == "" || confirmPassword == "" || email == "") {
+                        showDialog(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                            key: const Key("Empty field"),
+                            title: const Text('Error'),
+                            content: const Text('Please enter the relevant information in the empty fields'),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: const Text('OK'),
+                              ),
+                            ],
+                          ),
+                        );
+                      } else if (password == confirmPassword) {
+                        Navigator.pushNamedAndRemoveUntil(context, "/email_verification", ModalRoute.withName("/email_verification"));
                         // Implement signup logic here
                       } else {
                         // Passwords don't match, show an error message
                         showDialog(
                           context: context,
                           builder: (context) => AlertDialog(
+                            key: const Key("Non-matching passwords"),
                             title: const Text('Error'),
                             content: const Text('Passwords do not match.'),
                             actions: [

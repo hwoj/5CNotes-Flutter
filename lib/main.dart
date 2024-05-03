@@ -1,5 +1,10 @@
 
+import 'package:fivec_notes/screens/change_password_screen.dart';
+import 'package:fivec_notes/screens/email_verification_screen.dart';
+import 'package:fivec_notes/screens/home_screen.dart';
 import 'package:fivec_notes/screens/login_screen.dart';
+import 'package:fivec_notes/screens/settings_screen.dart';
+import 'package:fivec_notes/screens/signup_screen.dart';
 import 'package:fivec_notes/themes/app_colors_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

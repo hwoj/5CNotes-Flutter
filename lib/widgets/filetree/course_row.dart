@@ -44,7 +44,7 @@ class CourseRow extends StatefulWidget {
 /// This state encodes the contents of the [CourseRow] and will update as necessary
 class CourseRowState extends State<CourseRow> {
 
-  
+
   /// whether the dropdown is expanded or not
   bool isExpanded = false;
 
@@ -180,13 +180,14 @@ class CourseRowState extends State<CourseRow> {
                   const Spacer(),
                   if (isHovered) ...[
                     IconButton(
+                      key: const Key("Create Folder"),
                       padding: const EdgeInsets.all(2),
                       constraints: const BoxConstraints(),
                       onPressed: () {
                         showDialog(
                           context: context, 
                           builder: (BuildContext context) {
-                            return AddDirectory(parent: widget.course, createDirectory: createDirectory);
+                            return AddDirectory(key: const Key("Name Folder"), parent: widget.course, createDirectory: createDirectory);
                           }
                         );
                       },
@@ -197,13 +198,14 @@ class CourseRowState extends State<CourseRow> {
                       ),
                     ),
                     IconButton(
+                      key: const Key("Create File"),
                       padding: const EdgeInsets.all(2),
                       constraints: const BoxConstraints(),
                       onPressed: () {
                         showDialog(
                           context: context, 
                           builder: (BuildContext context) {
-                            return CreateFile(parentName: widget.course.name, createFunc: createSubfile);
+                            return CreateFile(key: const Key("Name File"), parentName: widget.course.name, createFunc: createSubfile);
                           }
                         );
                       },

@@ -12,9 +12,9 @@ void main() {
 
   // test correct code given 
   
-  testWidgets("widget", (tester) async {
+  testWidgets("Email Verification Test", (tester) async {
     await tester.pumpWidget(EmailVerificationScreen());
-
+    
   }
   );
   
