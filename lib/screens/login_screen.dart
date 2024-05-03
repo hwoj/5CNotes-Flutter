@@ -47,8 +47,16 @@ class _LoginScreenState extends State<LoginScreen> {
     /// to navigate the user to the main page if their password is correct.
     /// Else, Tell them that their password is incorrect.
     return Scaffold(
+      backgroundColor: Theme.of(context).appColors.backgroundRow,
       appBar: AppBar(
-        title: const Text('Login'),
+        backgroundColor: Theme.of(context).appColors.appBarStart,
+        automaticallyImplyLeading: false,
+        title: Text(
+          'Login',
+          style: TextStyle(
+            color: Theme.of(context).appColors.appBarText
+          ),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -60,7 +68,15 @@ class _LoginScreenState extends State<LoginScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 200.0, vertical: 15.0),
               child: TextField(
                 controller: _emailController,
-                decoration: const InputDecoration(labelText: 'Email'),
+                decoration: InputDecoration(
+                  labelText: 'Email',
+                  labelStyle: TextStyle(
+                    color: Theme.of(context).appColors.textDefault
+                  )
+                ),
+                style: TextStyle(
+                  color: Theme.of(context).appColors.textDefault
+                ),
               ),
             ),
             Padding(
@@ -68,8 +84,16 @@ class _LoginScreenState extends State<LoginScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 200.0, vertical: 15.0),
               child: TextField(
                 controller: _passwordController,
-                decoration: const InputDecoration(labelText: 'Password'),
+                decoration: InputDecoration(
+                  labelText: 'Password',
+                  labelStyle: TextStyle(
+                    color: Theme.of(context).appColors.textDefault
+                  )
+                ),
                 obscureText: true,
+                style: TextStyle(
+                  color: Theme.of(context).appColors.textDefault
+                ),
               ),
             ),
             const SizedBox(height: 30.0),
@@ -79,14 +103,14 @@ class _LoginScreenState extends State<LoginScreen> {
                 children: <Widget>[
                   Positioned.fill(
                     child: Container(
-                      color: Theme.of(context).appColors.backgroundDefault,
+                      color: Theme.of(context).appColors.primaryButton,
                       ),
                     ),
                     TextButton(
                       key: const Key("Login button"),
                       style: TextButton.styleFrom(
                       textStyle: const TextStyle(fontSize: 15),
-                      foregroundColor: Theme.of(context).appColors.backgroundRow,
+                      foregroundColor: Theme.of(context).appColors.primaryButtonText,
                       padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20)
                       ), 
                     onPressed: () {
