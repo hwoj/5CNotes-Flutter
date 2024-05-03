@@ -58,6 +58,30 @@ class FileTreeService {
   ///
   ///
   ///
+  static Future<Course> createCourse(String name) async {
+    Uri uri = Uri.parse("http://localhost:8080/courses");
+
+    Map<String, String> requestHeaders = {
+      "Content-Type": "application/json"
+    };
+
+    Map<String, String> requestBody = {
+      "folderName": name
+    };
+
+    http.Response response = await http.post(uri, headers: requestHeaders, body: requestBody);
+
+    if (response.statusCode == 200) {
+      Map<String, dynamic> courseJson = jsonDecode(response.body);
+      return Course.fromJson(courseJson);
+    } else {
+      return Course(uuid: "-", name: "-");
+    }
+  }
+
+  ///
+  ///
+  ///
   static Future<bool> shouldSaveLocally() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     bool? shouldSave = prefs.getBool("saveLocally");
@@ -96,12 +120,57 @@ class FileTreeService {
   /// Gets the contents of a file using the file metadata
   ///
   /// Requests the contents of the file from the backend using the id from the [file] argument
-  getFile(File file) {
-    // send get request to server to get contents of the file using the id of the file passed into the function
+  static Future<File> getFileById(String fileId) async {
+      http.Response response = await http.get(Uri.parse("http://localhost:8080/files/$fileId"));
 
-    // overwrite the contents of the local file or create new file on disk if doesn't exist on disk yet
+      if (response.statusCode == 200) {
+        Map<String, dynamic> fileJson = jsonDecode(response.body);
+        return File.fromJson(fileJson);
+      } else {
+        return File(uuid: "-", name: "-");
+      }
   }
 
+  ///
+  ///
+  ///
+  static Future<Directory> getDirectoryById(String dirId) async {
+    http.Response response = await http.get(Uri.parse("http://localhost:8080/directories/$dirId"));
+
+    if (response.statusCode == 200) {
+      Map<String, dynamic> dirJson = jsonDecode(response.body);
+      return Directory.fromJson(dirJson);
+    } else {
+      return Directory(uuid: "-", name: "-");
+    }
+  }
+
+  ///
+  ///
+  ///
+  static Future<Course> getCourseById(String courseId) async {
+    http.Response response = await http.get(Uri.parse("http://localhost:8080/courses/$courseId"));
+
+    if (response.statusCode == 200) {
+      Map<String, dynamic> courseJson = jsonDecode(response.body);
+      return Course.fromJson(courseJson);
+    } else {
+      return Course(uuid: "-", name: "-");
+    }
+  }
+
+  ///
+  ///
+  ///
+  static Future<List<User>> getClassmates(Course course) async {
+    UserProvider userProvider = UserProvider();
+    List<User> classmates = [User(uuid: userProvider.currentUserId ?? "-", email: "email", firstName: "firstName", lastName: "lastName")];
+    return classmates;
+  }
+
+  ///
+  ///
+  ///
   static Future<Directory> createDirectory(String directoryName) async {
     UserProvider userProvider = UserProvider();
     String? userId = userProvider.currentUserId;
@@ -122,7 +191,6 @@ class FileTreeService {
       if (response.statusCode == 200) {
         var directoryResponse = jsonDecode(response.body);
         Directory directory = Directory.fromJson(directoryResponse);
-        print("here");
         response = await http.put(Uri.parse("http://localhost:8080/directories/${directory.uuid}/users/$userId"));
         
         if (response.statusCode == 200) {
@@ -170,7 +238,7 @@ class FileTreeService {
   ///
   static Future<File> createFile(String fileName) async {
     if (await isOnline()) {
-      print("im online!!");
+
     }
     UserProvider userProvider = UserProvider();
     String? userId = userProvider.currentUserId;

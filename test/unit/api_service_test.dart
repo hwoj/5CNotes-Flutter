@@ -67,7 +67,7 @@ void main () async {
   });
 
   test("get user test", () async {
-    User testUser = await UserService.getUserFromID(user.uuid);
+    User testUser = await UserService.getUserByID(user.uuid);
     expect(testUser.firstName, equals("fName"));
   });
 

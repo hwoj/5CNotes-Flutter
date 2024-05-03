@@ -14,14 +14,14 @@ class Course {
   final String name;
 
   /// The code for the [Course] used for shorthand purposes in the UI
-  final String code;
+  final String? code;
 
   /// The semester that the [Course] belongs to. 
   /// The same course will occur in different semesters so this is an easy way of differentiating the objects
-  final String semester;
+  final String? semester;
 
   /// The list of meetings times for the [Course] 
-  List<DateTime> meetingTimes = [];
+  List<DateTime>? meetingTimes = [];
 
   /// The top level directories within the [Course]
   List<Directory> directories = [];
@@ -35,9 +35,9 @@ class Course {
   Course({
     required this.uuid,
     required this.name,
-    required this.code,
-    required this.semester,
-    required this.meetingTimes
+    this.code,
+    this.semester,
+    this.meetingTimes
   });
 
   /// The JSON constructor for the [Course] class
