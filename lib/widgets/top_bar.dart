@@ -43,8 +43,8 @@ class _TopBarState extends State<TopBar> {
     /// to move back and forth between screens.
       return AppBar(
         title: TextButton(
-          onPressed: (){
-            Navigator.pushNamed(context, '/home');
+          onPressed: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
           },
           child: Text(
             "5CNotes",
@@ -67,7 +67,7 @@ class _TopBarState extends State<TopBar> {
               begin: Alignment.centerLeft,
               end: Alignment.centerRight,
             ), 
-            ), 
+          ), 
         ),
       );
       

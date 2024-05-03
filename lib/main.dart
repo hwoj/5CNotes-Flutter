@@ -73,6 +73,14 @@ class MainApp extends StatelessWidget {
                 );
               } else {
                 return MaterialApp(
+                  routes: {
+                      '/login' : (context) => LoginScreen(),
+                      '/signup' : (context) => SignupScreen(),
+                      '/change_password': (context) => ChangePasswordScreen(),
+                      '/email_verification' : (context) => EmailVerificationScreen(),
+                      '/settings' : (context) => SettingsScreen(), 
+                      '/home' : (context) => HomeScreen(),
+                    },
                   home: LoginScreen(),
                   themeMode: themeNotifier.themeMode,
                   theme: Theme.of(context).copyWith(

@@ -58,7 +58,9 @@ void main() {
     ));
 
     // test adding and removing text, test bold, italics, changing title of file
-    await tester.quillEnterText(find.byType(QuillEditor), 'test\n');
+    await tester.quillEnterText(find.byType(QuillEditor), 'test');
+
+    expect(find.text("test"), findsOneWidget);
   }
   );
 
