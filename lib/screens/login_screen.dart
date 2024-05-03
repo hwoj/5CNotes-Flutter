@@ -23,6 +23,11 @@ class _LoginScreenState extends State<LoginScreen> {
   // to take the user input.
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
+
+  void login() {
+    
+  }
+
   /// Takes the information of the parent widget and 
   /// return a [Scaffold], which defines the structure, layout,
   /// color of the login page features

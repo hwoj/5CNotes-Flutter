@@ -1,8 +1,12 @@
+import 'dart:convert';
+import 'dart:ui';
 import 'package:fivec_notes/main.dart';
 import 'package:fivec_notes/models/file.dart';
+import 'package:fivec_notes/services/api_services/filetree_service.dart';
 import 'package:fivec_notes/widgets/open_file_row.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart';
+import 'package:flutter_quill/quill_delta.dart';
 
 /// The [OpenDocument] [StatefulWidget] is responsible for the document that is currently being edited by the user
 ///
@@ -35,6 +39,8 @@ class OpenDocumentState extends State<OpenDocument> {
   
 
   QuillController _controller = QuillController.basic();
+
+  late final AppLifecycleListener _listener;
   
 
   /// Updates the document that is open in the editor
@@ -42,8 +48,13 @@ class OpenDocumentState extends State<OpenDocument> {
   /// Takes in a new file who's contents to be displayed in the editor. This 
   /// function will be called by the [FileRow] widget when clicked to pass in the file
   void updateDocument(File file) {
-    setState(() {
-      saveFile();
+    
+
+    setState(() {  
+      if (!_controller.document.isEmpty()) {
+        saveFile();
+        _controller.document = Document();
+      }
       _file = file;
     });
     
@@ -52,8 +63,20 @@ class OpenDocumentState extends State<OpenDocument> {
   /// Saves the contents of the [File] that is open in the [OpenDocument]
   ///
   /// Called upon carriage return being hit and when a new [File] is opened
-  void saveFile() {
+  void saveFile() async {
+    if (!_controller.document.isEmpty()) {
+      Delta fileContents = _controller.document.toDelta();
+
+      List<Map<String, dynamic>> contentsAsJSON = fileContents.toJson();
+      _file.contents = jsonEncode(contentsAsJSON);
+
+      bool isSaved = await FileTreeService.saveFile(_file);
+      if (!isSaved) {
+        print("File refused to save");
+      }
+    }
     
+
   }
   
 
@@ -61,10 +84,24 @@ class OpenDocumentState extends State<OpenDocument> {
   void initState() {
     super.initState();
     _file = widget.file;
+
+    _listener = AppLifecycleListener(
+      onExitRequested: _handleExitRequest,
+    );
     // _controller.formatSelection(ColorAttribute('#${Theme.of(context).appColors.defaultDocumentText}'));
 
   }
 
+  @override
+  void dispose() {
+
+    super.dispose();
+  }
+
+  Future<AppExitResponse> _handleExitRequest() async {
+    saveFile();
+    return AppExitResponse.exit;
+  }
 
 
   /// The build method that handles the state being made and remade
@@ -78,7 +115,7 @@ class OpenDocumentState extends State<OpenDocument> {
         Row(
           children: [
             const SizedBox(width: 15),
-            OpenFileRow(file: _file),
+            OpenFileRow(file: _file, saveFunc: saveFile),
             const SizedBox(width: 20,)
           ],
         ),
@@ -439,23 +476,23 @@ class OpenDocumentState extends State<OpenDocument> {
                         )
                       ),
                     ),
-                    QuillToolbarLinkStyleButton(
-                      controller: _controller,
-                      options: QuillToolbarLinkStyleButtonOptions(
-                        iconTheme: QuillIconTheme(
-                          iconButtonSelectedData: IconButtonData(
-                            style: IconButton.styleFrom(
-                              foregroundColor: Theme.of(context).appColors.textDefault
-                            )
-                          ),
-                          iconButtonUnselectedData: IconButtonData(
-                            style: IconButton.styleFrom(
-                              foregroundColor: Theme.of(context).appColors.textDefault
-                            )
-                          )
-                        )
-                      ),
-                    ),
+                    // QuillToolbarLinkStyleButton(
+                    //   controller: _controller,
+                    //   options: QuillToolbarLinkStyleButtonOptions(
+                    //     iconTheme: QuillIconTheme(
+                    //       iconButtonSelectedData: IconButtonData(
+                    //         style: IconButton.styleFrom(
+                    //           foregroundColor: Theme.of(context).appColors.textDefault
+                    //         )
+                    //       ),
+                    //       iconButtonUnselectedData: IconButtonData(
+                    //         style: IconButton.styleFrom(
+                    //           foregroundColor: Theme.of(context).appColors.textDefault
+                    //         )
+                    //       )
+                    //     )
+                    //   ),
+                    // ),
                     QuillToolbarSearchButton(
                       controller: _controller,
                       options: QuillToolbarSearchButtonOptions(

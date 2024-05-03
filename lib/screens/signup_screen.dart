@@ -22,6 +22,11 @@ class _SignUpScreenState extends State<SignupScreen> {
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
   TextEditingController _confirmPasswordController = TextEditingController();
+
+  void signup() {
+
+  }
+
   /// creates the structure/layout of the page.  This will include a
   /// email, password, and confirm password text box, and a button to 
   /// submit the entered fields.
@@ -84,14 +89,14 @@ class _SignUpScreenState extends State<SignupScreen> {
                 children: <Widget>[
                   Positioned.fill(
                     child: Container(
-                      color: Theme.of(context).appColors.backgroundDefault,
+                      color: Theme.of(context).appColors.primaryButton,
                       ),
                     ),
                   TextButton(
                     key: const Key("Signup button"),
                     style: TextButton.styleFrom(
                       textStyle: const TextStyle(fontSize: 15),
-                      foregroundColor: Theme.of(context).appColors.backgroundRow,
+                      foregroundColor: Theme.of(context).appColors.primaryButton,
                       padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20)
                     ),
                     onPressed: () {
@@ -139,7 +144,12 @@ class _SignUpScreenState extends State<SignupScreen> {
                         );
                       }
                     },
-              child: const Text('Sign Up'),
+              child: Text(
+                'Sign Up',
+                style: TextStyle(
+                  color: Theme.of(context).appColors.primaryButtonText
+                ),
+              ),
             ),
                 ]
               )

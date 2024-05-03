@@ -1,6 +1,7 @@
 import 'package:fivec_notes/main.dart';
 import 'package:fivec_notes/models/directory.dart';
 import 'package:fivec_notes/models/file.dart';
+import 'package:fivec_notes/services/api_services/filetree_service.dart';
 import 'package:fivec_notes/widgets/directory/add_subdirectory.dart';
 import 'package:fivec_notes/widgets/directory/directory_delete.dart';
 import 'package:fivec_notes/widgets/directory/directory_rename.dart';
@@ -8,7 +9,6 @@ import 'package:fivec_notes/widgets/file/create_file.dart';
 import 'package:fivec_notes/widgets/filetree/file_row.dart';
 import 'package:fivec_notes/widgets/open_document.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 /// The [DirectoryRow] [StatefulWidget] is the widget responsible for an individual [Directory] in the [FileTree]
 ///
@@ -55,27 +55,51 @@ class DirectoryRowState extends State<DirectoryRow> {
   /// Whether the row is hovered or not
   bool isHovered = false;
 
+  @override
+  void initState() {
+    super.initState();
+    getFiles();
+    getSubDirs();
+  }
 
-  /// the files that exist in this directory
-  List<File> files = [];
+  ///
+  ///
+  ///
+  void getSubDirs() async {
+    List<Directory> subDirs = await FileTreeService.getDirectoriesInDirectory(widget.directory);
+    setState(() {
+      widget.directory.subdirectories = subDirs;
+    });
+  }
 
-  /// the directories that exist in this directory
-  List<Directory> subdirectories = [];
+  ///
+  ///
+  ///
+  void getFiles() async {
+    List<File> files = await FileTreeService.getFilesinDirectory(widget.directory);
+    setState(() {
+      widget.directory.files = files;
+    });
+  }
 
   /// The function responsible for handling the action to rename the [Directory] from the [DirectoryRow]
   ///
   /// This function will be passed to the [DirectoryRename] widget to rename the [Directory]
-  renameDirectory(String newName) {
+  void renameDirectory(String newName) {
     setState(() {
       widget.directory.name = newName;
     }); 
   }
 
-  /// The function responsible for handling the action to delete the [Directory] from the [DirectoryRow]
+  /// The function responsible for handling the action to delete the sub [Directory] from the [DirectoryRow]
   ///
   /// This function will confirm whether the the [Directory] and all contents should be deleted and then 
   /// carry out the specified action
-  void deleteDirectory(Directory directory) {
+  void deleteSubDirectory(Directory directory) async {
+    bool isDeleted = await FileTreeService.deleteDirectoryForUser(directory);
+    if (!isDeleted) {
+      print("failed to delete subdirectory");
+    }
     setState(() {
       widget.directory.subdirectories.remove(directory);
     });
@@ -84,17 +108,28 @@ class DirectoryRowState extends State<DirectoryRow> {
   /// The function responsible for creating a subdirectory within the [Directory]
   ///
   /// This function will allow the user to create a new directory that exists underneath the current [DirectoryRow]'s directory
-  void createSubDirectory(String name) {
+  void createSubDirectory(String name) async {
+    Directory newSubDir = await FileTreeService.createDirectory(name);
+    bool isAdded = await FileTreeService.addDirectoryToDirectory(widget.directory, newSubDir);
+    if (!isAdded) {
+      print("failed to add directory to directory");
+    }
     setState(() {
-      widget.directory.subdirectories.add(Directory(uuid: "123456", name: name, parent: widget.directory.uuid, user: "437827", course: ""));
-      isExpanded = true;
+      if (newSubDir.uuid != "-") {
+        widget.directory.subdirectories.add(newSubDir);
+        isExpanded = true;
+      }
     });
   }
 
   /// Removes the specified file
   ///
   /// Deletes the file from the folder and updates the state of the row
-  void deleteSubfile(File file) {
+  void deleteSubfile(File file) async {
+    bool isDeleted = await FileTreeService.deleteFileForUserInDir(file, widget.directory);
+    if (!isDeleted) {
+      print("failed to delete file for user");
+    }
     setState(() {
       widget.directory.files.remove(file);
     });
@@ -103,14 +138,25 @@ class DirectoryRowState extends State<DirectoryRow> {
   /// The function responsible for creating a new [File] within the current [Directory]
   /// 
   /// This function will create a new [File] to be represented as a [FileRow] within the current [Directory] and [DirectoryRow]
-  createSubFile(String fileName) {
+  createSubFile(String fileName) async {
+
+    File file = await FileTreeService.createFile(fileName);
+
+    bool isAdded = await FileTreeService.addFileToDirectory(widget.directory, file);
+
+    if (!isAdded) {
+      print("failed to add file to directory");
+    }
     setState(() {
-      widget.directory.files.add(File(uuid: "wjbkw", name: fileName, author: "12345", createdAt: DateTime(2024), lastEdited: DateTime(2024), course: "123"));
-      isExpanded = true;
-      final OpenDocumentState? openDocumentState = widget.docKey.currentState;
-      if (openDocumentState != null) {
-        openDocumentState.updateDocument(widget.directory.files.last);
+      if (file.uuid != "-") {
+        widget.directory.files.add(file);
+        isExpanded = true;
+        final OpenDocumentState? openDocumentState = widget.docKey.currentState;
+        if (openDocumentState != null) {
+          openDocumentState.updateDocument(widget.directory.files.last);
+        }
       }
+      
     });
   }
 
@@ -240,7 +286,7 @@ class DirectoryRowState extends State<DirectoryRow> {
                   shrinkWrap: true,
                   itemCount: widget.directory.subdirectories.length,
                   itemBuilder: (BuildContext context, int index) {
-                    return DirectoryRow(directory: widget.directory.subdirectories[index], deleteFunction: deleteDirectory, docKey: widget.docKey,);
+                    return DirectoryRow(directory: widget.directory.subdirectories[index], deleteFunction: deleteSubDirectory, docKey: widget.docKey,);
                   }
                 ),
               )

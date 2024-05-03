@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 ///
 /// This class has a private member which stores the UUID of the current user and exposes it via getter and setter methods
 class UserProvider extends ChangeNotifier {
-  String? _currentUserId;
+  String? _currentUserId = "3e446e63-42e2-442e-8386-b443ca1a91d2";
 
   User? _currentuser;
 
