@@ -339,6 +339,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "9.3.9"
+  flutter_quill_test:
+    dependency: "direct main"
+    description:
+      name: flutter_quill_test
+      sha256: a2d267839a820032a2d0383d045e78e37603d2709f27aa8533a158bb5195f274
+      url: "https://pub.dev"
+    source: hosted
+    version: "9.3.10"
   flutter_test:
     dependency: "direct dev"
     description: flutter

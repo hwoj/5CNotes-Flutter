@@ -16,7 +16,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:provider/provider.dart';
-
+import 'package:flutter_quill_test/flutter_quill_test.dart';
 
 void main() {
 
@@ -58,6 +58,7 @@ void main() {
     ));
 
     // test adding and removing text, test bold, italics, changing title of file
+    await tester.quillEnterText(find.byType(QuillEditor), 'test\n');
   }
   );
 
