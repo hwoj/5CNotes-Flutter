@@ -2,6 +2,8 @@ import 'package:fivec_notes/main.dart';
 import 'package:fivec_notes/models/course.dart';
 import 'package:fivec_notes/models/directory.dart';
 import 'package:fivec_notes/models/file.dart';
+import 'package:fivec_notes/services/api_services/filetree_service.dart';
+import 'package:fivec_notes/widgets/course/remove_course.dart';
 import 'package:fivec_notes/widgets/directory/add_directory.dart';
 import 'package:fivec_notes/widgets/file/create_file.dart';
 import 'package:fivec_notes/widgets/filetree/directory_row.dart';
@@ -18,15 +20,10 @@ class CourseRow extends StatefulWidget {
   /// The [Course] object that the [CourseRow] is representing
   final Course course;
 
-
-  /// The list of [Directory] objects that exist under the [Course]
-  List<Directory> directories = [Directory(uuid: "1234", name: "Some Folder", parent: ".", user: "1234", course: "123")];
-
-  /// The list of [File] objects that exist under the [Course]
-  List<File> files = [];
-
   /// The [GlobalKey] to alter the [OpenDocumentState]
   final GlobalKey<OpenDocumentState> docKey;
+
+  final Function(Course) deleteFunc;
 
   /// The default constructor for the [CourseRow]
   ///
@@ -34,7 +31,8 @@ class CourseRow extends StatefulWidget {
   CourseRow({
     super.key,
     required this.docKey,
-    required this.course
+    required this.course,
+    required this.deleteFunc
   });
 
   @override
@@ -53,35 +51,66 @@ class CourseRowState extends State<CourseRow> {
   /// whether the row is hovered or not
   bool isHovered = false;
 
+  @override
+  void initState(){
+    super.initState();
+    getCourseDirectories();
+  }
+
+  ///
+  ///
+  ///
+  void getCourseDirectories() async {
+    List<Directory> dirs = await FileTreeService.getDirectoriesForCourse(widget.course);
+
+    setState(() {
+      widget.course.directories = dirs;
+    });
+  }
+
   /// The method to delete the directory
   /// 
   /// Deletes the directory from the list of directories that belong to the course
-  deleteDirectory(Directory directory) {
+  deleteDirectory(Directory directory) async {
+    bool isDeleted = await FileTreeService.deleteDirectoryForUser(directory);
+
+    if (!isDeleted) {
+      print("failed to delete folder for user");
+    }
     setState(() {
-      widget.directories.remove(directory);
+      widget.course.directories.remove(directory);
     });
   }
 
   /// Creates a file within the course
   ///
   /// Adds a file to the course at the top level (meaning this file resides in no folder)
-  void createSubfile(String fileName) {
+  void createSubfile(String fileName) async{
+    File file = await FileTreeService.createFile(fileName);
+    bool addedToCourse = await FileTreeService.addFiletoCourse(widget.course, file);
+    if (!addedToCourse) {
+      print("failed to add file to course");
+    }
     setState(() {
-      widget.files.add(File(uuid: "ignr", name: fileName, author: "ngrgn", createdAt: DateTime(2024), lastEdited: DateTime(2024), course: widget.course.uuid));
+      widget.course.files.add(file);
       isExpanded = true;
     });
     final OpenDocumentState? openDocumentState = widget.docKey.currentState;
     if (openDocumentState != null) {
-      openDocumentState.updateDocument(widget.files.last);
+      openDocumentState.updateDocument(widget.course.files.last);
     }
   }
 
   /// Deletes subfile from course
   ///
   /// Removes subfile [file] from the list of files part of the course
-  void deleteSubFile(File file) {
+  void deleteSubFile(File file) async {
+    bool isDeleted = await FileTreeService.deleteFileForUser(file, );
+    if (!isDeleted) {
+      print("failed to delete file for user");
+    }
     setState(() {
-      widget.files.remove(file);
+      widget.course.files.remove(file);
     });
   }
 
@@ -97,13 +126,24 @@ class CourseRowState extends State<CourseRow> {
   ///
   /// This function takes the name sent by the [AddDirectory] widget and creates a new [Directory]
   /// from it that lives within the [Course]
-  void createDirectory(String directoryName) {
+  void createDirectory(String directoryName) async{
+    Directory newDir = await FileTreeService.createDirectory(directoryName);
+    bool isAdded = await FileTreeService.addDirectoryToCourse(newDir, widget.course);
+
+    if (!isAdded) {
+      print("failed to add directory to course");
+    }
     setState(() {
-      widget.directories.add(Directory(uuid: "xdd", name: directoryName, parent: ".", user: "-", course: widget.course.uuid));
-      isExpanded = true;  
+      if (newDir.uuid != "-") {
+        widget.course.directories.add(newDir);
+        isExpanded = true;  
+      }
+      
     });
     
   }
+
+
 
   /// The [build] method contains the widgets and content that makeup the [CourseRow]
   ///
@@ -175,6 +215,23 @@ class CourseRowState extends State<CourseRow> {
                         color: Theme.of(context).appColors.textDefault,
                       ),
                     ),
+                    IconButton(
+                      padding: const EdgeInsets.all(2),
+                      constraints: const BoxConstraints(),
+                      onPressed: (){
+                        showDialog(
+                          context: context, 
+                          builder: (BuildContext context) {
+                            return RemoveCourse(course: widget.course, deleteFunc: widget.deleteFunc);
+                          }
+                        );
+                      },
+                      tooltip: "Remove Course",
+                      icon: Icon(
+                        Icons.delete_outline,
+                        color: Theme.of(context).appColors.textDefault
+                      ),
+                    ),
                   ],
                     
                   Icon(
@@ -193,9 +250,9 @@ class CourseRowState extends State<CourseRow> {
               ListView.builder(
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,
-                itemCount: widget.directories.length,
+                itemCount: widget.course.directories.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return DirectoryRow(directory: widget.directories[index], deleteFunction: deleteDirectory,docKey: widget.docKey,);
+                  return DirectoryRow(directory: widget.course.directories[index], deleteFunction: deleteDirectory,docKey: widget.docKey,);
                 }
               )
               
@@ -207,9 +264,9 @@ class CourseRowState extends State<CourseRow> {
             ListView.builder(
               scrollDirection: Axis.vertical,
               shrinkWrap: true,
-              itemCount: widget.files.length,
+              itemCount: widget.course.files.length,
               itemBuilder: (BuildContext context, int index) {
-                return FileRow(file: widget.files[index], deleteFunc: deleteSubFile, docKey: widget.docKey,);
+                return FileRow(file: widget.course.files[index], deleteFunc: deleteSubFile, docKey: widget.docKey,);
               }
             )
           ],

@@ -14,7 +14,10 @@ dependencies:
   sqflite: ^2.3.3
   file_picker:
   provider:
-  mockito: ^5.4.4
+
+  http:
+  connectivity_plus: ^6.0.3
+  shared_preferences: ^2.2.3
 
 dev_dependencies:
   flutter_test:
