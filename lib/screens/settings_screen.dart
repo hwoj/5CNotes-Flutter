@@ -22,90 +22,162 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   late final SharedPreferences prefs;
 
-  void setPrefs() async {
+  Future<bool> setPrefs() async {
     prefs = await SharedPreferences.getInstance();
-  }
-  @override
-  void initState() {
-    super.initState();
-    setPrefs();
+    return true;
   }
 
-
-  ThemeMode themeMode = ThemeMode.system;
   /// Builds the three options of the Settings UI
   /// 
   /// Will create three [ListTile] objects wrapped within a [ListView]
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Theme.of(context).appColors.backgroundRow,
-      appBar: TopBar(),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: ListView(
-          children: <Widget>[
-            Consumer(
-              builder: (BuildContext context, ThemeNotifier themeNotifier, _) {
-                return ListTile(
-                  title: Text(
-                    "Switch to Dark Mode",
-                    style: TextStyle(
-                      color: Theme.of(context).appColors.textDefault
+    return FutureBuilder<bool>(
+      future: setPrefs(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+
+          return Scaffold(
+            backgroundColor: Theme.of(context).appColors.backgroundRow,
+            appBar: TopBar(),
+            body: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: ListView(
+                children: <Widget>[
+                  Consumer(
+                    builder: (BuildContext context, ThemeNotifier themeNotifier, _) {
+                      return ListTile(
+                        title: Text(
+                          "Switch to Dark Mode",
+                          style: TextStyle(
+                            color: Theme.of(context).appColors.textDefault
+                          ),
+                        ),
+                        trailing: Switch(
+                          value: prefs.getBool("isDarkMode") == true ,
+                          onChanged: (isOn) {
+                            isOn ? themeNotifier.setTheme(ThemeMode.dark) : themeNotifier.setTheme(ThemeMode.light);
+                            prefs.setBool("isDarkMode", isOn);
+                          }
+                          )
+                      );
+                    }
+                  ),
+                  
+                  ListTile(
+                    title: Text(
+                      "Change Password",
+                      style: TextStyle(
+                        color: Theme.of(context).appColors.textDefault
+                      ),
+                    ),
+                    trailing: TextButton(
+                      style: TextButton.styleFrom(
+                        textStyle: const TextStyle(fontSize: 10),
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                          context, 
+                          MaterialPageRoute(builder: (context) => ChangePasswordScreen()),
+                        );
+                      },
+                      child: const Text('Change'),
                     ),
                   ),
-                  trailing: Switch(
-                    value: themeNotifier.themeMode == ThemeMode.dark,
-                    onChanged: (isOn) {
-                      themeNotifier.toggleTheme();
-                      prefs.setBool("isDarkMode", isOn);
-                      print(prefs.getBool("isDarkMode"));
-                    }
+                  ListTile(
+                    title: Text(
+                      "Save files to device",
+                      style: TextStyle(
+                        color: Theme.of(context).appColors.textDefault
+                      ),
+                    ),
+                    trailing: TextButton(
+                      style: TextButton.styleFrom(
+                        textStyle: const TextStyle(fontSize: 10),
+                      ),
+                      onPressed: () {
+                        // TODO: save files to local device
+                      },
+                      child: const Text("Save"),
                     )
-                );
-              }
-            ),
-            
-            ListTile(
-              title: Text(
-                "Change Password",
-                style: TextStyle(
-                  color: Theme.of(context).appColors.textDefault
-                ),
-              ),
-              trailing: TextButton(
-                style: TextButton.styleFrom(
-                  textStyle: const TextStyle(fontSize: 10),
-                ),
-                onPressed: () {
-                  Navigator.push(
-                    context, 
-                    MaterialPageRoute(builder: (context) => ChangePasswordScreen()),
-                  );
-                },
-                child: const Text('Change'),
-              ),
-            ),
-            ListTile(
-              title: Text(
-                "Save files to device",
-                style: TextStyle(
-                  color: Theme.of(context).appColors.textDefault
-                ),
-              ),
-              trailing: TextButton(
-                style: TextButton.styleFrom(
-                  textStyle: const TextStyle(fontSize: 10),
-                ),
-                onPressed: () {
-                  // TODO: save files to local device
-                },
-                child: const Text("Save"),
+                  ),
+                ],
               )
-            ),
-          ],
-        )
-        )
+            )
+          );
+        } else {
+          return Scaffold(
+            backgroundColor: Theme.of(context).appColors.backgroundRow,
+            appBar: TopBar(),
+            body: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: ListView(
+                children: <Widget>[
+                  Consumer(
+                    builder: (BuildContext context, ThemeNotifier themeNotifier, _) {
+                      return ListTile(
+                        title: Text(
+                          "Switch to Dark Mode",
+                          style: TextStyle(
+                            color: Theme.of(context).appColors.textDefault
+                          ),
+                        ),
+                        trailing: Switch(
+                          value: themeNotifier.themeMode == ThemeMode.dark,
+                          onChanged: (isOn) {
+                            isOn ? themeNotifier.setTheme(ThemeMode.dark) : themeNotifier.setTheme(ThemeMode.light);
+                            prefs.setBool("isDarkMode", isOn);
+                          }
+                          )
+                      );
+                    }
+                  ),
+                  
+                  ListTile(
+                    title: Text(
+                      "Change Password",
+                      style: TextStyle(
+                        color: Theme.of(context).appColors.textDefault
+                      ),
+                    ),
+                    trailing: TextButton(
+                      style: TextButton.styleFrom(
+                        textStyle: const TextStyle(fontSize: 10),
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                          context, 
+                          MaterialPageRoute(builder: (context) => ChangePasswordScreen()),
+                        );
+                      },
+                      child: const Text('Change'),
+                    ),
+                  ),
+                  ListTile(
+                    title: Text(
+                      "Save files to device",
+                      style: TextStyle(
+                        color: Theme.of(context).appColors.textDefault
+                      ),
+                    ),
+                    trailing: TextButton(
+                      style: TextButton.styleFrom(
+                        textStyle: const TextStyle(fontSize: 10),
+                      ),
+                      onPressed: () {
+                        // TODO: save files to local device
+                      },
+                      child: const Text("Save"),
+                    )
+                  ),
+                ],
+              )
+            )
+          );
+        }
+      }
     );
+
+    
   }
 }

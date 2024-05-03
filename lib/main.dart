@@ -30,6 +30,16 @@ class MainApp extends StatelessWidget {
   const MainApp({super.key});
 
 
+  Future<bool> isThemeDark() async {
+    ThemeNotifier notifier = ThemeNotifier();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool isDark = prefs.getBool('isDarkMode') ?? false;
+    if (isDark) {
+      notifier.setTheme(ThemeMode.dark);
+    }
+    return isDark;
+  }
+
   @override
   Widget build(BuildContext context) {
     
@@ -37,19 +47,43 @@ class MainApp extends StatelessWidget {
       create: (_) => ThemeNotifier(),
       child: Consumer(
         builder: (BuildContext context, ThemeNotifier themeNotifier, _) {
-          return MaterialApp(
-            home: LoginScreen(),
-            themeMode: themeNotifier.themeMode,
-            theme: Theme.of(context).copyWith(
-              extensions: [
-                AppColorsTheme.light()
-              ]
-            ),
-            darkTheme: Theme.of(context).copyWith(
-              extensions: [
-                AppColorsTheme.dark()
-              ]
-            ),
+          return FutureBuilder<bool>(
+            future: isThemeDark(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.done) {
+                final bool isDarkTheme = snapshot.data ?? false;
+                return MaterialApp(
+                  home: LoginScreen(),
+                  themeMode: isDarkTheme ? ThemeMode.dark : ThemeMode.light,
+                  theme: Theme.of(context).copyWith(
+                    extensions: [
+                      AppColorsTheme.light()
+                    ]
+                  ),
+                  darkTheme: Theme.of(context).copyWith(
+                    extensions: [
+                      AppColorsTheme.dark()
+                    ]
+                  ),
+                );
+              } else {
+                return MaterialApp(
+                  home: LoginScreen(),
+                  themeMode: themeNotifier.themeMode,
+                  theme: Theme.of(context).copyWith(
+                    extensions: [
+                      AppColorsTheme.light()
+                    ]
+                  ),
+                  darkTheme: Theme.of(context).copyWith(
+                    extensions: [
+                      AppColorsTheme.dark()
+                    ]
+                  ),
+                );
+              }
+              
+            }
           );
         }
         )

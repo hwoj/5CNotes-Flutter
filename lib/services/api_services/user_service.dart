@@ -10,7 +10,7 @@ class UserService {
   ///
   /// A GET request will be sent to the Spring server to retrieve the information about the user, returning it as a [User]
   /// The [User] object is generated using the [User.fromJson] constructor
-  User getUserFromID(String uuid) {
+  User getUserByID(String uuid) {
     // send GET request to server to retrieve user with uuid
     // store json object returned by request
 
