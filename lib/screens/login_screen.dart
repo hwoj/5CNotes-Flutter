@@ -92,7 +92,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       String correctEmail = "email";
                       String correctPassword = "password"; 
                       if (email == correctEmail && password == correctPassword) { 
-                        Navigator.pushNamedAndRemoveUntil(context, '/home', ModalRoute.withName('/home'));
+                        final homescreenRoute = MaterialPageRoute(builder: (_) => HomeScreen());
+                        Navigator.push(context, homescreenRoute);
                       } else { // Display modal if email or password is incorrect
                         showDialog(
                           context: context,

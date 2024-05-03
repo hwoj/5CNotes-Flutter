@@ -36,12 +36,12 @@ class MainApp extends StatelessWidget {
           return MaterialApp(
             navigatorObservers: [NavigatorObserver()], // for testing navigation
             routes: {
-              '/login' : (context) => LoginScreen(),
+              '/' : (context) => LoginScreen(),
               '/signup' : (context) => SignupScreen(),
               '/change_password': (context) => ChangePasswordScreen(),
               '/email_verification' : (context) => EmailVerificationScreen(),
               '/settings' : (context) => SettingsScreen(), 
-              '/home' : (context) => HomeScreen(),
+              '/homescreen' : (context) => HomeScreen(),
             },
             initialRoute: "/login",
             home: LoginScreen(),
