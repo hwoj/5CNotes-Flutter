@@ -494,23 +494,23 @@ class OpenDocumentState extends State<OpenDocument> {
                           )
                         ),
                       ),
-                      // QuillToolbarLinkStyleButton(
-                      //   controller: _controller,
-                      //   options: QuillToolbarLinkStyleButtonOptions(
-                      //     iconTheme: QuillIconTheme(
-                      //       iconButtonSelectedData: IconButtonData(
-                      //         style: IconButton.styleFrom(
-                      //           foregroundColor: Theme.of(context).appColors.textDefault
-                      //         )
-                      //       ),
-                      //       iconButtonUnselectedData: IconButtonData(
-                      //         style: IconButton.styleFrom(
-                      //           foregroundColor: Theme.of(context).appColors.textDefault
-                      //         )
-                      //       )
-                      //     )
-                      //   ),
-                      // ),
+                      QuillToolbarLinkStyleButton(
+                        controller: _controller,
+                        options: QuillToolbarLinkStyleButtonOptions(
+                          iconTheme: QuillIconTheme(
+                            iconButtonSelectedData: IconButtonData(
+                              style: IconButton.styleFrom(
+                                foregroundColor: Theme.of(context).appColors.textDefault
+                              )
+                            ),
+                            iconButtonUnselectedData: IconButtonData(
+                              style: IconButton.styleFrom(
+                                foregroundColor: Theme.of(context).appColors.textDefault
+                              )
+                            )
+                          )
+                        ),
+                      ),
                       QuillToolbarSearchButton(
                         controller: _controller,
                         options: QuillToolbarSearchButtonOptions(
