@@ -59,6 +59,17 @@ class DirectoryRowState extends State<DirectoryRow> {
   void initState() {
     super.initState();
     getFiles();
+    getSubDirs();
+  }
+
+  ///
+  ///
+  ///
+  void getSubDirs() async {
+    List<Directory> subDirs = await FileTreeService.getDirectoriesInDirectory(widget.directory);
+    setState(() {
+      widget.directory.subdirectories = subDirs;
+    });
   }
 
   ///
@@ -115,7 +126,7 @@ class DirectoryRowState extends State<DirectoryRow> {
   ///
   /// Deletes the file from the folder and updates the state of the row
   void deleteSubfile(File file) async {
-    bool isDeleted = await FileTreeService.deleteFileForUser(file);
+    bool isDeleted = await FileTreeService.deleteFileForUserInDir(file, widget.directory);
     if (!isDeleted) {
       print("failed to delete file for user");
     }

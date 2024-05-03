@@ -22,7 +22,7 @@ class Directory {
   String? course;
 
   /// The subdirectories of the directory
-  final List<Directory> subdirectories = [];
+  List<Directory> subdirectories = [];
 
   /// The files inside the directory
   List<File> files = [];

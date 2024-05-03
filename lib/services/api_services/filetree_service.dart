@@ -240,6 +240,23 @@ class FileTreeService {
 
     if (response.statusCode == 200) {
 
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  ///
+  ///
+  ///
+  static Future<bool> deleteFileForUserInDir(File file, Directory dir) async {
+    UserProvider userProvider = UserProvider();
+    String? userId = userProvider.currentUserId;
+
+    http.Response response = await http.delete(Uri.parse("http://localhost:8080/files/${file.uuid}/users/$userId"));
+
+    if (response.statusCode == 200) {
+      http.Response response = await http.delete(Uri.parse("http://localhost:8080/files/${file.uuid}/directories/${dir.uuid}"));
 
       return true;
     } else {
@@ -373,6 +390,19 @@ class FileTreeService {
       List<File> filesInDir = filesJson.map((json) => File.fromJson(json)).toList();
 
       return filesInDir;
+    } else {
+      return [];
+    }
+  }
+
+  static Future<List<Directory>> getDirectoriesInDirectory(Directory dir) async {
+    http.Response response = await http.get(Uri.parse("http://localhost:8080/directories/${dir.uuid}"));
+
+    if (response.statusCode == 200) {
+      List<dynamic> dirsJson = jsonDecode(response.body)['childFolders'];
+      List<Directory> dirsInDir = dirsJson.map((json) => Directory.fromJson(json)).toList();
+
+      return dirsInDir;
     } else {
       return [];
     }
