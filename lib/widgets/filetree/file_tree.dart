@@ -45,8 +45,6 @@ class FileTreeState extends State<FileTree> {
   @override
   void initState() {
     super.initState();
-    ThemeNotifier themeNotifier = ThemeNotifier();
-    print(themeNotifier.themeMode);
     initializeFileTree();
     // semesters[0].courses.add(Course(uuid: "123", name: "Software Engineering", code: "CSCI181AA", semester: "Spring 2024", meetingTimes: []));
     // semesters[0].courses.add(Course(uuid: "234", name: "Intermediate Chinese", code: "CHIN051B", semester: "Spring 2024", meetingTimes: []));

@@ -55,10 +55,26 @@ class DirectoryRowState extends State<DirectoryRow> {
   /// Whether the row is hovered or not
   bool isHovered = false;
 
+  @override
+  void initState() {
+    super.initState();
+    getFiles();
+  }
+
+  ///
+  ///
+  ///
+  void getFiles() async {
+    List<File> files = await FileTreeService.getFilesinDirectory(widget.directory);
+    setState(() {
+      widget.directory.files = files;
+    });
+  }
+
   /// The function responsible for handling the action to rename the [Directory] from the [DirectoryRow]
   ///
   /// This function will be passed to the [DirectoryRename] widget to rename the [Directory]
-  renameDirectory(String newName) {
+  void renameDirectory(String newName) {
     setState(() {
       widget.directory.name = newName;
     }); 

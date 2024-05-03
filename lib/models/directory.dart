@@ -25,7 +25,7 @@ class Directory {
   final List<Directory> subdirectories = [];
 
   /// The files inside the directory
-  final List<File> files = [];
+  List<File> files = [];
 
   /// The primary constructor for the [Directory] class
   ///
@@ -44,6 +44,6 @@ class Directory {
   /// This constructor will be used to construct [Directory] objects from the backend's API endpoints
   /// It requires the [json] parameter to have valid structure that map to the class' properties
   factory Directory.fromJson(Map<String, dynamic> json) {
-    return Directory(name: json['folderName'], uuid: json['folderId']);
+    return Directory(name: json['folderName'], uuid: json['folderId'], user: json['userString']);
   }
 }

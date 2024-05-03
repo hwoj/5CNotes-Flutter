@@ -72,6 +72,7 @@ class SemesterRowState extends State<SemesterRow> {
     });
   }
 
+
   void addCourse() {
     
   }

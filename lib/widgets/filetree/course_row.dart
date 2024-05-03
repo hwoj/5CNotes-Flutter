@@ -51,6 +51,23 @@ class CourseRowState extends State<CourseRow> {
   /// whether the row is hovered or not
   bool isHovered = false;
 
+  @override
+  void initState(){
+    super.initState();
+    getCourseDirectories();
+  }
+
+  ///
+  ///
+  ///
+  void getCourseDirectories() async {
+    List<Directory> dirs = await FileTreeService.getDirectoriesForCourse(widget.course);
+
+    setState(() {
+      widget.course.directories = dirs;
+    });
+  }
+
   /// The method to delete the directory
   /// 
   /// Deletes the directory from the list of directories that belong to the course

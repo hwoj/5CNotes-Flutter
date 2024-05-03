@@ -352,15 +352,30 @@ class FileTreeService {
     UserProvider userProvider = UserProvider();
     String? userId = userProvider.currentUserId;
 
-    http.Response response = await http.get(Uri.parse("localhost:8080/courses/${course.uuid}"));
-
+    http.Response response = await http.get(Uri.parse("http://localhost:8080/courses/${course.uuid}"));
     if (response.statusCode == 200) {
-      List<Map<String, dynamic>> directoriesJson = jsonDecode(response.body)[''];
+      List<dynamic> directoriesJson = jsonDecode(response.body)['childFolders'];
+      List<Directory> dirsInCourse = directoriesJson.map((json) => Directory.fromJson(json)).toList();
+      List<Directory> userDirsInCourse = dirsInCourse.where((dir) => dir.user == userId).toList();
+      return userDirsInCourse;
+    } else {
+      return [];
     }
     
-
-
   }
   
+  static Future<List<File>> getFilesinDirectory(Directory dir) async {
+
+    http.Response response = await http.get(Uri.parse("http://localhost:8080/directories/${dir.uuid}"));
+
+    if (response.statusCode == 200) {
+      List<dynamic> filesJson = jsonDecode(response.body)['files'];
+      List<File> filesInDir = filesJson.map((json) => File.fromJson(json)).toList();
+
+      return filesInDir;
+    } else {
+      return [];
+    }
+  }
   
 }
