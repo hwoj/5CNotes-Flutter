@@ -21,7 +21,7 @@ void main() {
         builder: (BuildContext context, ThemeNotifier themeNotifier, _) {
           return MaterialApp(
 
-            home: SignupScreen(),
+            home: SettingsScreen(),
             themeMode: themeNotifier.themeMode,
             theme: Theme.of(context).copyWith(
               extensions: [

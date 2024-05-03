@@ -41,6 +41,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 200.0, vertical: 15.0),
               child: TextField(
+                key: const Key("old password"),
                 controller: _oldPasswordController,
                 decoration: const InputDecoration(labelText: 'Old Password'),
                 obscureText: true,
@@ -50,6 +51,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 200.0, vertical: 15.0),
               child: TextField(
+                key: const Key("new password"),
                 controller: _newPasswordController,
                 decoration: const InputDecoration(labelText: 'New Password'),
                 obscureText: true,
@@ -59,6 +61,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 200.0, vertical: 15.0),
               child: TextField(
+                key: const Key("confirm password"),
                 controller: _confirmPasswordController,
                 decoration: const InputDecoration(labelText: 'Confirm New Password'),
                 obscureText: true,
@@ -75,6 +78,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                       ),
                     ),
                   TextButton(
+                    key: const Key("change password button"),
                     style: TextButton.styleFrom(
                       textStyle: const TextStyle(fontSize: 15),
                       foregroundColor: Theme.of(context).appColors.backgroundRow,
@@ -82,21 +86,41 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                     ),
                     onPressed: () {
                       // Add change password logic here
+                      String actualPassword = "password";
                       String oldPassword = _oldPasswordController.text;
                       String newPassword = _newPasswordController.text;
                       String confirmPassword = _confirmPasswordController.text;
 
-                      if (newPassword == confirmPassword) {
+                      if (newPassword == confirmPassword && oldPassword == actualPassword) {
                         Navigator.push(
                           context, 
                           MaterialPageRoute(builder: (context) => LoginScreen()));
+                      } else if (newPassword == "" || confirmPassword == "" || oldPassword == "") {
+                        showDialog(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                            key: const Key("Change password empty field"),
+                            title: const Text('Error'),
+                            content: const Text('Please fill in one of the empty fields.'),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: const Text('OK'),
+                              ),
+                            ],
+                          ),
+                        );
+
                       } else {
                         // Passwords don't match, show an error message
                         showDialog(
                           context: context,
                           builder: (context) => AlertDialog(
+                            key: const Key("credentials do not match"),
                             title: const Text('Error'),
-                            content: const Text('Passwords do not match.'),
+                            content: const Text('Passwords do not match or incorrect password was given.'),
                             actions: [
                               TextButton(
                                 onPressed: () {

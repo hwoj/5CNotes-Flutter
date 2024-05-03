@@ -41,6 +41,7 @@ class _EmailVerificationState extends State<EmailVerificationScreen> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 200.0, vertical: 15.0),
               child: TextField(
+                key: const Key("enter code field"),
                 controller: _verificationController,
                 decoration: const InputDecoration(labelText: 'Enter the 6-digit code'),
               ),
@@ -58,6 +59,7 @@ class _EmailVerificationState extends State<EmailVerificationScreen> {
                       ),
                     ),
                 TextButton(
+                  key: const Key("verify code button"),
                   style: TextButton.styleFrom(
                       textStyle: const TextStyle(fontSize: 15),
                       foregroundColor: Theme.of(context).appColors.backgroundRow,
@@ -75,6 +77,7 @@ class _EmailVerificationState extends State<EmailVerificationScreen> {
                     showDialog(
                       context: context,
                       builder: (context) => AlertDialog(
+                        key: const Key("incorrect code entered"),
                         title: const Text('Error'),
                         content: const Text('Code is incorrect'),
                         actions: [

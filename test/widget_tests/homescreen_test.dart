@@ -51,6 +51,7 @@ void main() {
     final editor = find.byType(QuillEditor);
     
     expect(filetree, findsOneWidget);
+    expect(editor, findsOneWidget);
   }
   );
 
