@@ -1,3 +1,4 @@
+import 'package:fivec_notes/main.dart';
 import 'package:fivec_notes/models/course.dart';
 import 'package:fivec_notes/models/semester.dart';
 import 'package:fivec_notes/widgets/filetree/semester_row.dart';
@@ -35,7 +36,7 @@ class FileTreeState extends State<FileTree> {
 
 
   /// This instance variable contains the semesters that the user has been enrolled in
-  List<Semester> semesters = [Semester(name: "Spring 2024", isCurrent: true), Semester(name: "Fall 2023")];
+  List<Semester> semesters = [Semester(name: "Spring 2024", isCurrent: true), Semester(name: "Fall 2023"), Semester(name: 'Spring 2023'), Semester(name: "Fall 2022"), Semester(name: "Spring 2022"), Semester(name: "Fall 2021")];
 
 
   /// The initState function handles the logic to be run upon the first build of the [FileTreeState]
@@ -44,10 +45,11 @@ class FileTreeState extends State<FileTree> {
   @override
   void initState() {
     super.initState();
-
+    ThemeNotifier themeNotifier = ThemeNotifier();
+    print(themeNotifier.themeMode);
     initializeFileTree();
-    semesters[0].courses.add(Course(uuid: "123", name: "Software Engineering", code: "CSCI181AA", semester: "Spring 2024", meetingTimes: []));
-    semesters[0].courses.add(Course(uuid: "234", name: "Intermediate Chinese", code: "CHIN051B", semester: "Spring 2024", meetingTimes: []));
+    // semesters[0].courses.add(Course(uuid: "123", name: "Software Engineering", code: "CSCI181AA", semester: "Spring 2024", meetingTimes: []));
+    // semesters[0].courses.add(Course(uuid: "234", name: "Intermediate Chinese", code: "CHIN051B", semester: "Spring 2024", meetingTimes: []));
   }
 
 

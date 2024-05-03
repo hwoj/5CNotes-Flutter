@@ -3,6 +3,7 @@ import 'package:fivec_notes/screens/change_password_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:fivec_notes/widgets/top_bar.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 /// Screen that will allow a user to change their app settings.
 /// 
@@ -17,6 +18,20 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
+
+
+  late final SharedPreferences prefs;
+
+  void setPrefs() async {
+    prefs = await SharedPreferences.getInstance();
+  }
+  @override
+  void initState() {
+    super.initState();
+    setPrefs();
+  }
+
+
   ThemeMode themeMode = ThemeMode.system;
   /// Builds the three options of the Settings UI
   /// 
@@ -43,6 +58,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     value: themeNotifier.themeMode == ThemeMode.dark,
                     onChanged: (isOn) {
                       themeNotifier.toggleTheme();
+                      prefs.setBool("isDarkMode", isOn);
+                      print(prefs.getBool("isDarkMode"));
                     }
                     )
                 );

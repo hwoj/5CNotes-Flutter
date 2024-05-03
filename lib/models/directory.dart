@@ -13,13 +13,13 @@ class Directory {
   String name;
 
   /// The directory's parent
-  final String parent;
+  String? parent;
 
   /// The user who owns the directory
-  final String user;
+  String? user;
 
   /// The course that the directory sits under
-  final String course;
+  String? course;
 
   /// The subdirectories of the directory
   final List<Directory> subdirectories = [];
@@ -34,9 +34,9 @@ class Directory {
   Directory({
     required this.uuid,
     required this.name,
-    required this.parent,
-    required this.user,
-    required this.course
+    this.parent,
+    this.user,
+    this.course
   });
 
   /// This is the JSON constructor for [Directory] 
@@ -44,6 +44,6 @@ class Directory {
   /// This constructor will be used to construct [Directory] objects from the backend's API endpoints
   /// It requires the [json] parameter to have valid structure that map to the class' properties
   factory Directory.fromJson(Map<String, dynamic> json) {
-    return Directory(course: json['course'], name: json['name'], uuid: json['uuid'], parent: json['parent'], user: json['user']);
+    return Directory(name: json['folderName'], uuid: json['folderId']);
   }
 }

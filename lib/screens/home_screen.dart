@@ -4,6 +4,7 @@ import 'package:fivec_notes/widgets/filetree/file_tree.dart';
 import 'package:fivec_notes/widgets/open_document.dart';
 import 'package:fivec_notes/widgets/top_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 /// [HomeScreen] is a [StatefulWidget] responsible for most of the application interfaces the user will use
 /// 
@@ -21,7 +22,15 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
 
   final GlobalKey<OpenDocumentState> openDocumentKey = GlobalKey();
+  late ThemeNotifier notifier;
 
+  @override
+  void initState() {
+    super.initState();
+    // notifier = ThemeNotifier();
+    // notifier.setTheme(ThemeMode.dark);
+  }
+  
 
   @override
   Widget build(BuildContext context) {

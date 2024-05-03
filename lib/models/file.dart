@@ -16,16 +16,19 @@ class File {
   List<User>? collaborators = [];
 
   /// The uuid of the author of the file
-  final String author;
+  String? author;
 
   /// The UTC server time timestamp for when the file was created
-  final DateTime createdAt;
+  DateTime? createdAt;
 
   /// The UTC server time timestamp for the last database persistent edit of the file
   DateTime? lastEdited;
 
   /// The UUID for the course that the file belongs to
-  final String course;
+  String? course;
+
+  ///
+  String? contents;
 
   /// The number of [User] that have access to a given file
   int? userCount;
@@ -36,10 +39,10 @@ class File {
   File({
     required this.uuid,
     required this.name,
-    required this.author,
-    required this.createdAt,
-    required this.lastEdited,
-    required this.course,
+    this.author,
+    this.createdAt,
+    this.lastEdited,
+    this.course,
     this.collaborators,
     this.userCount,
 
@@ -49,15 +52,10 @@ class File {
   /// 
   /// This is the constructor that will be called the most when interacting with data from the server
   factory File.fromJson(Map<String, dynamic> json) {
-    return File(uuid: json['uuid'], 
-      name: json['name'], 
-      author: json['author'], 
-      createdAt: json['createdAt'], 
-      lastEdited: json['lastEdited'], 
-      course: json['course'],
-      collaborators: json['collaborators'],
-      userCount: json['userCount']
-      );
+    return File(
+      uuid: json['fileId'], 
+      name: json['fileName'], 
+    );
 
   }
 

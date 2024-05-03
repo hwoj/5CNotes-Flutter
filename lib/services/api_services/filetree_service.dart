@@ -1,4 +1,14 @@
+import 'dart:convert';
+
+import 'package:fivec_notes/models/course.dart';
+import 'package:fivec_notes/models/directory.dart';
 import 'package:fivec_notes/models/file.dart';
+import 'package:fivec_notes/models/semester.dart';
+import 'package:fivec_notes/models/user.dart';
+import 'package:fivec_notes/providers/user_provider.dart';
+import 'package:http/http.dart' as http;
+import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 /// This class encapsulates all the interfaces for [File] objects in the local file system as well as the OT and REST API
 ///
@@ -32,13 +42,55 @@ class FileTreeService {
 
   }
 
+  ///
+  ///
+  ///
+  static Future<bool> isOnline() async {
+    var connection = await Connectivity().checkConnectivity();
+    if (connection.contains(ConnectivityResult.none)) {
+      return false;
+    } else {
+      return true;
+    }
+
+  }
+
+  ///
+  ///
+  ///
+  static Future<bool> shouldSaveLocally() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool? shouldSave = prefs.getBool("saveLocally");
+
+    if (shouldSave != null || shouldSave == true) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   /// This function retrieves the directories and files that the [User] has access to
   ///
   /// This function is called to help initialize the [FileTree] widget
-  retrieveFileTree() {
-    // requests the file tree and metadata for the elements in the filetree that the user has acces to
+  static Future<List<Course>> retrieveSemesterFileTree(Semester semester) async {
+    UserProvider userProvider = UserProvider();
+    String? userId = userProvider.currentUserId;
 
-    // returns a tuple with one list of files and one list of directories
+    if (userId != null) {
+      var response = await http.get(Uri.parse("http://localhost:8080/users/$userId"));
+      
+      if (response.statusCode == 200) {
+        // print("Response body: ${response.body}");
+        Map<String, dynamic> userResponse = jsonDecode(response.body);
+        List<dynamic> userdynamic = userResponse['courses'];  
+        List<Map<String, dynamic>> userCourses = userdynamic.cast<Map<String, dynamic>>();
+        List<Course> courses = userCourses.map((json) => Course.fromJson(json)).toList();
+
+        return courses;
+      }
+    }
+
+    return [];
   }
 
   /// Gets the contents of a file using the file metadata
@@ -50,4 +102,265 @@ class FileTreeService {
     // overwrite the contents of the local file or create new file on disk if doesn't exist on disk yet
   }
 
+  static Future<Directory> createDirectory(String directoryName) async {
+    UserProvider userProvider = UserProvider();
+    String? userId = userProvider.currentUserId;
+
+    Uri uri = Uri.parse("http://localhost:8080/directories");
+
+    var requestBody = {
+      "folderName": directoryName
+    };
+
+    var requestHeaders = {
+      "Content-Type": "application/json"
+    };
+
+    try {
+      http.Response response = await http.post(uri, headers: requestHeaders, body: jsonEncode(requestBody));
+
+      if (response.statusCode == 200) {
+        var directoryResponse = jsonDecode(response.body);
+        Directory directory = Directory.fromJson(directoryResponse);
+        print("here");
+        response = await http.put(Uri.parse("http://localhost:8080/directories/${directory.uuid}/users/$userId"));
+        
+        if (response.statusCode == 200) {
+          return directory;
+        }
+      }
+    } catch (e) {
+      print("exception: $e");
+    }
+
+    return Directory(uuid: "-", name: "-");
+  }
+
+  /// creates a directory for the user
+  ///
+  /// 
+  static Future<bool> addDirectoryToCourse(Directory directory, Course course) async {
+    
+
+    http.Response response = await http.put(Uri.parse("http://localhost:8080/directories/${directory.uuid}/courses/${course.uuid}"));
+
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
+    }
+
+  }
+
+  ///
+  ///
+  ///
+  static Future<bool> addDirectoryToDirectory(Directory parentDir, Directory childDir) async {
+    http.Response response = await http.put(Uri.parse("http://localhost:8080/directories/${childDir.uuid}/directories/${parentDir.uuid}"));
+
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  /// 
+  ///
+  ///
+  static Future<File> createFile(String fileName) async {
+    if (await isOnline()) {
+      print("im online!!");
+    }
+    UserProvider userProvider = UserProvider();
+    String? userId = userProvider.currentUserId;
+
+    Uri uri = Uri.parse("http://localhost:8080/files");
+
+    var requestBody = {
+      "fileName": fileName
+    };
+
+    var requestHeaders = {
+      "Content-Type": "application/json"
+    };
+
+
+    if (userId != null) {
+      http.Response response = await http.post(uri, headers: requestHeaders, body: jsonEncode(requestBody));
+
+      if (response.statusCode == 200) {
+        File file = File.fromJson(jsonDecode(response.body));
+        response = await http.put(Uri.parse("http://localhost:8080/files/${file.uuid}/users/$userId"));
+
+        if (response.statusCode == 200) {
+          return file;
+        }
+      }
+
+    }
+
+    return File(name: "-", uuid: "-");
+  }
+
+  ///
+  ///
+  ///
+  static Future<bool> addFileToDirectory(Directory directory, File file) async {
+    http.Response response = await http.put(Uri.parse("http://localhost:8080/files/${file.uuid}/directories/${directory.uuid}"));
+
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  ///
+  ///
+  ///
+  static Future<bool> addFiletoCourse(Course course, File file) async {
+    http.Response response = await http.put(Uri.parse("http://localhost:8080/files/${file.uuid}/courses/${course.uuid}"));
+
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  ///
+  ///
+  ///
+  static Future<bool> deleteFileForUser(File file) async {
+    UserProvider userProvider = UserProvider();
+    String? userId = userProvider.currentUserId;
+
+    http.Response response = await http.delete(Uri.parse("http://localhost:8080/files/${file.uuid}/users/$userId"));
+
+    if (response.statusCode == 200) {
+
+
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  ///
+  ///
+  ///
+  static Future<bool> deleteDirectoryForUser(Directory directory) async {
+    UserProvider userProvider = UserProvider();
+    String? userId = userProvider.currentUserId;
+
+    http.Response response = await http.delete(Uri.parse("http://localhost:8080/directories/${directory.uuid}/users/$userId"));
+
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  ///
+  ///
+  ///
+  static Future<bool> addCourseToUser(Course course) async {
+    UserProvider userProvider = UserProvider();
+    String? userId = userProvider.currentUserId;
+
+    http.Response response = await http.put(Uri.parse("http://localhost:8080/courses/${course.uuid}/users/$userId"));
+
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  ///
+  ///
+  ///
+  static Future<bool> removeUserFromCourse(Course course) async {
+    UserProvider userProvider = UserProvider();
+    String? userId = userProvider.currentUserId;
+
+    http.Response response = await http.delete(Uri.parse('http://localhost:8080/courses/${course.uuid}/users/$userId'));
+
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  ///
+  ///
+  ///
+  static Future<bool> saveFile(File file) async {
+    Uri uri = Uri.parse("http://localhost:8080/files/${file.uuid}");
+
+    var requestBody = {
+      "fileBody": file.contents
+    };
+
+    var requestHeaders = {
+      "Content-Type": "application/json"
+    };
+
+    http.Response response = await http.put(uri, headers: requestHeaders, body: jsonEncode(requestBody));
+
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  static Future<bool> renameDirectory(Directory directory) async {
+    http.Response response = await http.put(Uri.parse("http://localhost:8080/directories/${directory.uuid}"));
+
+    if (response.statusCode ==  200) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  static Future<bool> renameFile(File file) async {
+    http.Response response = await http.put(Uri.parse("http://localhost:8080/files/${file.uuid}"));
+
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  static Future<bool> shareFile(File file, User user) async {
+    http.Response response = await http.put(Uri.parse("http://localhost:8080/files/${file.uuid}/users/${user.uuid}"));
+
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
+    }
+  } 
+
+  static Future<List<Directory>> getDirectoriesForCourse(Course course) async {
+    UserProvider userProvider = UserProvider();
+    String? userId = userProvider.currentUserId;
+
+    http.Response response = await http.get(Uri.parse("localhost:8080/courses/${course.uuid}"));
+
+    if (response.statusCode == 200) {
+      List<Map<String, dynamic>> directoriesJson = jsonDecode(response.body)[''];
+    }
+    
+
+
+  }
+  
+  
 }

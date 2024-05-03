@@ -142,18 +142,23 @@ class FileRenameState extends State<FileRename> {
                 children: <Widget>[
                   Positioned.fill(
                     child: Container(
-                      color: Theme.of(context).appColors.backgroundDefault,
+                      color: Theme.of(context).appColors.primaryButton,
                     )
                   ),
                   TextButton(
                     style: TextButton.styleFrom(
-                      foregroundColor: Theme.of(context).appColors.backgroundRow,
+                      foregroundColor: Theme.of(context).appColors.primaryButton,
                       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10)
                     ),
                     onPressed: () {
                      saveName(_renameController.text);
                     }, 
-                    child: const Text("Rename File"),
+                    child: Text(
+                      "Rename File",
+                      style: TextStyle(
+                        color: Theme.of(context).appColors.primaryButtonText
+                      ),
+                    ),
                     
                   ),
                 ],

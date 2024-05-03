@@ -1,3 +1,6 @@
+import 'package:fivec_notes/models/directory.dart';
+import 'package:fivec_notes/models/file.dart';
+
 /// The [Course] class encodes the courses that a [User] will be enrolled in
 /// 
 /// These objects act like the top level directories that contain all the relevant [Directory] and [File] objects
@@ -20,6 +23,12 @@ class Course {
   /// The list of meetings times for the [Course] 
   List<DateTime> meetingTimes = [];
 
+  /// The top level directories within the [Course]
+  List<Directory> directories = [];
+
+  /// The top level files within the [Course]
+  List<File> files = [];
+
   /// The primary constructor for the [Course] class
   ///
   /// This constructor will mostly be called by the [Course.fromJson] constructor
@@ -36,7 +45,7 @@ class Course {
   /// Most of the time courses are going to be read in from the API in JSON and converted into a [Course] using this constructor
   /// The incoming JSON object must have the matching fields
   factory Course.fromJson(Map<String, dynamic> json) {
-    return Course(uuid: json['uuid'], name: json['name'], code: json['code'], semester: json['semester'], meetingTimes: json['meetingTimes']);
+    return Course(uuid: json['folderId'], name: json['folderName'], code: 'code', semester: json['courseSemester'], meetingTimes: []);
   }
 
 
