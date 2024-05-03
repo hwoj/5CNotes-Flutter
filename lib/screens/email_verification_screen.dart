@@ -68,9 +68,7 @@ class _EmailVerificationState extends State<EmailVerificationScreen> {
                   String code = _verificationController.text;
                   String correctCode = ""; // dummy value, will change later
                   if (code == correctCode) { 
-                    Navigator.push(
-                      context, 
-                      MaterialPageRoute(builder: (context) => HomeScreen()));
+                    Navigator.pushNamedAndRemoveUntil(context, '/home', ModalRoute.withName("/home"));
                     // Implement signup logic here
                   } else {
                     // Passwords don't match, show an error message

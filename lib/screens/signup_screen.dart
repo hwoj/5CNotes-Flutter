@@ -97,9 +97,7 @@ class _SignUpScreenState extends State<SignupScreen> {
                       String confirmPassword = _confirmPasswordController.text;
 
                       if (password == confirmPassword) {
-                        Navigator.push(
-                          context, 
-                          MaterialPageRoute(builder: (context) => EmailVerificationScreen()));
+                        Navigator.pushNamedAndRemoveUntil(context, "/email_verification", ModalRoute.withName("/email_verification"));
                         // Implement signup logic here
                       } else {
                         // Passwords don't match, show an error message

@@ -1,5 +1,10 @@
 
+import 'package:fivec_notes/screens/change_password_screen.dart';
+import 'package:fivec_notes/screens/email_verification_screen.dart';
+import 'package:fivec_notes/screens/home_screen.dart';
 import 'package:fivec_notes/screens/login_screen.dart';
+import 'package:fivec_notes/screens/settings_screen.dart';
+import 'package:fivec_notes/screens/signup_screen.dart';
 import 'package:fivec_notes/themes/app_colors_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -29,7 +34,16 @@ class MainApp extends StatelessWidget {
       child: Consumer(
         builder: (BuildContext context, ThemeNotifier themeNotifier, _) {
           return MaterialApp(
-
+            navigatorObservers: [NavigatorObserver()], // for testing navigation
+            routes: {
+              '/login' : (context) => LoginScreen(),
+              '/signup' : (context) => SignupScreen(),
+              '/change_password': (context) => ChangePasswordScreen(),
+              '/email_verification' : (context) => EmailVerificationScreen(),
+              '/settings' : (context) => SettingsScreen(), 
+              '/home' : (context) => HomeScreen(),
+            },
+            initialRoute: "/login",
             home: LoginScreen(),
             themeMode: themeNotifier.themeMode,
             theme: Theme.of(context).copyWith(
