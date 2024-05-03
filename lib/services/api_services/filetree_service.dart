@@ -69,7 +69,7 @@ class FileTreeService {
       "folderName": name
     };
 
-    http.Response response = await http.post(uri, headers: requestHeaders, body: requestBody);
+    http.Response response = await http.post(uri, headers: requestHeaders, body: jsonEncode(requestBody));
 
     if (response.statusCode == 200) {
       Map<String, dynamic> courseJson = jsonDecode(response.body);
@@ -237,9 +237,9 @@ class FileTreeService {
   ///
   ///
   static Future<File> createFile(String fileName) async {
-    if (await isOnline()) {
+    // if (await isOnline()) {
 
-    }
+    // }
     UserProvider userProvider = UserProvider();
     String? userId = userProvider.currentUserId;
 
@@ -387,7 +387,8 @@ class FileTreeService {
     Uri uri = Uri.parse("http://localhost:8080/files/${file.uuid}");
 
     var requestBody = {
-      "fileBody": file.contents
+      "fileBody": file.contents,
+      "fileName": file.name
     };
 
     var requestHeaders = {
@@ -407,7 +408,18 @@ class FileTreeService {
   ///
   ///
   static Future<bool> renameDirectory(Directory directory) async {
-    http.Response response = await http.put(Uri.parse("http://localhost:8080/directories/${directory.uuid}"));
+
+    Uri uri = Uri.parse("http://localhost:8080/directories/${directory.uuid}");
+
+    Map<String, String> requestHeaders = {
+      "Content-Type": "application/json"
+    };
+
+    Map<String, String> requestBody = {
+      "folderName": directory.name
+    };
+
+    http.Response response = await http.put(uri, headers: requestHeaders, body: jsonEncode(requestBody));
 
     if (response.statusCode ==  200) {
       return true;
@@ -420,7 +432,16 @@ class FileTreeService {
   ///
   ///
   static Future<bool> renameFile(File file) async {
-    http.Response response = await http.put(Uri.parse("http://localhost:8080/files/${file.uuid}"));
+    Uri uri = Uri.parse("http://localhost:8080/files/${file.uuid}");
+
+    Map<String, String> requestHeaders = {
+      "Content-Type": "application/json"
+    };
+
+    Map<String, String> requestBody = {
+      "fileName": file.name
+    };
+    http.Response response = await http.put(uri, headers: requestHeaders, body: jsonEncode(requestBody));
 
     if (response.statusCode == 200) {
       return true;

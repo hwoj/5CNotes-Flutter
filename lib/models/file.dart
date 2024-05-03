@@ -45,6 +45,7 @@ class File {
     this.course,
     this.collaborators,
     this.userCount,
+    this.contents
 
   });
 
@@ -54,7 +55,8 @@ class File {
   factory File.fromJson(Map<String, dynamic> json) {
     return File(
       uuid: json['fileId'], 
-      name: json['fileName'], 
+      name: json['fileName'],
+      contents: json['fileBody'],
     );
 
   }

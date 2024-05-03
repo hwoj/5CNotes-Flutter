@@ -31,7 +31,7 @@ class User {
   /// 
   /// The [json] argument must contain the 'uuid', 'email', 'firstName' and 'lastName' properties
   factory User.fromJson(Map<String, dynamic> json) {
-    return User(uuid: json['uuid'], email: json['email'], firstName: json['firstName'], lastName: json['lastName']);
+    return User(uuid: json['userId'], email: json['email'], firstName: json['firstName'], lastName: json['lastName']);
   }
 
 }

@@ -34,13 +34,13 @@ class UserService {
       "Content-Type": "application/json"
     };
 
-    Map<String, String> requestBody = {
+    Map<String, dynamic> requestBody = {
       "firstName": firstName,
       "lastName": lastName,
       "email": email
     };
 
-    http.Response response = await http.post(uri, headers: requestHeaders, body: requestBody);
+    http.Response response = await http.post(uri, headers: requestHeaders, body: jsonEncode(requestBody));
 
     if (response.statusCode == 200) {
       Map<String, dynamic> userJson = jsonDecode(response.body);

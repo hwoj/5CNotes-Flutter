@@ -35,7 +35,7 @@ void main () async {
     file.contents = "[{\"insert\":\"hello world\",\"attributes\":{\"bold\":true,\"italic\":true,\"underline\":true,\"strike\":true,\"color\":\"#FF283593\"}},{\"insert\":\"\\n\"}]";
     bool isEdited = await FileTreeService.saveFile(file);
     expect(isEdited, equals(true));
-
+    print(file.uuid);
     File testFile = await FileTreeService.getFileById(file.uuid);
     expect(testFile.contents, equals("[{\"insert\":\"hello world\",\"attributes\":{\"bold\":true,\"italic\":true,\"underline\":true,\"strike\":true,\"color\":\"#FF283593\"}},{\"insert\":\"\\n\"}]"));
   });
@@ -90,7 +90,7 @@ void main () async {
   test("get classmates test", () async {
     UserProvider userProvider = UserProvider();
     List<User> classmates = await FileTreeService.getClassmates(course);
-    expect(classmates[1].uuid, equals(userProvider.currentUserId));
+    expect(classmates[0].uuid, equals(userProvider.currentUserId));
   });
 
 
