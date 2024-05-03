@@ -256,7 +256,7 @@ class FileTreeService {
     http.Response response = await http.delete(Uri.parse("http://localhost:8080/files/${file.uuid}/users/$userId"));
 
     if (response.statusCode == 200) {
-      http.Response response = await http.delete(Uri.parse("http://localhost:8080/files/${file.uuid}/directories/${dir.uuid}"));
+      await http.delete(Uri.parse("http://localhost:8080/files/${file.uuid}/directories/${dir.uuid}"));
 
       return true;
     } else {
@@ -335,6 +335,9 @@ class FileTreeService {
     }
   }
 
+  ///
+  ///
+  ///
   static Future<bool> renameDirectory(Directory directory) async {
     http.Response response = await http.put(Uri.parse("http://localhost:8080/directories/${directory.uuid}"));
 
@@ -345,6 +348,9 @@ class FileTreeService {
     }
   }
 
+  ///
+  ///
+  ///
   static Future<bool> renameFile(File file) async {
     http.Response response = await http.put(Uri.parse("http://localhost:8080/files/${file.uuid}"));
 
@@ -355,6 +361,9 @@ class FileTreeService {
     }
   }
 
+  ///
+  ///
+  ///
   static Future<bool> shareFile(File file, User user) async {
     http.Response response = await http.put(Uri.parse("http://localhost:8080/files/${file.uuid}/users/${user.uuid}"));
 
@@ -365,6 +374,9 @@ class FileTreeService {
     }
   } 
 
+  ///
+  ///
+  ///
   static Future<List<Directory>> getDirectoriesForCourse(Course course) async {
     UserProvider userProvider = UserProvider();
     String? userId = userProvider.currentUserId;
@@ -381,6 +393,9 @@ class FileTreeService {
     
   }
   
+  ///
+  ///
+  ///
   static Future<List<File>> getFilesinDirectory(Directory dir) async {
 
     http.Response response = await http.get(Uri.parse("http://localhost:8080/directories/${dir.uuid}"));
@@ -395,6 +410,9 @@ class FileTreeService {
     }
   }
 
+  ///
+  ///
+  ///
   static Future<List<Directory>> getDirectoriesInDirectory(Directory dir) async {
     http.Response response = await http.get(Uri.parse("http://localhost:8080/directories/${dir.uuid}"));
 
