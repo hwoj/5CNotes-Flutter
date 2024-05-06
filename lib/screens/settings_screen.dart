@@ -54,7 +54,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           ),
                         ),
                         trailing: Switch(
-                          value: prefs.getBool("isDarkMode") == true ,
+                          value: prefs.getBool("isDarkMode") == true,
                           onChanged: (isOn) {
                             isOn ? themeNotifier.setTheme(ThemeMode.dark) : themeNotifier.setTheme(ThemeMode.light);
                             prefs.setBool("isDarkMode", isOn);
@@ -125,6 +125,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           ),
                         ),
                         trailing: Switch(
+                          key: const Key("theme switch"),
                           value: themeNotifier.themeMode == ThemeMode.dark,
                           onChanged: (isOn) {
                             isOn ? themeNotifier.setTheme(ThemeMode.dark) : themeNotifier.setTheme(ThemeMode.light);

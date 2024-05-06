@@ -259,6 +259,10 @@ void main() {
       
       final nextScreen = find.byType(HomeScreen);
 
+      final capturedRoutes = verify(mockObserver.didPush(captureAny!, captureAny)).captured;
+
+      print(capturedRoutes);
+
       expect(nextScreen, findsOneWidget);
     }
   );

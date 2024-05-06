@@ -22,13 +22,6 @@ class _EmailVerificationState extends State<EmailVerificationScreen> {
   /// as input.
   @override
   Widget build(BuildContext context) {
-    /// Use [Padding] widget for body parameter.
-    /// Define its child to be [Column] widget.
-    /// Define the children of the [Column] widget 
-    /// to be the text controller.
-    /// Instantiate an [ElevatedButton] button
-    /// to enter the code, navigate to a new page if correct,
-    /// else, prompt error message.
     return  Scaffold(
       appBar: AppBar(
         title: const Text('Enter the 6-digit code sent to your email address'),
@@ -46,8 +39,6 @@ class _EmailVerificationState extends State<EmailVerificationScreen> {
                 decoration: const InputDecoration(labelText: 'Enter the 6-digit code'),
               ),
             ),
-            
-            
             const SizedBox(height: 16.0),
             ClipRRect(
               borderRadius: BorderRadius.circular(4),

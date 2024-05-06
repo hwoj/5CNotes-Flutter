@@ -73,7 +73,7 @@ class MainApp extends StatelessWidget {
                 );
               } else {
                 return MaterialApp(
-                  routes: {
+                  routes: { // page routes listed as string names
                       '/login' : (context) => LoginScreen(),
                       '/signup' : (context) => SignupScreen(),
                       '/change_password': (context) => ChangePasswordScreen(),
@@ -81,7 +81,7 @@ class MainApp extends StatelessWidget {
                       '/settings' : (context) => SettingsScreen(), 
                       '/home' : (context) => HomeScreen(),
                     },
-                  home: LoginScreen(),
+                  home: LoginScreen(), //  default page
                   themeMode: themeNotifier.themeMode,
                   theme: Theme.of(context).copyWith(
                     extensions: [
