@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:fivec_notes/main.dart';
 import 'package:fivec_notes/screens/change_password_screen.dart';
 import 'package:flutter/material.dart';
@@ -54,6 +56,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           ),
                         ),
                         trailing: Switch(
+                          key: const Key("theme switch with non-null data"),
                           value: prefs.getBool("isDarkMode") == true,
                           onChanged: (isOn) {
                             isOn ? themeNotifier.setTheme(ThemeMode.dark) : themeNotifier.setTheme(ThemeMode.light);
@@ -125,7 +128,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           ),
                         ),
                         trailing: Switch(
-                          key: const Key("theme switch"),
+                          key: const Key("theme switch with some null data"),
                           value: themeNotifier.themeMode == ThemeMode.dark,
                           onChanged: (isOn) {
                             isOn ? themeNotifier.setTheme(ThemeMode.dark) : themeNotifier.setTheme(ThemeMode.light);
