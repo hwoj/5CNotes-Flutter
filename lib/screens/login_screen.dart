@@ -11,22 +11,18 @@ class LoginScreen extends StatefulWidget {
   // Overload createState() method to return an instance
   // of a [_LoginPageState]
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<LoginScreen> createState() => LoginScreenState();
 }
 
 /// Stores the various states of a login page
 /// In this case, it refers to the information typed
 /// in the email and password fields. 
-class _LoginScreenState extends State<LoginScreen> {
+class LoginScreenState extends State<LoginScreen> {
 
   // Initialize username and password text editing controller 
   // to take the user input.
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
-
-  void login() {
-    
-  }
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
   /// Takes the information of the parent widget and 
   /// return a [Scaffold], which defines the structure, layout,
@@ -59,7 +55,7 @@ class _LoginScreenState extends State<LoginScreen> {
               key: const Key("Email text box"),
               padding: const EdgeInsets.symmetric(horizontal: 200.0, vertical: 15.0),
               child: TextField(
-                controller: _emailController,
+                controller: emailController,
                 decoration: const InputDecoration(labelText: 'Email'),
               ),
             ),
@@ -67,7 +63,7 @@ class _LoginScreenState extends State<LoginScreen> {
               key: const Key("Password text box"),
               padding: const EdgeInsets.symmetric(horizontal: 200.0, vertical: 15.0),
               child: TextField(
-                controller: _passwordController,
+                controller: passwordController,
                 decoration: const InputDecoration(labelText: 'Password'),
                 obscureText: true,
               ),
@@ -91,8 +87,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       ), 
                     onPressed: () {
                       // Add authentication logic here
-                      String email = _emailController.text;
-                      String password = _passwordController.text;
+                      String email = emailController.text;
+                      String password = passwordController.text;
                       // dummy values for correct email and password, will change later 
                       String correctEmail = "email";
                       String correctPassword = "password"; 
@@ -147,8 +143,8 @@ class _LoginScreenState extends State<LoginScreen> {
   void dispose() {
     // Call the dispose method on the username and password
     // text editing controller.
-    _emailController.dispose();
-    _passwordController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
     super.dispose();
   }
 

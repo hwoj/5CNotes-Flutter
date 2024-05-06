@@ -9,20 +9,20 @@ import 'package:flutter/material.dart';
 class ChangePasswordScreen extends StatefulWidget {
   /// Create new instance of a _SingUpPageState
   @override
-  State<ChangePasswordScreen> createState() => _ChangePasswordScreenState();
+  State<ChangePasswordScreen> createState() => ChangePasswordScreenState();
 }
 
 /// Monitors the state of the Signup page.
 ///  
 /// Keeps track of information passed into the 
 /// email, password, and confirm password textbox.
-class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
+class ChangePasswordScreenState extends State<ChangePasswordScreen> {
 
   /// create text editing controllers for the old password, new password, 
   /// and confirm new password fields.
-  TextEditingController _oldPasswordController = TextEditingController();
-  TextEditingController _newPasswordController = TextEditingController();
-  TextEditingController _confirmPasswordController = TextEditingController();
+  TextEditingController oldPasswordController = TextEditingController();
+  TextEditingController newPasswordController = TextEditingController();
+  TextEditingController confirmPasswordController = TextEditingController();
   /// creates the structure/layout of the page.  
   /// 
   /// This will include an old password, new password, and confirm new password text box, and a button to 
@@ -49,7 +49,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 200.0, vertical: 15.0),
               child: TextField(
                 key: const Key("old password"),
-                controller: _oldPasswordController,
+                controller: oldPasswordController,
                 decoration: InputDecoration(
                   labelText: 'Old Password',
                   labelStyle: TextStyle(
@@ -67,7 +67,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 200.0, vertical: 15.0),
               child: TextField(
                 key: const Key("new password"),
-                controller: _newPasswordController,
+                controller: newPasswordController,
                 decoration: InputDecoration(
                   labelText: 'New Password',
                   labelStyle: TextStyle(
@@ -85,7 +85,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 200.0, vertical: 15.0),
               child: TextField(
                 key: const Key("confirm password"),
-                controller: _confirmPasswordController,
+                controller: confirmPasswordController,
                 decoration: InputDecoration(
                   labelText: 'Confirm New Password',
                   labelStyle: TextStyle(
@@ -118,9 +118,9 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                     onPressed: () {
                       // Add change password logic here
                       String actualPassword = "password";
-                      String oldPassword = _oldPasswordController.text;
-                      String newPassword = _newPasswordController.text;
-                      String confirmPassword = _confirmPasswordController.text;
+                      String oldPassword = oldPasswordController.text;
+                      String newPassword = newPasswordController.text;
+                      String confirmPassword = confirmPasswordController.text;
 
                       if (newPassword == confirmPassword && oldPassword == actualPassword) {
                         Navigator.push(
@@ -186,9 +186,9 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
   void dispose() {
 
     /// call the dispose method on all three text editing controllers
-    _oldPasswordController.dispose();
-    _newPasswordController.dispose();
-    _confirmPasswordController.dispose();
+    oldPasswordController.dispose();
+    newPasswordController.dispose();
+    confirmPasswordController.dispose();
     super.dispose();
   }
 }

@@ -15,26 +15,35 @@ void main() {
 }
 
 
-
+/// The [ThemeNotifier] class will keep track of light and dark mode.
+/// 
+/// Its methods include toggleTheme and setTheme, which are called to change 
+/// or initialize the app's color scheme, respectively.
 class ThemeNotifier extends ChangeNotifier {
   ThemeMode _themeMode = ThemeMode.light;
   ThemeMode get themeMode => _themeMode;
 
+  /// Toggles the app's theme between light and dark mode. 
   void toggleTheme() {
     _themeMode = _themeMode == ThemeMode.light ? ThemeMode.dark : ThemeMode.light;
     notifyListeners();
   }
 
+  /// Initializes the app's theme. 
   void setTheme(ThemeMode mode) {
     _themeMode = mode;
     notifyListeners();
   }
 
 }
+
+/// The main app runs the application.
+/// 
+/// It initializes the app theme and its home page. 
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
 
-
+  /// Checks if the app is currently set to dark mode and returns a Future<bool> since it is an asynchronous method.
   Future<bool> isThemeDark() async {
     ThemeNotifier notifier = ThemeNotifier();
     SharedPreferences prefs = await SharedPreferences.getInstance();

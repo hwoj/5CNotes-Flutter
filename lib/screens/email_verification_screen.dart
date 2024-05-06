@@ -8,14 +8,14 @@ class EmailVerificationScreen extends StatefulWidget {
   // override createState method by making it instantiate an 
   // _Email VerificationState instance.
   @override
-  State<EmailVerificationScreen> createState() => _EmailVerificationState();
+  State<EmailVerificationScreen> createState() => EmailVerificationState();
 }
 
 /// Creates the email verification page layout/features
-class _EmailVerificationState extends State<EmailVerificationScreen> {
+class EmailVerificationState extends State<EmailVerificationScreen> {
 
   // Instantiate text editing controller for the email verification text box. 
-  TextEditingController _verificationController = TextEditingController();
+  TextEditingController verificationController = TextEditingController();
 
   /// Creates the structure/layout fo the Email verification page.
   /// It should create a text box that will take the verification code.
@@ -35,7 +35,7 @@ class _EmailVerificationState extends State<EmailVerificationScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 200.0, vertical: 15.0),
               child: TextField(
                 key: const Key("enter code field"),
-                controller: _verificationController,
+                controller: verificationController,
                 decoration: const InputDecoration(labelText: 'Enter the 6-digit code'),
               ),
             ),
@@ -58,7 +58,7 @@ class _EmailVerificationState extends State<EmailVerificationScreen> {
                       ),
                 onPressed: () {
                   // Add signup logic here
-                  String code = _verificationController.text;
+                  String code = verificationController.text;
                   String correctCode = "123"; // dummy value, will change later
                   if (code == correctCode) { 
                     Navigator.pushNamedAndRemoveUntil(context, '/home', ModalRoute.withName("/home"));
@@ -97,7 +97,7 @@ class _EmailVerificationState extends State<EmailVerificationScreen> {
   /// Removes controller for each verification code text box.
   @override
   void dispose() {   
-    _verificationController.dispose();
+    verificationController.dispose();
     super.dispose();
   }
   

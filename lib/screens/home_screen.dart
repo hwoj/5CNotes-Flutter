@@ -13,13 +13,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 class HomeScreen extends StatefulWidget {
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<HomeScreen> createState() => HomeScreenState();
 }
 
 /// This is the primary state for the [HomeScreen] screen
 /// 
 /// This state will encompass both the [OpenDocument] and [FileTree] widgets
-class _HomeScreenState extends State<HomeScreen> {
+class HomeScreenState extends State<HomeScreen> {
 
   final GlobalKey<OpenDocumentState> openDocumentKey = GlobalKey();
   late ThemeNotifier notifier;

@@ -15,11 +15,11 @@ class SettingsScreen extends StatefulWidget {
 
 
   @override
-  State<SettingsScreen> createState() => _SettingsScreenState();
+  State<SettingsScreen> createState() => SettingsScreenState();
 
 }
 
-class _SettingsScreenState extends State<SettingsScreen> {
+class SettingsScreenState extends State<SettingsScreen> {
 
 
   late final SharedPreferences prefs;

@@ -8,24 +8,20 @@ import 'package:flutter/material.dart';
 class SignupScreen extends StatefulWidget {
   /// Create new instance of a _SingUpPageState
   @override
-  State<SignupScreen> createState() => _SignUpScreenState();
+  State<SignupScreen> createState() => SignUpScreenState();
 }
 
 /// Monitors the state of the Signup page.
 ///  
 /// Keeps track of information passed into the 
 /// email, password, and confirm password textbox.
-class _SignUpScreenState extends State<SignupScreen> {
+class SignUpScreenState extends State<SignupScreen> {
 
   /// create text editing controllers for the email, password, 
   /// and confirm password fields.
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
-  TextEditingController _confirmPasswordController = TextEditingController();
-
-  void signup() {
-
-  }
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController confirmPasswordController = TextEditingController();
 
   /// creates the structure/layout of the page.  This will include a
   /// email, password, and confirm password text box, and a button to 
@@ -58,7 +54,7 @@ class _SignUpScreenState extends State<SignupScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 200.0, vertical: 15.0),
               child: TextField(
                 key: const Key("Register email"),
-                controller: _emailController,
+                controller: emailController,
                 decoration: const InputDecoration(labelText: 'Email'),
               ),
             ),
@@ -67,7 +63,7 @@ class _SignUpScreenState extends State<SignupScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 200.0, vertical: 15.0),
               child: TextField(
                 key: const Key("Register password"),
-                controller: _passwordController,
+                controller: passwordController,
                 decoration: const InputDecoration(labelText: 'Password'),
                 obscureText: true,
               ),
@@ -77,7 +73,7 @@ class _SignUpScreenState extends State<SignupScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 200.0, vertical: 15.0),
               child: TextField(
                 key: const Key("Confirm password"),
-                controller: _confirmPasswordController,
+                controller: confirmPasswordController,
                 decoration: const InputDecoration(labelText: 'Confirm Password'),
                 obscureText: true,
               ),
@@ -101,9 +97,9 @@ class _SignUpScreenState extends State<SignupScreen> {
                     ),
                     onPressed: () {
                       // Add signup logic here
-                      String email = _emailController.text;
-                      String password = _passwordController.text;
-                      String confirmPassword = _confirmPasswordController.text;
+                      String email = emailController.text;
+                      String password = passwordController.text;
+                      String confirmPassword = confirmPasswordController.text;
                       if (password == "" || confirmPassword == "" || email == "") {
                         showDialog(
                           context: context,
@@ -166,9 +162,9 @@ class _SignUpScreenState extends State<SignupScreen> {
   void dispose() {
 
     /// call the dispose method on all three text editing controllers
-    _emailController.dispose();
-    _passwordController.dispose();
-    _confirmPasswordController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+    confirmPasswordController.dispose();
     super.dispose();
   }
 }
