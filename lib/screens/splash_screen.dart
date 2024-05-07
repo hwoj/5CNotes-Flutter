@@ -3,6 +3,10 @@ import 'dart:async';
 import 'package:fivec_notes/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 
+
+/// Starts a splash screen upon open the app
+/// 
+/// discarded because it went against the project requirements.
 class SplashScreen extends StatefulWidget {
 
   @override

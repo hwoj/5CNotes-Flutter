@@ -19,6 +19,7 @@ void main() {
 /// 
 /// Its methods include toggleTheme and setTheme, which are called to change 
 /// or initialize the app's color scheme, respectively.
+
 class ThemeNotifier extends ChangeNotifier {
   ThemeMode _themeMode = ThemeMode.light;
   ThemeMode get themeMode => _themeMode;
